@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapper"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+  <!-- ex		
+  <select id="selectUsers" parameterType="com.yck.wob.dto.UserDTO" resultType="com.yck.wob.dto.UserDTO">
+						UserDTO 객체를 파라미터로 받아, UserDTO객체를 반환합니다.
+  	SELECT `seq`, `name`, `country`
+    FROM lab03
+    <if test='country != null and country != ""'> 만약 파라미터에 country가 있다면 SQL문에 WHERE절을 추가합니다.
+    	WHERE country = #{country}
+    </if>
+  </select>
+ -->
+
+<select id="selectBoards" resultType="com.yck.wob.dto.BoardDTO">
+SELECT * FROM board_list_tb
+ </select>
+
+ <select id="selectPermitedBoards" resultType="com.yck.wob.dto.BoardDTO">
+SELECT * FROM board_list_tb where boardStatus between 20 and 30
+ </select>
+
+ <select id="countBoards" resultType="int">
+SELECT count(*) FROM board_list_tb
+ </select>
+
+ <select id="selectBoardByNo" parameterType="com.yck.wob.dto.BoardDTO" resultType="com.yck.wob.dto.BoardDTO">
+SELECT * FROM board_list_tb where boardNo = #{boardNo}
+ </select>
+
+  <select id="selectBoardByName" parameterType="com.yck.wob.dto.BoardDTO" resultType="com.yck.wob.dto.BoardDTO">
+SELECT * FROM board_list_tb where boardNo = #{boardNo}
+ </select>
+
+ <insert id="insertBoard" parameterType="com.yck.wob.dto.BoardDTO" resultType="int">
+ insert into board_list_tb(boardNo, boardName, boardDesc, boardProposer, boardStatus)
+ value(#{boardNo}, #{boardName}, #{boardDesc}, #{boardProposer}, #{boardStatus})
+ </insert>
+
+  <update id="udpateBoard" parameterType="com.yck.wob.dto.BoardDTO" resultType="int">
+  update board_list_tb set boardName=#{boardName}, boardDesc=#{boardDesc}, boardStatus=#{boardStatus}
+  where boardNo=#{boardNo}
+ </update>
+
+  <delete id="deleteBoard" parameterType="com.yck.wob.dto.BoardDTO">
+  delete board_list_tb where boardNo=#{boardNo}
+ </delete>
+
+
+
+<update id="createMainBoard" parameterType="com.yck.wob.dto.BoardDTO">
+CREATE TABLE IF NOT EXISTS ${boardNo}_board_tb(
+	`postNo` int not null auto_increment,
+	`postName` varchar(60) DEFAULT NULL,
+	`postDesc` varchar(500) DEFAULT NULL,
+	`postOwner` int DEFAULT NULL,
+	PRIMARY KEY(postNo)
+	)DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+</update>
+
+<update id="createSubBoard" parameterType="com.yck.wob.dto.BoardDTO">
+CREATE TABLE IF NOT EXISTS ${boardNo}_board_sub_tb(
+	`postSubNo` int not null auto_increment,
+	`postSubParentNo` int DEFAULT NULL,
+	`postNo` int DEFAULT NULL,
+	`postSubName` varchar(60) DEFAULT NULL,
+  `postSubDesc` varchar(500) DEFAULT NULL,
+  `postSubOwner` int DEFAULT NULL,
+	PRIMARY KEY(postSubNo)
+	)DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+</update>
+
+
+
+
+
+ <select id="selectPosts" resultType="com.yck.wob.dto.PostDTO">
+SELECT * FROM ${boardNo}_board_tb
+ </select>
+
+<select id="countPosts" resultType="int">
+select count(*) from ${boardNo}_board_tb
+</select>
+
+<select id="selectPostByNo" parameterType="com.yck.wob.dto.PostDTO" resultType="com.yck.wob.dto.PostDTO">
+select * from ${boardNo}_board_tb where postNo=#{postNo}
+</select>
+
+<insert id="insertPost" parameterType="com.yck.wob.dto.PostDTO">
+insert into ${boardNo}_board_tb(postNo,postName,postDesc,postOwner) 
+value(#{postNo}, #{postName}, #{postDesc}, #{postOwner})
+</insert>
+
+<update id="udpatePost" parameterType="com.yck.wob.dto.PostDTO">
+update ${boardNo}_board_tb set postName=#{postName},postDesc=#{postDesc}
+where postNo=#{postNo}
+</update>
+
+<delete id="deletePost" parameterType="com.yck.wob.dto.PostDTO">
+delete from ${boardNo}_board_tb where postNo=#{postNo}
+</delete>
+
+
+
+
+ <select id="selectPostSubs" resultType="com.yck.wob.dto.PostSubDTO">
+SELECT * FROM ${boardNo}_board_sub_tb
+ </select>
+
+<select id="countPostSubs" resultType="int">
+select count(*) from ${boardNo}_board_sub_tb
+</select>
+
+<select id="selectPostSubByNo" parameterType="com.yck.wob.dto.PostSubDTO" resultType="com.yck.wob.dto.PostSubDTO">
+select * from ${boardNo}_board_sub_tb where postSubNo=#{postSubNo}
+</select>
+
+<insert id="insertPostSub" parameterType="com.yck.wob.dto.PostSubDTO">
+insert into ${boardNo}_board_sub_tb(postSubNo,postSubParentNo,postNo,postSubName,postSubDesc,postSubOwner)
+value(#{postSubNo}, #{postSubParentNo}, #{postNo}, #{postSubName}, #{postSubDesc}, #{postSubOwner})
+</insert>
+
+<update id="udpatePostSub" parameterType="com.yck.wob.dto.PostSubDTO">
+update ${boardNo}_board_sub_tb set postSubName=#{postSubName},postSubDesc=#{postSubDesc}
+where postSubNo=#{postSubNo}
+</update>
+
+<delete id="deletePostSub" parameterType="com.yck.wob.dto.PostSubDTO">
+delete from ${boardNo}_board_sub_tb where postSubNo=#{postSubNo}
+</delete>
+
+<!--
+ <select id="selectUsers" resultType="com.yck.wob.dto.UserDTO">
+SELECT * FROM user_tb
+ </select>
+
+<select id="countUsers" resultType="int">
+select count(*) from user_tb
+</select>
+
+<select id="selectUserByNo" parameterType="com.yck.wob.dto.UserDTO" resultType="com.yck.wob.dto.UserDTO">
+select * from user_tb where userNo=#{userNo}
+</select>
+
+<select id="selectUserByEmail" parameterType="com.yck.wob.dto.UserDTO" resultType="com.yck.wob.dto.UserDTO">
+select * from user_tb where userEmail=#{userEmail}
+</select>
+
+<insert id="insertUser" parameterType="com.yck.wob.dto.UserDTO">
+insert into user_tb(userNo,userPassword,userEmail,userNickname,userStatus) 
+value(#{userNo}, #{userPassword}, #{userEmail}, #{userNickname}, #{userStatus})
+</insert>
+
+<update id="udpateUser" parameterType="com.yck.wob.dto.UserDTO">
+update user_tb set userPassword=#{userPassword}, userNickname=#{userNickname}, userStatus=#{userStatus}
+where userNo=#{userNo}
+</update> 
+
+<delete id="deleteUser" parameterType="com.yck.wob.dto.UserDTO">
+delete from user_tb where userNo=#{userNo}
+</delete>
+-->
+
+</mapper>

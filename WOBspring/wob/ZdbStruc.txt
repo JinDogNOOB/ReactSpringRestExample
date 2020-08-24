@@ -1,0 +1,43 @@
+# user_tb
+## 유저 정보
+userNo int pk
+userPassword varchar 80
+userEmail varchar 60
+userNickname varchar 60
+userStatus int
+/*
+userStatus 
+0~19 뭔가의 정지
+20~30 정상
+99 어드민
+*/
+
+
+# board_list_tb
+## 게시판 정보
+boardNo int pk
+boardName varchar 30
+boardDesc varchar 300
+boardProposer ### user_no
+boardStatus int
+/*
+boardStatus 
+0~19 뭔가의 정지
+20~30 정상
+*/
+
+
+# {number}_board_tb ### boardNo
+## 게시판 게시글
+postNo int pk
+postName varchar 60
+postDesc varchar 500
+postOwner int ### user_no
+
+# {number}_board_sub_tb ### boardNo
+## 게시판 댓글
+postSubNo int pk
+postSubParent int ### post_sub_no
+postSubName varchar 60
+postSubDesc varchar 500
+postSubOwner int ### user_no
