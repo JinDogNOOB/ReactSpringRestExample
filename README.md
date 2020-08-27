@@ -1,7 +1,7 @@
 # WhisperOfTheBlocks
 #### 이더리움 메인넷을 활용한 다양한 기능들을 만들면 재밌을것같다.
 
-
+mvn -N io.takari:maven:wrapper
 
 # 목표 및 소요기간
 ## 1단계 목표 java 
