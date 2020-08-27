@@ -18,7 +18,7 @@ public interface BoardDao {
     BoardDTO selectBoardByNo(BoardDTO boardDTO);
     BoardDTO selectBoardByName(BoardDTO boardDTO);
     int insertBoard(BoardDTO boardDTO);
-    int udpateBoard(BoardDTO boardDTO);
+    int updateBoard(BoardDTO boardDTO);
     void deleteBoard(BoardDTO boardDTO);
 
     // 게시판 테이블 생성
@@ -31,7 +31,7 @@ public interface BoardDao {
     int countPosts(PostDTO postDTO);
     PostDTO selectPostByNo(PostDTO postDTO);
     int insertPost(PostDTO postDTO);
-    int udpatePost(PostDTO postDTO);
+    int updatePost(PostDTO postDTO);
     void deletePost(PostDTO postDTO);
 
     // 게시글 댓글
@@ -39,7 +39,7 @@ public interface BoardDao {
     int countPostSubs(PostSubDTO postSubDTO);
     PostSubDTO selectPostSubByNo(PostSubDTO postSubDTO);
     int insertPostSub(PostSubDTO postSubDTO);
-    int udpatePostSub(PostSubDTO postSubDTO);
+    int updatePostSub(PostSubDTO postSubDTO);
     void deletePostSub(PostSubDTO postSubDTO);
 
     

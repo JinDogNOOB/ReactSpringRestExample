@@ -36,7 +36,7 @@ insert into user_tb(userNo,userPassword,userEmail,userNickname,userStatus)
 value(#{userNo}, #{userPassword}, #{userEmail}, #{userNickname}, #{userStatus})
 </insert>
 
-<update id="udpateUser" parameterType="com.yck.wob.dto.UserDTO">
+<update id="updateUser" parameterType="com.yck.wob.dto.UserDTO">
 update user_tb set userPassword=#{userPassword}, userNickname=#{userNickname}, userStatus=#{userStatus}
 </update> 
 

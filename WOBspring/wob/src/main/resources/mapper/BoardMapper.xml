@@ -35,12 +35,12 @@ SELECT * FROM board_list_tb where boardNo = #{boardNo}
 SELECT * FROM board_list_tb where boardNo = #{boardNo}
  </select>
 
- <insert id="insertBoard" parameterType="com.yck.wob.dto.BoardDTO" resultType="int">
+ <insert id="insertBoard" parameterType="com.yck.wob.dto.BoardDTO">
  insert into board_list_tb(boardNo, boardName, boardDesc, boardProposer, boardStatus)
  value(#{boardNo}, #{boardName}, #{boardDesc}, #{boardProposer}, #{boardStatus})
  </insert>
 
-  <update id="udpateBoard" parameterType="com.yck.wob.dto.BoardDTO" resultType="int">
+  <update id="updateBoard" parameterType="com.yck.wob.dto.BoardDTO">
   update board_list_tb set boardName=#{boardName}, boardDesc=#{boardDesc}, boardStatus=#{boardStatus}
   where boardNo=#{boardNo}
  </update>
@@ -94,7 +94,7 @@ insert into ${boardNo}_board_tb(postNo,postName,postDesc,postOwner)
 value(#{postNo}, #{postName}, #{postDesc}, #{postOwner})
 </insert>
 
-<update id="udpatePost" parameterType="com.yck.wob.dto.PostDTO">
+<update id="updatePost" parameterType="com.yck.wob.dto.PostDTO">
 update ${boardNo}_board_tb set postName=#{postName},postDesc=#{postDesc}
 where postNo=#{postNo}
 </update>
@@ -123,7 +123,7 @@ insert into ${boardNo}_board_sub_tb(postSubNo,postSubParentNo,postNo,postSubName
 value(#{postSubNo}, #{postSubParentNo}, #{postNo}, #{postSubName}, #{postSubDesc}, #{postSubOwner})
 </insert>
 
-<update id="udpatePostSub" parameterType="com.yck.wob.dto.PostSubDTO">
+<update id="updatePostSub" parameterType="com.yck.wob.dto.PostSubDTO">
 update ${boardNo}_board_sub_tb set postSubName=#{postSubName},postSubDesc=#{postSubDesc}
 where postSubNo=#{postSubNo}
 </update>
@@ -154,7 +154,7 @@ insert into user_tb(userNo,userPassword,userEmail,userNickname,userStatus)
 value(#{userNo}, #{userPassword}, #{userEmail}, #{userNickname}, #{userStatus})
 </insert>
 
-<update id="udpateUser" parameterType="com.yck.wob.dto.UserDTO">
+<update id="updateUser" parameterType="com.yck.wob.dto.UserDTO">
 update user_tb set userPassword=#{userPassword}, userNickname=#{userNickname}, userStatus=#{userStatus}
 where userNo=#{userNo}
 </update> 

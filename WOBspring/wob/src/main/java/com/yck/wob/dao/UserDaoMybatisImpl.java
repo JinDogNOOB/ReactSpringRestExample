@@ -31,9 +31,9 @@ public class UserDaoMybatisImpl implements UserDao {
 
 
     @Override
-    public int udpateUser(UserDTO userDTO) {
+    public int updateUser(UserDTO userDTO) {
         // TODO Auto-generated method stub
-        return sqlSession.update(namespace + ".udpateUser",userDTO);
+        return sqlSession.update(namespace + ".updateUser",userDTO);
     }
 
     @Override

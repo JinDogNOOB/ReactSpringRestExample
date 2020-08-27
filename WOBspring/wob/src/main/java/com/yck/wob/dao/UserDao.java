@@ -13,7 +13,7 @@ public interface UserDao {
     UserDTO selectUserByNo(UserDTO userDTO);
     UserDTO selectUserByEmail(UserDTO userDTO);
     int insertUser(UserDTO userDTO);
-    int udpateUser(UserDTO userDTO);
+    int updateUser(UserDTO userDTO);
     void deleteUser(UserDTO userDTO);
     int countUsers();
 }

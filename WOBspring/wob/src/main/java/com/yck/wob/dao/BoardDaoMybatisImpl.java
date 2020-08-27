@@ -44,8 +44,8 @@ public class BoardDaoMybatisImpl implements BoardDao {
         return sqlSession.insert(namespace + ".insertBoard", boardDTO);
        }
        @Override
-       public int udpateBoard(BoardDTO boardDTO){
-        return sqlSession.update(namespace + ".udpateBoard", boardDTO);
+       public int updateBoard(BoardDTO boardDTO){
+        return sqlSession.update(namespace + ".updateBoard", boardDTO);
        }
        @Override
        public void deleteBoard(BoardDTO boardDTO){
@@ -82,8 +82,8 @@ public class BoardDaoMybatisImpl implements BoardDao {
         return sqlSession.insert(namespace + ".insertPost",postDTO);
        }
        @Override
-       public int udpatePost(PostDTO postDTO){
-        return sqlSession.update(namespace + ".udpatePost",postDTO);
+       public int updatePost(PostDTO postDTO){
+        return sqlSession.update(namespace + ".updatePost",postDTO);
        }
        @Override
        public void deletePost(PostDTO postDTO){
@@ -108,8 +108,8 @@ public class BoardDaoMybatisImpl implements BoardDao {
         return sqlSession.insert(namespace + ".insertPostSub", postSubDTO);
        }
        @Override
-       public int udpatePostSub(PostSubDTO postSubDTO){
-        return sqlSession.update(namespace + ".udpatePostSub", postSubDTO);
+       public int updatePostSub(PostSubDTO postSubDTO){
+        return sqlSession.update(namespace + ".updatePostSub", postSubDTO);
        }
        @Override
        public void deletePostSub(PostSubDTO postSubDTO){
