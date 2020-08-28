@@ -22,7 +22,7 @@ public class PostService {
     
 
     // ### 게시글 쓰기
-    boolean addPost(String postName, String postDesc, int postOwner, int boardNo){
+    public boolean addPost(String postName, String postDesc, int postOwner, int boardNo){
         PostDTO post = new PostDTO();
         post.setPostName(postName);
         post.setPostDesc(postDesc);
@@ -38,7 +38,7 @@ public class PostService {
     }
 
     // ### 게시글 수정
-    boolean modifyPost(String postName, String postDesc, int postNo, int boardNo){
+    public boolean modifyPost(String postName, String postDesc, int postNo, int boardNo){
 
         PostDTO post = new PostDTO();
         post.setPostDesc(postDesc);
@@ -55,13 +55,13 @@ public class PostService {
     }
 
     // ### 게시글 목록 보기
-    List<PostDTO> getPostlists(int boardNo){
+    public List<PostDTO> getPostlists(int boardNo){
         PostDTO post = new PostDTO();
         post.setBoardNo(boardNo);
         return boardDao.selectPosts(post);
     }
     // ### 게시글 하나 보기
-    PostDTO getPost(int boardNo, int postNo){
+    public PostDTO getPost(int boardNo, int postNo){
         PostDTO post = new PostDTO();
         post.setBoardNo(boardNo);
         post.setPostNo(postNo);
@@ -73,7 +73,7 @@ public class PostService {
     // ################################ 댓글 #############
 
     // ### 댓글 입력 
-    boolean addPostSub(int boardNo, int postSubParentNo, int postNo, String postSubName, String postSubDesc, int postSubOwner){
+    public boolean addPostSub(int boardNo, int postSubParentNo, int postNo, String postSubName, String postSubDesc, int postSubOwner){
         PostSubDTO postSub = new PostSubDTO();
         postSub.setBoardNo(boardNo);
         postSub.setPostSubParentNo(postSubParentNo);
@@ -88,7 +88,7 @@ public class PostService {
     }
 
     // ### 댓글 수정
-    boolean addPostSub(int boardNo, int postSubNo, String postSubName, String postSubDesc){
+    public boolean addPostSub(int boardNo, int postSubNo, String postSubName, String postSubDesc){
         PostSubDTO postSub = new PostSubDTO();
         postSub.setBoardNo(boardNo);
         postSub.setPostSubNo(postSubNo);
@@ -100,7 +100,7 @@ public class PostService {
     }
 
     // ### 댓글 가져오기 spa 프론트 후에 작업하자
-    PostSubDTO getPostSub(int boardNo, int postSub){
+    public PostSubDTO getPostSub(int boardNo, int postSub){
         return null;
     }
 

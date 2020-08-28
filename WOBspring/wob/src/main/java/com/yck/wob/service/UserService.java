@@ -16,7 +16,7 @@ public class UserService{
 
     
     // ### 회원가입
-    boolean signUp(String userEmail, String userPassword, String userNickname){
+    public boolean signUp(String userEmail, String userPassword, String userNickname){
         UserDTO user = new UserDTO();
         user.setUserEmail(userEmail);
         user.setUserPassword(userPassword);
@@ -35,7 +35,7 @@ public class UserService{
     }
 
     // ### 로그인
-    UserDTO signIn(String userEmail, String userPassword){
+    public UserDTO signIn(String userEmail, String userPassword){
         UserDTO user = new UserDTO();
         user.setUserEmail(userEmail);
         user.setUserPassword(userPassword);
@@ -55,14 +55,14 @@ public class UserService{
     }
 
     // ### 회원정보 보기 
-    UserDTO getUserInfo(int userNo){
+    public UserDTO getUserInfo(int userNo){
         UserDTO user = new UserDTO();
         user.setUserNo(userNo);
         return userDao.selectUserByNo(user);
     }
 
     // ### 회원정보 수정
-    boolean modifyUserInfo(String userPassword, String userNickname){
+    public boolean modifyUserInfo(String userPassword, String userNickname){
         UserDTO user = new UserDTO();
         user.setUserPassword(userPassword);
         user.setUserNickname(userNickname);
@@ -76,7 +76,7 @@ public class UserService{
     }
 
     // ### 회원 탈퇴 
-    boolean deleteUserInfo(int userNo){
+    public boolean deleteUserInfo(int userNo){
         UserDTO user = new UserDTO();
         user.setUserNo(userNo);
         try{

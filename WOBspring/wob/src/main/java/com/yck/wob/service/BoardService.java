@@ -14,14 +14,14 @@ public class BoardService {
     BoardDao boardDao;
 
     // 게시판 생성 등등등
-    List<BoardDTO> getPermitedBoardList() {
+    public List<BoardDTO> getPermitedBoardList() {
         return boardDao.selectPermitedBoards();
     }
-    List<BoardDTO> getBoardList(){
+    public List<BoardDTO> getBoardList(){
         return boardDao.selectBoards();
     }
     
-    boolean requestAddingBoardList(String boardName, String boardDesc, int userNo){
+    public boolean requestAddingBoardList(String boardName, String boardDesc, int userNo){
         BoardDTO board = new BoardDTO();
         board.setBoardName(boardName);
         board.setBoardDesc(boardDesc);
@@ -36,7 +36,7 @@ public class BoardService {
         return true;
     }
 
-    boolean addBoardList(int boardNo){
+    public boolean addBoardList(int boardNo){
         BoardDTO board = new BoardDTO();
         board.setBoardNo(boardNo);
         BoardDTO dbBoard = boardDao.selectBoardByNo(board);
@@ -49,7 +49,7 @@ public class BoardService {
 
     }
 
-    BoardDTO getBoardInfo(int boardNo){
+    public BoardDTO getBoardInfo(int boardNo){
         BoardDTO board = new BoardDTO();
         board.setBoardNo(boardNo);
         return boardDao.selectBoardByNo(board);
