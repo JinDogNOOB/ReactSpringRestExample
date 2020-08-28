@@ -16,11 +16,11 @@ public class UserAuthUtil {
     private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     // String jws = Jwts.builder().setSubject("Joe").signWith(key).compact();
 
-    private static final int EXPIRETIME_FOREVER = 100;
-    private static final int EXPIRETIME_ONEDAY = 101;
+    public static final int EXPIRETIME_FOREVER = 100;
+    public static final int EXPIRETIME_ONEDAY = 101;
 
-    private static final int STATUS_USER = 200;
-    private static final int STATUS_ADMIN = 201;
+    public static final int STATUS_USER = 200;
+    public static final int STATUS_ADMIN = 201;
     // jwt parameters
     /*
      헤더 설정도 하고

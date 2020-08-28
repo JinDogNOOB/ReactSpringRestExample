@@ -1,8 +1,9 @@
 2XX Success 
-200 OK SC_OK
-201 Created SC_CREATED
-202 Accepted SC_ACCEPTED
-204 No Content SC_NO_CONTENT
+200 OK SC_OK 뭔가 요청
+201 Created SC_CREATED 뭔가 생성
+202 Accepted SC_ACCEPTED 뭔가 변경
+204 No Content SC_NO_CONTENT 삭제후 확인 및 컨텐츠없다
+여기서는 그냥 다 200 ok로 통일하자
 
 4XX Client errors
 400 Bad Request SC_BAD_REQUEST// 파라미터 이상한거 옴 
