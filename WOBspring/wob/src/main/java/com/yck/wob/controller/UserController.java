@@ -19,14 +19,48 @@ public class UserController {
 
     @Autowired
     UserDao userDao;
-    
-    @RequestMapping(value="/test", method = RequestMethod.GET)
+
+    /*
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    private int tetetete(){
+    }
+    */
+
+    // 회원정보보기
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    private List<UserDTO> getUserInfo(){
+        List<UserDTO> users = userDao.selectUsers();
+        System.out.println(users.toString());
+        System.out.println(userDao.countUsers());
+        return users;
+    }
+    // 회원가입
+    @RequestMapping(value="/", method = RequestMethod.PUT)
     private List<UserDTO> test(){
         List<UserDTO> users = userDao.selectUsers();
         System.out.println(users.toString());
         System.out.println(userDao.countUsers());
         return users;
     }
+    // 로그인
+    @RequestMapping(value="/", method = RequestMethod.POST)
+    private List<UserDTO> test(){
+        List<UserDTO> users = userDao.selectUsers();
+        System.out.println(users.toString());
+        System.out.println(userDao.countUsers());
+        return users;
+    }
+    // 유저 신고
+    @RequestMapping(value="/", method = RequestMethod.DELETE)
+    private List<UserDTO> test(){
+        List<UserDTO> users = userDao.selectUsers();
+        System.out.println(users.toString());
+        System.out.println(userDao.countUsers());
+        return users;
+    }
+
+
+
 
     
     
