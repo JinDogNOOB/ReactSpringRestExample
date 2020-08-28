@@ -70,8 +70,8 @@ public class PostService {
 
 
 
+    // ################################ 댓글 #############
 
-    
     // ### 댓글 입력 
     boolean addPostSub(int boardNo, int postSubParentNo, int postNo, String postSubName, String postSubDesc, int postSubOwner){
         PostSubDTO postSub = new PostSubDTO();
@@ -97,6 +97,11 @@ public class PostService {
 
         boardDao.updatePostSub(postSub);
         return true;
+    }
+
+    // ### 댓글 가져오기 spa 프론트 후에 작업하자
+    PostSubDTO getPostSub(int boardNo, int postSub){
+        return null;
     }
 
 

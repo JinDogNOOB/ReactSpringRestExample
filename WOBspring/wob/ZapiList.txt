@@ -1,3 +1,22 @@
+2XX Success
+200 OK
+201 Created 
+202 Accepted
+204 No Content
+
+4XX Client errors
+400 Bad Request // 파라미터 이상한거 옴 
+401 Unauthorized //인증이 안되있다. 여기서는 로그인유무로 하자
+403 Forbidden //자원에 대한 권한이 없다
+404 Not Found // 경로나 자원이 없다
+405 Method Not Allowd // 메쏘드 허용된게 아니다 뭐 options안쓰는데 오면 이걸로 응답하자
+409 Conflict // 비즈니스로직상 불가능하거나 모순이 생긴경우
+429 Too many Requests // 도스공격 비스므리한것 http header의 retry-after를 통해서 기다리라고할수있다.
+
+5XX Server errors // restapi 제공하는측에서는 500을 리턴하면안댄다. 톰캣 자체적으로 어쩔수없이 가는건 괜찮은데
+개발자가 나서서 500코드를 설정해서 보내는것은 바람직하지않다
+
+
 --- 어드민페이지
 
 /admin/user
