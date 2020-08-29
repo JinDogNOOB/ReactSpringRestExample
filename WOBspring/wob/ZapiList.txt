@@ -84,8 +84,12 @@ https://tomcat.apache.org/tomcat-5.5-doc/servletapi/javax/servlet/http/HttpServl
 게시판정보수정요청 *put
 게시판삭제요청 *delete
 
---- 특정 게시판
-/board/{boardname}
+--- 특정게시판
+/board/{boardNo}
+게시판정보 *get
+
+--- 특정 게시판 글
+/board/{boardNo}/post
 게시글리스트 *get
 게시글쓰기 *post
 게시글보기 /num *get
@@ -93,7 +97,7 @@ https://tomcat.apache.org/tomcat-5.5-doc/servletapi/javax/servlet/http/HttpServl
 게시글수정 /num *put
 
 --- 댓글
-/board/{boardname}/{num}/sub
+/board/{boardNo}/post/{num}/sub
 댓글리스트 *get
 댓글쓰기 *post
 댓글수정 *put

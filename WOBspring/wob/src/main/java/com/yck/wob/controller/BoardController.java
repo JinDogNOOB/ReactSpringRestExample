@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yck.wob.dto.BoardDTO;
+import com.yck.wob.dto.PostDTO;
 import com.yck.wob.service.BoardService;
 import com.yck.wob.service.PostService;
 import com.yck.wob.util.UserAuthUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.WebUtils;
@@ -69,16 +71,49 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
 
 
 
+    // ########### /board/{boardNo}
+    // 게시판 정보 가져오기 get
+    @RequestMapping(value="/{boardNo}", method = RequestMethod.GET)
+    private BoardDTO getBoardDetail(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
+        response.setStatus(HttpServletResponse.SC_OK);
+        return boardService.getBoardInfo(boardNo);
+    }
 
-    // ############# /board/{boardName}
+
+
+    // ############# /board/{boardNo}/post
     // 게시글 리스트 get
+    @RequestMapping(value="/{boardNo}/post", method = RequestMethod.GET)
+    private List<PostDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
+        response.setStatus(HttpServletResponse.SC_OK);
+        return postService.getPostlists(boardNo);
+    }
 
     // 게시글 쓰기 post
+    @RequestMapping(value="/{boardNo}/post", method = RequestMethod.POST)
+    private void addPost(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
+        String postName = request.getParameter("postName");
+        String postDesc = request.getParameter("postDesc");
 
+        // 로그인 체크 
+        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
+        // 작업
+        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()), boardNo)){
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return;
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return;
+    }
     
 
 
-    // ############ /board/{boardName}/{postNo}
+    // ############ /board/{boardNo}/post/{postNo}
     // 게시글보기 get
 
     // 게시글삭제 delete
@@ -87,7 +122,7 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
 
 
 
-    // ############ /board/{boardName}/{postNo}/sub
+    // ############ /board/{boardNo}/post/{postNo}/sub
     // 댓글리스트 get
     
     // 댓글쓰기 post

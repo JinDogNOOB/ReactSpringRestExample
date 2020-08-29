@@ -88,7 +88,7 @@ public class PostService {
     }
 
     // ### 댓글 수정
-    public boolean addPostSub(int boardNo, int postSubNo, String postSubName, String postSubDesc){
+    public boolean modifyPostSub(int boardNo, int postSubNo, String postSubName, String postSubDesc){
         PostSubDTO postSub = new PostSubDTO();
         postSub.setBoardNo(boardNo);
         postSub.setPostSubNo(postSubNo);
