@@ -65,7 +65,7 @@ public class UserService{
     // ### 회원정보 수정
     public boolean modifyUserInfo(String userPassword, String userNickname){
         UserDTO user = new UserDTO();
-        user.setUserPassword(userPassword);
+        user.setUserPassword(PasswordHash.hashPasswordWithSHA256(userPassword));
         user.setUserNickname(userNickname);
         try{
             userDao.updateUser(user); 

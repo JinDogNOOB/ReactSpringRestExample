@@ -53,7 +53,7 @@ public class UserController {
     }
 
     // 로그인
-    @RequestMapping(value="", method = RequestMethod.POST)
+    @RequestMapping(value="/", method = RequestMethod.POST)
     private void signin(HttpServletRequest request, HttpServletResponse response){
         String userEmail = request.getParameter("userEmail");
         String userPassword = request.getParameter("userPassword");
@@ -89,6 +89,54 @@ public class UserController {
     }
 
 
+
+
+
+    // ################ /user/myinfo/ ###################################
+
+    // 내 정보보기
+    @RequestMapping(value="/myinfo/", method = RequestMethod.GET)
+    private UserDTO getMyUserInfo(HttpServletRequest request, HttpServletResponse response){
+        int userNo = Integer.parseInt(request.getParameter("userNo"));
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        UserDTO user = userService.getUserInfo(userNo);
+        user.setUserPassword(null);
+        return user;
+    }
+
+    // 내 정보수정
+    @RequestMapping(value="/myinfo/", method = RequestMethod.PUT)
+    private void modifyMyUserInfo(HttpServletRequest request, HttpServletResponse response){
+        int userNo = Integer.parseInt(request.getParameter("userNo"));
+
+        String newNickname = request.getParameter("newNickname")
+        String currentPassword = request.getParameter("currentPassword");
+        String newPassword = currentPassword;
+        if(request.getParameter("newPassword") == null || request.getParameter("newPassword").contentEquals("") == false){
+            newPassword = request.getParameter("newPassword");
+        }
+        // 현재 패스워드 맞는지 검증
+        if (userService.signIn("userEmail", currentPassword) == null){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        // 유저정보 수정 시작
+        if (userService.modifyUserInfo(newPassword, newNickname) == false){
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return;
+        }
+        // 성공
+        response.setStatus(HttpServletResponse.SC_OK);
+        return;
+    }
+
+    // 회원탈퇴
+    @RequestMapping(value="/myinfo/", method = RequestMethod.DELETE)
+    private void DeleteMyUserInfo(HttpServletRequest request, HttpServletResponse response){
+        response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+        return;
+    }
 
 
     
