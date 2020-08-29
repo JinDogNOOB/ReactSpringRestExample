@@ -110,7 +110,7 @@ public class UserController {
     private void modifyMyUserInfo(HttpServletRequest request, HttpServletResponse response){
         int userNo = Integer.parseInt(request.getParameter("userNo"));
 
-        String newNickname = request.getParameter("newNickname")
+        String newNickname = request.getParameter("newNickname");
         String currentPassword = request.getParameter("currentPassword");
         String newPassword = currentPassword;
         if(request.getParameter("newPassword") == null || request.getParameter("newPassword").contentEquals("") == false){
