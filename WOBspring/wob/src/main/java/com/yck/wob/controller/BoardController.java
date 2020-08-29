@@ -1,11 +1,20 @@
 package com.yck.wob.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.yck.wob.dto.BoardDTO;
 import com.yck.wob.service.BoardService;
 import com.yck.wob.service.PostService;
+import com.yck.wob.util.UserAuthUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.WebUtils;
 
 
 
@@ -30,9 +39,30 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
 
     // ############### /board/
     // 게시판 목록 get
-
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    private List<BoardDTO> getPermitedBoardList(HttpServletRequest request, HttpServletResponse response){
+        response.setStatus(HttpServletResponse.SC_OK);
+        return boardService.getPermitedBoardList();
+    }
     // 게시판생성요청 post
-
+    @RequestMapping(value="/", method = RequestMethod.POST)
+    private void requestForAddingBoard(HttpServletRequest request, HttpServletResponse response){
+        String boardName = request.getParameter("boardName");
+        String boardDesc = request.getParameter("boardDesc");
+    
+        // 로그인 유무 권한 확인
+        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        // 작업
+        if(!boardService.requestAddingBoardList(boardName, boardDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()))){
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return;
+        }
+        response.setStatus(HttpServletResponse.SC_OK);
+        return;
+    }
     // 게시판정보수정요청 put XXXXXXXXXXXX
 
     // 게시판삭제요청 delete XXXXXXXXXXXX
@@ -66,7 +96,7 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
 
     // 댓글삭제 delete
 
-    
+
 
 
 }

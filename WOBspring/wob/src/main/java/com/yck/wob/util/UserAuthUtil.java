@@ -71,6 +71,11 @@ public class UserAuthUtil {
     // jws 확인
     public static boolean validateJwtNStatus(String jwsString, int STATUS){
         // Jws<Claims> jws;
+        if(jwsString == null){
+            return false;
+        }
+
+        
         int userStatus = 0;
         try{
             
@@ -106,7 +111,18 @@ public class UserAuthUtil {
         }
     }
 
-    public static Claims getClaimsFromJws(String jwsString){
+/*
+            .claim("userNo", user.getUserNo())
+            .claim("userStatus", user.getUserStatus())
+            .claim("userNickname", user.getUserNickname())
+*/
+
+    public static int getUserNoFromJws(String jwsString){
+        return getClaimsFromJws(jwsString).get("userNo", Integer.class).intValue();
+    }
+
+
+    private static Claims getClaimsFromJws(String jwsString){
         try{      
              return Jwts.parserBuilder()
             .setSigningKey(key)
