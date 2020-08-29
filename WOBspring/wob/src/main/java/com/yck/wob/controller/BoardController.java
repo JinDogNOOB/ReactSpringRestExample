@@ -115,11 +115,66 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
 
     // ############ /board/{boardNo}/post/{postNo}
     // 게시글보기 get
-
+    @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.GET)
+    private PostDTO getPostDetail(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
+        response.setStatus(HttpServletResponse.SC_OK);
+        return postService.getPost(boardNo, postNo);
+    }
     // 게시글삭제 delete
+    @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.DELETE)
+    private void deletePost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
+        
+        // 로그인 유무 권한 확인
+        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        // 쿠키에서 userNo 추출
+        int userNo = UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue());
+        // 요청 게시글 db에서 추출 
+        PostDTO dbPost = postService.getPost(boardNo, postNo);
+        // userNo와 owner 비교
+        if((dbPost.getPostOwner() == userNo)== false){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
 
+        // 작업
+        // 작업은 보류 .. 어떻게 할지 고민좀해보자 deleted로 다 치환해버려!?
+        
+        response.setStatus(HttpServletResponse.SC_OK);
+        return;
+    }
     // 게시글수정 put
+    @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.PUT)
+    private void modifyPost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
+        
+        String postName = request.getParameter("postName");
+        String postDesc = request.getParameter("postDesc");
+        // 로그인 유무 권한 확인
+        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        // 쿠키에서 userNo 추출
+        int userNo = UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue());
+        // 요청 게시글 db에서 추출 
+        PostDTO dbPost = postService.getPost(boardNo, postNo);
+        // userNo와 owner 비교
+        if((dbPost.getPostOwner() == userNo)== false){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
 
+        // 작업
+        if(!postService.modifyPost(postName, postDesc, postNo, boardNo)){
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return;
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+        return;
+    }
 
 
     // ############ /board/{boardNo}/post/{postNo}/sub
