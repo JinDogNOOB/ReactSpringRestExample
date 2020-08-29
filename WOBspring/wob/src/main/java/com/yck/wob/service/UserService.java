@@ -2,6 +2,7 @@ package com.yck.wob.service;
 
 import com.yck.wob.dao.UserDao;
 import com.yck.wob.dto.UserDTO;
+import com.yck.wob.util.PasswordHash;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class UserService{
     public boolean signUp(String userEmail, String userPassword, String userNickname){
         UserDTO user = new UserDTO();
         user.setUserEmail(userEmail);
-        user.setUserPassword(userPassword);
+        user.setUserPassword(PasswordHash.hashPasswordWithSHA256(userPassword));
         user.setUserNickname(userNickname);
 
         // 아이디 중복 체크 
@@ -46,7 +47,7 @@ public class UserService{
             return null;
         }
         // 패스워드 비교 
-        if(dbUser.getUserPassword().contentEquals(user.getUserPassword())){
+        if(PasswordHash.comparePassword(userPassword, dbUser.getUserPassword())){
             // 성공
             return dbUser;
         }
