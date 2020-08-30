@@ -21,7 +21,7 @@ public class BoardService {
         return boardDao.selectBoards();
     }
     
-    public boolean requestAddingBoardList(String boardName, String boardDesc, int userNo){
+    public boolean askToAddingBoardList(String boardName, String boardDesc, int userNo){
         BoardDTO board = new BoardDTO();
         board.setBoardName(boardName);
         board.setBoardDesc(boardDesc);
@@ -53,6 +53,11 @@ public class BoardService {
         BoardDTO board = new BoardDTO();
         board.setBoardNo(boardNo);
         return boardDao.selectBoardByNo(board);
+    }
+
+    public BoardDTO getBoardInfoByName(String boardName){
+        BoardDTO board = new BoardDTO();
+        return boardDao.selectBoardByName(board);
     }
 
 

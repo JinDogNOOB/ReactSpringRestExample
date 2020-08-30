@@ -100,7 +100,7 @@ public class PostService {
     }
 
     // ### 댓글 가져오기 spa 프론트 후에 작업하자
-    public PostSubDTO getPostSub(int boardNo, int postSub){
+    public PostSubDTO getPostSub(int boardNo, int postNo){
         return null;
     }
 

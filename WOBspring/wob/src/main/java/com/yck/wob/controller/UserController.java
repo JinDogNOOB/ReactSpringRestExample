@@ -95,7 +95,7 @@ public class UserController {
     // ################ /user/myinfo/ ###################################
 
     // 내 정보보기
-    @RequestMapping(value="/myinfo/", method = RequestMethod.GET)
+    @RequestMapping(value="/myinfo", method = RequestMethod.GET)
     private UserDTO getMyUserInfo(HttpServletRequest request, HttpServletResponse response){
         int userNo = Integer.parseInt(request.getParameter("userNo"));
 
@@ -106,7 +106,7 @@ public class UserController {
     }
 
     // 내 정보수정
-    @RequestMapping(value="/myinfo/", method = RequestMethod.PUT)
+    @RequestMapping(value="/myinfo", method = RequestMethod.PUT)
     private void modifyMyUserInfo(HttpServletRequest request, HttpServletResponse response){
         int userNo = Integer.parseInt(request.getParameter("userNo"));
 
@@ -132,7 +132,7 @@ public class UserController {
     }
 
     // 회원탈퇴
-    @RequestMapping(value="/myinfo/", method = RequestMethod.DELETE)
+    @RequestMapping(value="/myinfo", method = RequestMethod.DELETE)
     private void DeleteMyUserInfo(HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
         return;

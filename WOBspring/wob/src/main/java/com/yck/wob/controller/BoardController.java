@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yck.wob.dto.BoardDTO;
 import com.yck.wob.dto.PostDTO;
+import com.yck.wob.dto.PostSubDTO;
 import com.yck.wob.service.BoardService;
 import com.yck.wob.service.PostService;
 import com.yck.wob.util.UserAuthUtil;
@@ -58,7 +59,7 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
             return;
         }
         // 작업
-        if(!boardService.requestAddingBoardList(boardName, boardDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()))){
+        if(!boardService.askToAddingBoardList(boardName, boardDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()))){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
@@ -179,12 +180,19 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
 
     // ############ /board/{boardNo}/post/{postNo}/sub
     // 댓글리스트 get
-    
+    @RequestMapping(value="/{boardNo}/post/{postNo}/sub", method = RequestMethod.PUT)
+    private PostSubDTO getSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
+        
+        response.setStatus(HttpServletResponse.SC_OK);
+        return postService.getPostSub(boardNo, postNo);
+        
+    }
+
     // 댓글쓰기 post
 
     // 댓글수정 put
 
-    // 댓글삭제 delete
+    // 댓글삭제 delete 
 
 
 
