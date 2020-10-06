@@ -1,24 +1,28 @@
-import React, {Component} from 'react';
-import {Home, Signup} from './pages/index';
+import React from 'react';
 import {Route, Switch} from 'react-router-dom';
+import {
+  MainPage,
+  PostDetailPage,
+  UserPage,
+  BoardPage,
+  UserMyInfoPage,
+  SpecificBoardPage
+  } from './pages';
 
-class App extends Component {
-  render(){
-    return (
-      <div>
-        <Route exact path="/" component={Home} />
-        <Switch>
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/signup/:name" component={Signup} />
-          <Route exact path="/signup/:name/:number" component={Signup} />
-        </Switch>
-        
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div>
+      <Route exact path="/" component={MainPage} />
+      <Route exact path="/user" component={UserPage} />
+
+      <Route exact path="/user/myinfo" component={UserMyInfoPage} />
+
+      <Route exact path="/board" component={BoardPage} />
+      <Route exact path="/board/:boardNo" component={SpecificBoardPage} />
+      <Route exact path="/board/:boardNo/post/:postNo" component={PostDetailPage} />
+
+    </div>
+  );
 }
-  
-  
-
 
 export default App;

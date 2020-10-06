@@ -3,7 +3,7 @@ import Menu from '../components/Menu';
 
 const Home = () => (
     <div>
-        This page is Home
+        <h1>home</h1>This page is Home
         <Menu />
     </div>
 )

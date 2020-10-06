@@ -9,7 +9,7 @@ const Signup = ({match, location}) => {
     
     return (
     <div>
-        This is signup page {match.params.name} {match.params.number}
+        <h2>thisissignup</h2>This is signup page {match.params.name} {match.params.number}
     </div>
     );
 }
