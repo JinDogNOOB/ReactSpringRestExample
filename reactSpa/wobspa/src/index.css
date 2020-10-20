@@ -107,6 +107,135 @@ body {
 
 
 
+/* ###### 페이지 틀 ############################################# */
+
+.header {
+    background-color: red;
+
+    width: 1200px;
+    height: 160px;
+    margin: 0px auto;
+
+    /*절대좌표*/
+
+    position: relative;
+}
+
+.content{
+    background-color: blue;
+
+    width: 1200px;
+    height: 60px;
+    margin: 0px auto;
+
+    overflow:hidden;
+}
+.content > ul {
+    overflow: hidden;
+}
+.content > ul > li{
+    width: 400px;
+    float: left;
+}
+
+.subContent{
+    background-color: green;
+    width: 1200px;
+    height: 40px;
+    margin: 0px auto;
+}
+.subContent > ul {
+    overflow: hidden;
+    text-align: center;
+    
+}
+.subContent > ul > li {
+    display: inline-block;
+}
+.subContent > ul > li > a{
+    display: block;
+    padding: 10px 60px;
+    border: 1px solid black;
+}
+
+.main{
+    background-color: yellow;
+    width: 1200px;
+    height: 600px;
+    margin: 0px auto;
+}
+
+.footer{
+    background-color: purple;
+    width: 1200px;
+    height: 150px;
+    margin: 0px auto;
+}
+
+
+
+/*############ 도구 ##########################################*/
+h1{
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    color: #216182;
+}
+label{
+    display: block;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+
+.alignCenter{
+    margin: 0px auto;
+}
+
+/* 모달*/
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+.modal > .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 500px;
+    height: auto;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+.modal > .modal-content > .modal-button {
+    float: right;
+    font-size: 20px;
+    padding: 20px 80px;
+    width: 50px;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+.modal > .modal-content > .modal-button:hover {
+    background-color: darkgray;
+}
+.modal-switch {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
 
 
 
@@ -115,3 +244,37 @@ body {
 
 
 
+/* ########## 컴포넌트 ####################################### */
+.UserStatus{
+    background-color: purple;
+    height: 60px;
+    width: 100%;
+    text-align: right;
+}
+.UserStatus > .UserStatusDiv{
+
+    background-color: red;
+    text-align: right;
+    display: block;
+}
+
+
+
+
+/* ####### 플렉스 ################################### */
+.container-flex{display:flex;}
+
+.container-flex.direction-col{flex-direction: column;}
+
+.container-flex.justifyContent-end{justify-content: flex-end;}
+.container-flex.justifyContent-center{justify-content: center;}
+.container-flex.justifyContent-spaceBetween{justify-content: space-between;}
+.container-flex.justifyContent-spaceAround{justify-content: space-around;}
+.container-flex.justifyContent-spaceEvenly{justify-content: space-evenly;}
+
+.container-flex.alignItem-flex-start{align-items : flex-start;}
+.container-flex.alignItem-flex-end{align-items : flex-end;}
+.container-flex.alignItem-flex-center{align-items : center;}
+.container-flex.alignItem-flex-baseline{align-items : baseline;}
+
+.item-flex{}
