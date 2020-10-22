@@ -14,7 +14,6 @@ const initialState = {
     isLoggedIn: false,
 };
 
-
 /* 리듀서 선언 */
 // 리듀서는 export default 로 내보내줘라
 export default function user(state=initialState, action){
@@ -25,3 +24,4 @@ export default function user(state=initialState, action){
             return state;
     }
 }
+

@@ -51,18 +51,18 @@ public class AdminController {
         return userService.getUserInfo(userNo);
     }
     // 유저정보수정 *put
-    @RequestMapping(value="/user/{userNo}", method = RequestMethod.GET)
+    @RequestMapping(value="/user/{userNo}", method = RequestMethod.PUT)
     private void modifyUserInfo(@PathVariable int userNo, HttpServletRequest request, HttpServletResponse response){
         // userService.modifyUserInfo(userPassword, userNickname);
         return;
     }
     // 유저차단 *post
-    @RequestMapping(value="/user/{userNo}", method = RequestMethod.GET)
+    @RequestMapping(value="/user/{userNo}", method = RequestMethod.POST)
     private void blockUser(@PathVariable int userNo, HttpServletRequest request, HttpServletResponse response){
         return;
     }
     // 유저정보삭제 *delete
-    @RequestMapping(value="/user/{userNo}", method = RequestMethod.GET)
+    @RequestMapping(value="/user/{userNo}", method = RequestMethod.DELETE)
     private void deleteUserInfo(@PathVariable int userNo, HttpServletRequest request, HttpServletResponse response){
         return;
     }

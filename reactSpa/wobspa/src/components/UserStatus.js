@@ -9,24 +9,30 @@ import React, {useState} from 'react';
 로그인 : ~~님 환영합니다 로그아웃
 
 */
-function UserStatus(){
+function UserStatus({isLoggedIn}){
     //var button = document.querySelector("#loginButton");
     //button.addEventListener(modalSwitch)
     // 모달 레퍼런스
     const signinModalRef = React.createRef();
     const signupModalRef = React.createRef();
 
-    // 로그인 상태 
-    const [userName, setUserName] = useState("");
+    // 로그인폼 상태
+    const [userId, setUserId] = useState("");
     const [userPassword, setUserPassword] = useState("");
+    // 회원가입폼에 따른 추가 상태
+    const [userNickname, setUserNickname] = useState("");
 
-    const updateUserName = (event) => {
-        setUserName(event.target.value);
+
+    const updateUserId = (event) => {
+        setUserId(event.target.value);
     }
     const updateUserPassword = (event) => {
         setUserPassword(event.target.value);
     }
-    // 회원가입 상태
+    const updateUserNickname = (event) => {
+        setUserNickname(event.target.value);
+    }
+
 
 
 
@@ -38,10 +44,9 @@ function UserStatus(){
 
 
 
-    var isLoggedIn = true;
 
 
-    if(isLoggedIn){
+    if(!isLoggedIn){
         return(
             <div className="UserStatus">
                 {/*  로그인이 안되있을 시  */}
@@ -63,7 +68,7 @@ function UserStatus(){
                             <h1>로그인</h1>
                             <div className="container-flex justifyContent-center">
                                 <h2>아이디</h2>
-                                <input type="text" value={userName} onChange={updateUserName}></input>
+                                <input type="text" value={userId} onChange={updateUserId}></input>
                             </div>
                             <div className="container-flex justifyContent-center">
                                 <h2>비밀번호</h2>
@@ -86,11 +91,15 @@ function UserStatus(){
                             <h1>회원가입</h1>
                             <div className="container-flex justifyContent-center">
                                 <h2>아이디</h2>
-                                <input type="text" value={userName} onChange={updateUserName}></input>
+                                <input type="text" value={userId} onChange={updateUserId}></input>
                             </div>
                             <div className="container-flex justifyContent-center">
                                 <h2>비밀번호</h2>
                                 <input type="text" value={userPassword} onChange={updateUserPassword}></input>
+                            </div>
+                            <div className="container-flex justifyContent-center">
+                                <h2>닉네임</h2>
+                                <input type="text" value={userNickname} onChange={updateUserNickname}></input>
                             </div>
                             <div className="container-flex justifyContent-center">
                                 <input type="button" onClick={() => modalSwitch(signupModalRef)} value="취소" />
