@@ -9,7 +9,7 @@ import React, {useState} from 'react';
 로그인 : ~~님 환영합니다 로그아웃
 
 */
-function UserStatus({isLoggedIn}){
+function UserStatus({isLoggedIn, onRequestSignup}){
     //var button = document.querySelector("#loginButton");
     //button.addEventListener(modalSwitch)
     // 모달 레퍼런스
@@ -103,7 +103,7 @@ function UserStatus({isLoggedIn}){
                             </div>
                             <div className="container-flex justifyContent-center">
                                 <input type="button" onClick={() => modalSwitch(signupModalRef)} value="취소" />
-                                <input type="button" value="확인" />
+                                <input type="button" onClick={() => onRequestSignup(userId, userPassword, userNickname)} value="확인" />
                             </div>
                         </div>
 

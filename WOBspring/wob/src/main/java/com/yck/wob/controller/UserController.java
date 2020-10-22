@@ -15,11 +15,12 @@ import com.yck.wob.util.UserAuthUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+// @CrossOrigin("*")
 @RestController
 @RequestMapping(value="/user")
 public class UserController {
@@ -49,6 +50,7 @@ public class UserController {
             // 회원가입 실패
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
+        response.addHeader("access-controll-allow-origin", "http://127.0.0.1:8080");
         return;
     }
 
@@ -79,9 +81,12 @@ public class UserController {
     // 회원정보보기
     @RequestMapping(value="/", method = RequestMethod.GET)
     private UserDTO getUserInfo(HttpServletRequest request, HttpServletResponse response){
+        if(request.getParameter("userNo") == null) return null;
+
         int userNo = Integer.parseInt(request.getParameter("userNo"));
 
         response.setStatus(HttpServletResponse.SC_OK);
+        
         UserDTO user = userService.getUserInfo(userNo);
         user.setUserPassword(null);
         user.setUserEmail(null);

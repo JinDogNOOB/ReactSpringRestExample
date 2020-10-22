@@ -10,9 +10,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+
 // @SpringBootApplication = @Configuration + @EnableAutoConfiguration + @ComponentScan
 @SpringBootApplication
-public class WobApplication {
+public class WobApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(WobApplication.class, args);
@@ -31,5 +32,6 @@ public class WobApplication {
 		
 		return sqlSessionFactoryBean.getObject();
 	}
+
 
 }
