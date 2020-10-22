@@ -12,7 +12,9 @@ public class PasswordHash {
         String salt = getRandomSalt();
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
+
         md.update(salt.getBytes());
+        System.out.println(plainText);
         md.update(plainText.getBytes());
         
         return salt + ":" + (new String(Base64.getEncoder().encode(md.digest())));

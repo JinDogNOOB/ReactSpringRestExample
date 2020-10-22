@@ -25,18 +25,31 @@ function UserStatusContainer(){
     // axios 통신
     const onRequestSignup = async(userEmail, userPassword, userNickname) => {
         try{
-            const response = await axios.put(serverUrl+'/user/', {params:{
-                userEmail : userEmail,
-                userPassword : userPassword,
-                userNickname : userNickname
-            }});
+             /* const response = await axios.put(serverUrl+'/user/test',
+             {params:{userEmail : userEmail, userPassword : userPassword, userNickname : userNickname
+            }}); get할때는 params post 등 다른거는 그냥 params */
+            const options = {
+                method: 'PUT',
+                url: serverUrl+'/user/test',
+                 headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }, // x-www-form-urlencoded
+                 data: {
+                    userEmail : userEmail,
+                    userPassword : userPassword,
+                    userNickname : userNickname
+                } 
+               /*  params: { 
+                    userEmail : userEmail,
+                    userPassword : userPassword,
+                    userNickname : userNickname
+                } */
+                // 이거 생성 함수 만들어줘야겠다 ㅎㅎ
+            };
+            const response = await axios(options);
 
-            response = await axios.put('http://127.0.0.1:8080/user/', {params:{
-                userEmail : userEmail,
-                userPassword : userPassword,
-                userNickname : userNickname
-            }});
-            
+   
             console.log(response);
 
         }catch(exception){

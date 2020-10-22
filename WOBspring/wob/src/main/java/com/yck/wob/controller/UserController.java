@@ -1,6 +1,7 @@
 package com.yck.wob.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,10 @@ import com.yck.wob.util.UserAuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 // @CrossOrigin("*")
@@ -29,19 +32,27 @@ public class UserController {
     UserService userService;
 
     /*
+    @RequestBody Map map // application/json
+    @RequestParam Map map // x-www-form-urlencoded // & =
     @RequestMapping(value="/", method = RequestMethod.GET)
     private int tetetete(HttpServletRequest request, HttpServletResponse response){
     }
     */
     // ################### /user/ ##########################################
     // 회원가입
-    @RequestMapping(value="/", method = RequestMethod.PUT)
-    private void signup(HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value="/test", method = RequestMethod.PUT)
+    private void signup(HttpServletRequest request, HttpServletResponse response, @RequestBody Map body
+    ){
         
-        String userEmail = request.getParameter("userEmail");
+/*         String userEmail = request.getParameter("userEmail");
         String userPassword = request.getParameter("userPassword");
-        String userNickname = request.getParameter("userNickname");
-
+        String userNickname = request.getParameter("userNickname"); */
+        String userEmail = (String)body.get("userEmail");
+        String userPassword = (String)body.get("userPassword");
+        String userNickname = (String)body.get("userNickname");
+        System.out.println(userEmail);
+        System.out.println(userPassword);
+        System.out.println(userNickname);
         if (userService.signUp(userEmail, userPassword, userNickname)){
 
             // 회원가입 성공
@@ -50,7 +61,7 @@ public class UserController {
             // 회원가입 실패
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
-        response.addHeader("access-controll-allow-origin", "http://127.0.0.1:8080");
+        // response.addHeader("access-controll-allow-origin", "http://127.0.0.1:8080");
         return;
     }
 

@@ -14,7 +14,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 // @SpringBootApplication = @Configuration + @EnableAutoConfiguration + @ComponentScan
 @SpringBootApplication
 public class WobApplication{
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(WobApplication.class, args);
 	}
