@@ -9,7 +9,7 @@ import React, {useState} from 'react';
 로그인 : ~~님 환영합니다 로그아웃
 
 */
-function UserStatus({isLoggedIn, onRequestSignup}){
+function UserStatus({onSetIsLoggedInStatus, isLoggedIn, onRequestSignup, onRequestLogin}){
     //var button = document.querySelector("#loginButton");
     //button.addEventListener(modalSwitch)
     // 모달 레퍼런스
@@ -22,7 +22,7 @@ function UserStatus({isLoggedIn, onRequestSignup}){
     // 회원가입폼에 따른 추가 상태
     const [userNickname, setUserNickname] = useState("");
 
-
+    // 상태 변경 함수
     const updateUserId = (event) => {
         setUserId(event.target.value);
     }
@@ -36,12 +36,35 @@ function UserStatus({isLoggedIn, onRequestSignup}){
 
 
 
-    // id 모달메뉴 껏다켰다 
+    // 사용함수 
+    // 회원가입 로그인 모달 스위치
     const modalSwitch = (modal) =>{
         // var modal = document.querySelector(".modal");
         modal.current.classList.toggle("modal-switch");
     };
+    // 회원가입 후에 실행할 함수 
+    const doWhenSignupEnd = (bool) => {
+        if(bool){
+            modalSwitch(signupModalRef);
+            alert("회원가입이 완료되었습니다!!!");
+        }else{
+            console.log("회원가입실패");
+            alert("중복된 이메일이 존재하여 회원가입에 실패했습니다");
+        }
+    }
+    // 로그인 후에 실행할 함수
+    const doWhenSigninEnd = (bool) => {
+        if(bool){
+            modalSwitch(signinModalRef);
+            alert("로그인에 성공했습니다!");
+            onSetIsLoggedInStatus(true);
+        }else{
+             console.log("로그인 실패");
+             alert("로그인에 실패했습니다");
 
+        }
+    }
+    // 아 이거를 조금 그 위로 뺄수는없을까..
 
 
 
@@ -76,7 +99,7 @@ function UserStatus({isLoggedIn, onRequestSignup}){
                             </div>
                             <div className="container-flex justifyContent-center">
                                 <input type="button" className="modal-button" onClick={() => modalSwitch(signinModalRef)} value="취소" />
-                                <input type="button" className="modal-button" value="확인" />
+                                <input type="button" className="modal-button" value="확인" onClick={() => onRequestLogin(userId, userPassword, (bool) => doWhenSigninEnd(bool))} />
                             </div>
                         </div>
 
@@ -103,7 +126,7 @@ function UserStatus({isLoggedIn, onRequestSignup}){
                             </div>
                             <div className="container-flex justifyContent-center">
                                 <input type="button" onClick={() => modalSwitch(signupModalRef)} value="취소" />
-                                <input type="button" onClick={() => onRequestSignup(userId, userPassword, userNickname)} value="확인" />
+                                <input type="button" onClick={() => onRequestSignup(userId, userPassword, userNickname, (bool) => doWhenSignupEnd(bool))} value="확인" />
                             </div>
                         </div>
 
@@ -119,7 +142,7 @@ function UserStatus({isLoggedIn, onRequestSignup}){
             <div className="UserStatus">
                 <div className="UserStatusDiv">
                     <text>님환영 님이 무엇입니까?!!</text>
-                    <button>로그아웃</button>
+                    <input type="button" onClick={() => onSetIsLoggedInStatus(false)} value="로그아웃" />
                 </div>
             </div>
         );

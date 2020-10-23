@@ -21,55 +21,51 @@ function UserStatusContainer(){
     const dispatch = useDispatch();
     const onSetIsLoggedInStatus = (bool) => dispatch(setLoginStatus(bool));
 
-    // axios 통신
-    const onRequestSignup = async(userEmail, userPassword, userNickname) => {
+    // axios
+    // 회원가입
+    const onRequestSignup = async(userEmail, userPassword, userNickname, callback) => {
         try{
-             /* const response = await axios.put(serverUrl+'/user/test',
-             {params:{userEmail : userEmail, userPassword : userPassword, userNickname : userNickname
-            }}); get할때는 params post 등 다른거는 그냥 params */
-           /*  const options = {
-                method: 'PUT',
-                url: serverUrl+'/user/',
-                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=UTF-8'
-                }, // x-www-form-urlencoded
-                 data: {
-                    userEmail : userEmail,
-                    userPassword : userPassword,
-                    userNickname : userNickname
-                } 
-                 params: { 
-                    userEmail : userEmail,
-                    userPassword : userPassword,
-                    userNickname : userNickname
-                } 
-               
-            }; 
-            tool/axiosOptions 가 역할대체
-            */
             const response = await axios(axiosOptions.put('/user/', {
                 userEmail : userEmail,
                 userPassword : userPassword,
                 userNickname : userNickname
             }));
-
-   
             console.log(response);
-
+            if(response.status / 100 == 2){
+                callback(true);
+                //성공
+                // 아 axios 400뜨면 exception발생시키는구나 
+            }else{
+                // 100 300 500 아 500은 excepiton 빠질라나
+                callback(false);
+            }
         }catch(exception){
+            callback(false);
             console.log(exception);
         }
-        /*
-        axios.put(serverUrl+'/user/', {params:{
-            userEmail : userEmail,
-            userPassword : userPassword,
-            userNickname : userNickname
-        }})
-        .then(response => {console.log(response)})
-        .catch(response => {console.log(response)});
-        */
     };
+    // axios
+    // 로그인
+    const onRequestLogin = async(userEmail, userPassword, callback) => {
+        try{
+            const response = await axios(axiosOptions.post('/user/', {
+                userEmail : userEmail,
+                userPassword : userPassword
+            }));
+            if(response.status / 100 == 2){
+                callback(true);
+                //성공
+            }else{
+                callback(false);
+                // 실패
+            }
+
+        }catch(exception){
+            // http status 400대일때 일로 빠지네,,.
+            callback(false);
+            console.log(exception);
+        }
+    }
 
 
 
@@ -77,9 +73,10 @@ function UserStatusContainer(){
     return(
         <div>
             <UserStatus 
-            // onSetIsLoggedInStatus = {onSetIsLoggedInStatus}
+            onSetIsLoggedInStatus = {onSetIsLoggedInStatus}
             isLoggedIn = {isLoggedIn}
             onRequestSignup = {onRequestSignup}
+            onRequestLogin = {onRequestLogin}
             />
 
         </div>
