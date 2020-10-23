@@ -40,19 +40,16 @@ public class UserController {
     */
     // ################### /user/ ##########################################
     // 회원가입
-    @RequestMapping(value="/test", method = RequestMethod.PUT)
-    private void signup(HttpServletRequest request, HttpServletResponse response, @RequestBody Map body
-    ){
+    @RequestMapping(value="/", method = RequestMethod.PUT)
+    private void signup(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
         
 /*         String userEmail = request.getParameter("userEmail");
         String userPassword = request.getParameter("userPassword");
         String userNickname = request.getParameter("userNickname"); */
-        String userEmail = (String)body.get("userEmail");
-        String userPassword = (String)body.get("userPassword");
-        String userNickname = (String)body.get("userNickname");
-        System.out.println(userEmail);
-        System.out.println(userPassword);
-        System.out.println(userNickname);
+        String userEmail = (String)map.get("userEmail");
+        String userPassword = (String)map.get("userPassword");
+        String userNickname = (String)map.get("userNickname");
+
         if (userService.signUp(userEmail, userPassword, userNickname)){
 
             // 회원가입 성공
@@ -67,9 +64,9 @@ public class UserController {
 
     // 로그인
     @RequestMapping(value="/", method = RequestMethod.POST)
-    private void signin(HttpServletRequest request, HttpServletResponse response){
-        String userEmail = request.getParameter("userEmail");
-        String userPassword = request.getParameter("userPassword");
+    private void signin(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
+        String userEmail = (String)map.get("userEmail");
+        String userPassword = (String)map.get("userPassword");
 
         UserDTO user = userService.signIn(userEmail, userPassword);
         if(user == null){
@@ -84,17 +81,17 @@ public class UserController {
     }
     // 유저 신고
     @RequestMapping(value="/", method = RequestMethod.DELETE)
-    private List<UserDTO> reportUser(HttpServletRequest request, HttpServletResponse response){
+    private List<UserDTO> reportUser(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
         response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
         return null;
     }
 
     // 회원정보보기
     @RequestMapping(value="/", method = RequestMethod.GET)
-    private UserDTO getUserInfo(HttpServletRequest request, HttpServletResponse response){
-        if(request.getParameter("userNo") == null) return null;
+    private UserDTO getUserInfo(HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+        if(map.get("userNo") == null) return null;
 
-        int userNo = Integer.parseInt(request.getParameter("userNo"));
+        int userNo = Integer.parseInt((String)map.get("userNo"));
 
         response.setStatus(HttpServletResponse.SC_OK);
         
@@ -112,8 +109,8 @@ public class UserController {
 
     // 내 정보보기
     @RequestMapping(value="/myinfo", method = RequestMethod.GET)
-    private UserDTO getMyUserInfo(HttpServletRequest request, HttpServletResponse response){
-        int userNo = Integer.parseInt(request.getParameter("userNo"));
+    private UserDTO getMyUserInfo(HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+        int userNo = Integer.parseInt((String)map.get("userNo"));
 
         response.setStatus(HttpServletResponse.SC_OK);
         UserDTO user = userService.getUserInfo(userNo);
@@ -123,14 +120,15 @@ public class UserController {
 
     // 내 정보수정
     @RequestMapping(value="/myinfo", method = RequestMethod.PUT)
-    private void modifyMyUserInfo(HttpServletRequest request, HttpServletResponse response){
-        int userNo = Integer.parseInt(request.getParameter("userNo"));
-
-        String newNickname = request.getParameter("newNickname");
-        String currentPassword = request.getParameter("currentPassword");
+    private void modifyMyUserInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
+        int userNo = Integer.parseInt((String)map.get("userNo"));
+        String newNickname = (String)map.get("newNickname");
+        String currentPassword = (String)map.get("currentPassword");
         String newPassword = currentPassword;
-        if(request.getParameter("newPassword") == null || request.getParameter("newPassword").contentEquals("") == false){
-            newPassword = request.getParameter("newPassword");
+
+
+        if(map.get("newPassword") == null || ((String)map.get("newPassword")).contentEquals("") == false){
+            newPassword = (String)map.get("newPassword");
         }
         // 현재 패스워드 맞는지 검증
         if (userService.signIn("userEmail", currentPassword) == null){

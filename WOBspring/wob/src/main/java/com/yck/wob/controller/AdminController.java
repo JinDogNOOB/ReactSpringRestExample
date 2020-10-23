@@ -1,6 +1,7 @@
 package com.yck.wob.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +14,10 @@ import com.yck.wob.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value="/admin")
@@ -71,17 +74,17 @@ public class AdminController {
     // /admin/board
     // 게시판목록 *get
     @RequestMapping(value="/board", method = RequestMethod.GET)
-    private List<BoardDTO> getBoardList(HttpServletRequest request, HttpServletResponse response){
+    private List<BoardDTO> getBoardList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
         response.setStatus(HttpServletResponse.SC_OK);
         return boardService.getBoardList();
     }
     // 게시판추가 *post
     @RequestMapping(value="/board", method = RequestMethod.POST)
-    private void makeBoard(HttpServletRequest request, HttpServletResponse response){
+    private void makeBoard(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
 
-        String boardName = request.getParameter("boardName");
-        String boardDesc = request.getParameter("boardDesc");
-        int userNo = Integer.parseInt(request.getParameter("userNo"));
+        String boardName = (String)map.get("boardName");
+        String boardDesc = (String)map.get("boardDesc");
+        int userNo = Integer.parseInt((String)map.get("userNo"));
 
         
         if (!boardService.askToAddingBoardList(boardName, boardDesc, userNo)){
