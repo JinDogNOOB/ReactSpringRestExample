@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
-import {serverUrl} from '../conf';
+import axiosOptions from '../tool/axiosOptions';
 
 import {setLoginStatus} from '../modules/user';
 import UserStatus from '../components/UserStatus';
-
 
 
 
@@ -28,9 +27,9 @@ function UserStatusContainer(){
              /* const response = await axios.put(serverUrl+'/user/test',
              {params:{userEmail : userEmail, userPassword : userPassword, userNickname : userNickname
             }}); get할때는 params post 등 다른거는 그냥 params */
-            const options = {
+           /*  const options = {
                 method: 'PUT',
-                url: serverUrl+'/user/test',
+                url: serverUrl+'/user/',
                  headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json;charset=UTF-8'
@@ -40,14 +39,20 @@ function UserStatusContainer(){
                     userPassword : userPassword,
                     userNickname : userNickname
                 } 
-               /*  params: { 
+                 params: { 
                     userEmail : userEmail,
                     userPassword : userPassword,
                     userNickname : userNickname
-                } */
-                // 이거 생성 함수 만들어줘야겠다 ㅎㅎ
-            };
-            const response = await axios(options);
+                } 
+               
+            }; 
+            tool/axiosOptions 가 역할대체
+            */
+            const response = await axios(axiosOptions.put('/user/', {
+                userEmail : userEmail,
+                userPassword : userPassword,
+                userNickname : userNickname
+            }));
 
    
             console.log(response);
