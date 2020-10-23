@@ -13,7 +13,7 @@ public class PasswordHash {
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
 
-        md.update(salt.getBytes());
+        md.update(Base64.getDecoder().decode(salt));
         md.update(plainText.getBytes());
         
         return salt + ":" + (new String(Base64.getEncoder().encode(md.digest())));
@@ -30,7 +30,8 @@ public class PasswordHash {
             String salt = targetPassword.substring(0, 16);
             
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(salt.getBytes());
+            
+            md.update(Base64.getDecoder().decode(salt));
             md.update(plainText.getBytes());
 
             String hashedPlainText = new String(Base64.getEncoder().encode(md.digest()));
@@ -48,7 +49,7 @@ public class PasswordHash {
 
     private static String getRandomSalt()throws NoSuchAlgorithmException{
         SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-        byte[] bytes = new byte[16];
+        byte[] bytes = new byte[12];
         random.nextBytes(bytes);
         return (new String(Base64.getEncoder().encode(bytes)));
     }
