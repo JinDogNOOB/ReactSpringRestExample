@@ -141,7 +141,7 @@ function UserStatus({onSetIsLoggedInStatus, isLoggedIn, onRequestSignup, onReque
         return(
             <div className="UserStatus">
                 <div className="UserStatusDiv">
-                    <text>님환영 님이 무엇입니까?!!</text>
+                    님환영 님이 무엇입니까?!!
                     <input type="button" onClick={() => onSetIsLoggedInStatus(false)} value="로그아웃" />
                 </div>
             </div>

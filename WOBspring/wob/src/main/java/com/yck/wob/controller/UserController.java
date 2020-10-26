@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
 import com.yck.wob.dao.UserDao;
 import com.yck.wob.dao.UserDaoMybatisImpl;
 import com.yck.wob.dto.UserDTO;
@@ -64,21 +65,27 @@ public class UserController {
 
     // 로그인
     @RequestMapping(value="/", method = RequestMethod.POST)
-    private void signin(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
+    private String signin(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
         String userEmail = (String)map.get("userEmail");
         String userPassword = (String)map.get("userPassword");
 
         UserDTO user = userService.signIn(userEmail, userPassword);
         if(user == null){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return;
+            return null;
         }
 
         String jws = UserAuthUtil.getJwtContainsUserInfo(user, UserAuthUtil.EXPIRETIME_ONEDAY);
         response.setStatus(HttpServletResponse.SC_OK);
-        response.setHeader("SET-COOKIE", "jws="+ jws + "; HttpOnly");
-        return;
+
+        // response.setHeader("SET-COOKIE", "jws="+ jws + "; HttpOnly"); 
+        // 쿠키로는 spa 그거 해놓기가 어렵다.. 그 아니 으으 그냥 redux state에 jwt 저장하는걸로 해놓기로했다
+        JsonObject obj = new JsonObject();
+        obj.addProperty("jwt", jws);
+        
+        return obj.toString();
     }
+
     // 유저 신고
     @RequestMapping(value="/", method = RequestMethod.DELETE)
     private List<UserDTO> reportUser(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){

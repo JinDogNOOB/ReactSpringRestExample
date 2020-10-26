@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 import axiosOptions from '../tool/axiosOptions';
 
-import {setLoginStatus} from '../modules/user';
+import {setLoginStatus, setJwt} from '../modules/user';
 import UserStatus from '../components/UserStatus';
 
 
@@ -12,10 +12,14 @@ import UserStatus from '../components/UserStatus';
 
 
 function UserStatusContainer(){
+
     
     // redux store
     const {isLoggedIn} = useSelector(state=> ({
         isLoggedIn: state.user.isLoggedIn
+    }));
+    const {jwt} = useSelector(state=> ({
+        jwt : state.user.jwt
     }));
 
     const dispatch = useDispatch();
@@ -54,6 +58,8 @@ function UserStatusContainer(){
             }));
             if(response.status / 100 == 2){
                 callback(true);
+                // console.log(response.data.jwt);
+                dispatch(setJwt(response.data.jwt));
                 //성공
             }else{
                 callback(false);

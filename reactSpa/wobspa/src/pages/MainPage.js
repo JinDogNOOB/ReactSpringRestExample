@@ -1,6 +1,7 @@
 import React from 'react';
 
 import UserStatusContainer from '../containers/UserStatusContainer';
+import './MainPage.css';
 /*
 헤더 : 로고, 전광판
 컨텐트 : 왼쪽은실시간 중앙은 검색 오른쪽은 유저
@@ -10,6 +11,34 @@ import UserStatusContainer from '../containers/UserStatusContainer';
 */
 
 function MainPage(){
+
+    if(true){
+        return(
+            <div className="grid_container">
+                <div className="head">
+                    헤드
+                </div>
+
+                <div className="nav">
+                    내브
+                </div>
+
+                <div className="sub_nav">
+                    부가메뉴..검색판
+                </div>
+
+                <div className="content">
+                    컨텐트
+                </div>
+
+                <div className="footer">
+                    푸터
+                </div>
+
+            </div>
+        );
+    }
+
     return(
         <div>
             <div className="header">

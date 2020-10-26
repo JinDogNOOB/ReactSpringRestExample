@@ -1,0 +1,53 @@
+
+.grid_container{
+    background-color: bisque;
+
+    /* 중앙 정렬 */
+    margin: 0 auto;
+    width: 1200px;
+
+    /* 그리드 사용 */
+    display: grid;
+
+    /* 그리드 형태정의 */ 
+    grid-template-columns: 200px 800px 200px;
+    grid-template-rows: 200px 100px 100px minmax(100px, auto) 150px;
+    /* ap: 10px 10px; */
+
+    /* 정렬 */
+    align-items: stretch;
+    justify-content: row;
+
+}
+
+
+
+
+
+.grid_container > div {
+    background-color: pink;
+
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.grid_container > .head{
+    grid-column: 1/4;
+}
+
+.grid_container > .nav{
+    grid-column: 1/4;
+}
+
+.grid_container > .sub_nav{
+    grid-column: 1/4;
+}
+
+.grid_container > .content{
+    grid-column: 1/4;
+}
+
+.grid_container > .footer{
+    grid-column: 1/4;
+}

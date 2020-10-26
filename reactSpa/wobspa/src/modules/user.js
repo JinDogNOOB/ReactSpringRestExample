@@ -3,15 +3,17 @@
 // 이렇게 하면 다른 모듈과 핵션 이름이 중복되는 것을 방지할 수 있다.
 
 const SET_LOGIN_STATUS = 'user/SET_LOGIN_STATUS';
-
+const SET_USER_NICKNAME = 'user/SET_USER_NICKNAME';
+const SET_JWT = "user/SET_JWT";
 
 /* 액션객체 생성함수 만들기 */
 export const setLoginStatus = (isLoggedIn) => ({type: SET_LOGIN_STATUS, isLoggedIn});
+export const setJwt = (jwt) => ({type:SET_JWT, jwt});
 
 /* 초기상태 선언*/
-
 const initialState = {
     isLoggedIn: false,
+    jwt: "",
 };
 
 /* 리듀서 선언 */
@@ -20,6 +22,8 @@ export default function user(state=initialState, action){
     switch(action.type){
         case SET_LOGIN_STATUS:
             return{...state, isLoggedIn: action.isLoggedIn};
+        case SET_JWT:
+            return{...state, jwt: action.jwt};
         default :
             return state;
     }
