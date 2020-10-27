@@ -1,6 +1,7 @@
 import React from 'react';
 
 import UserStatusContainer from '../containers/UserStatusContainer';
+import NavItemContainer from '../containers/NavItemContainer';
 import './MainPage.css';
 /*
 헤더 : 로고, 전광판
@@ -16,19 +17,34 @@ function MainPage(){
         return(
             <div className="grid_container">
                 <div className="head">
+                    <div className="logo_area">
+                        로고
+                    </div>
                     헤드
+                    <div className="user_area">
+                        <UserStatusContainer />
+                    </div>
+
                 </div>
 
                 <div className="nav">
-                    내브
+                    <NavItemContainer />
                 </div>
 
                 <div className="sub_nav">
                     부가메뉴..검색판
                 </div>
+                
+                <div className="left_content">
+                    왼쪽 컨텐트
+                </div>
 
-                <div className="content">
+                <div className="center_content">
                     컨텐트
+                </div>
+
+                <div className="right_content">
+                    오른쪽 컨텐트
                 </div>
 
                 <div className="footer">

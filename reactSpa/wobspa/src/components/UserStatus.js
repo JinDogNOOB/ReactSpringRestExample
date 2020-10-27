@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import './UserStatusStyle.css';
 
 
 /*
@@ -71,9 +71,9 @@ function UserStatus({onSetIsLoggedInStatus, isLoggedIn, onRequestSignup, onReque
 
     if(!isLoggedIn){
         return(
-            <div className="UserStatus">
+            <div>
                 {/*  로그인이 안되있을 시  */}
-                <div className="UserStatusDiv">
+                <div className="UserStatus">
                     <button onClick={() => modalSwitch(signinModalRef)}>로그인</button>
                     <button onClick={() => modalSwitch(signupModalRef)}>회원가입</button>
                 </div>

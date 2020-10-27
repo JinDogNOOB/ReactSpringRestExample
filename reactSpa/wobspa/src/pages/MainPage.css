@@ -5,23 +5,26 @@
     /* 중앙 정렬 */
     margin: 0 auto;
     width: 1200px;
+    height: auto;
 
     /* 그리드 사용 */
     display: grid;
 
     /* 그리드 형태정의 */ 
     grid-template-columns: 200px 800px 200px;
-    grid-template-rows: 200px 100px 100px minmax(100px, auto) 150px;
+    grid-template-rows: 160px 50px 80px minmax(600px, auto) 120px;
     /* ap: 10px 10px; */
 
     /* 정렬 */
     align-items: stretch;
-    justify-content: row;
 
 }
 
 
-
+/* 
+전부다 뭉뚱그린다음에 안에서 또 나누지말구....
+소요를 줄일수있는거는 줄이자 1분코딩님 참고하자
+*/
 
 
 .grid_container > div {
@@ -34,20 +37,50 @@
 
 .grid_container > .head{
     grid-column: 1/4;
+    grid-row: 1/2;
+
+    display: flex;
+    justify-content: space-between;
+
 }
 
 .grid_container > .nav{
     grid-column: 1/4;
+    grid-row: 2/3;
+    
+
 }
 
 .grid_container > .sub_nav{
     grid-column: 1/4;
+    grid-row: 3/4;
 }
 
-.grid_container > .content{
-    grid-column: 1/4;
+
+.grid_container > .left_content{
+    grid-column: 1/2;
+    grid-row: 4/5;
+}
+.grid_container > .center_content{
+    grid-column: 2/3;
+    grid-row: 4/5;
+}
+.grid_container > .right_content{
+    grid-column: 3/4;
+    grid-row: 4/5;
 }
 
 .grid_container > .footer{
     grid-column: 1/4;
+    grid-row: 5/6;
 }
+
+
+.head > .logo_area{
+    align-self: center;
+    margin: 0px 80px;
+}
+.head > .user_area{
+    align-self: flex-start;
+}
+
