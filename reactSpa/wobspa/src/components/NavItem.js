@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 import './NavItem.css';
 
-function NavItem(){
+function NavItem({boardList}){
 
-    const testData = ['yo', 'ho~', 'zozo'];
+    // const testData = ['yo', 'ho~', 'zozo'];
 
     return (
         <ul className="menu_container">
-            <li><a href="#">게시판</a><Item datas={testData}/></li>
+            <li><a href="#">게시판</a><BoardItem datas={boardList}/></li>
             <li>기능</li>
             <li>공지사항</li>
             <li>기타</li>
@@ -18,16 +19,19 @@ function NavItem(){
 
 
 
-function Item({datas}){
+function BoardItem({datas}){
     return (
-      <ul className="dropdown_container">
+      <div className="dropdown_container">
+          <div className="dropdown_header">
+              드롭다운헤더
+          </div>
           {datas.map((data, index) => (
-                <li key={index}>
-                    <span>{data}</span>
-                </li>
+                <div key={index}>
+                    <Link to={'/board/' + data.boardNo}>{data.boardName}</Link>
+                </div>
               ))}
 
-      </ul>
+      </div>
     );
 }
 

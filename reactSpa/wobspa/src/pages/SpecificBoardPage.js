@@ -1,9 +1,10 @@
 import React from 'react';
 
-function SpecificBoardPage(){
+function SpecificBoardPage({match}){
     return(
         <div>
-            SpecificBoardPage;
+            SpecificBoardPage {match.params.boardNo}
+
         </div>
     );
 }

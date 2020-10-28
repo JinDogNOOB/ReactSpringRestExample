@@ -4,4 +4,4 @@ export {default as UserPage} from './UserPage';
 export {default as BoardPage} from './BoardPage';
 export {default as UserMyInfoPage} from './UserMyInfoPage';
 export {default as SpecificBoardPage} from './SpecificBoardPage';
-
+export {default as AdminPage} from './AdminPage';

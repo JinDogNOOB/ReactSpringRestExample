@@ -16,7 +16,7 @@ public class BoardDaoMybatisImpl implements BoardDao {
     @Autowired
     private SqlSession sqlSession;
 
-        private static final String namespace = "UserMapper";
+        private static final String namespace = "BoardMapper";
 
        // 게시판인덱스 관리
         @Override

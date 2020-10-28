@@ -14,6 +14,11 @@ public class BoardService {
     BoardDao boardDao;
 
     // 게시판 생성 등등등
+    /** 
+     * 
+     * 
+     * status 20~30의 게시판을 가져온다
+    */
     public List<BoardDTO> getPermitedBoardList() {
         return boardDao.selectPermitedBoards();
     }

@@ -6,7 +6,8 @@ import {
   UserPage,
   BoardPage,
   UserMyInfoPage,
-  SpecificBoardPage
+  SpecificBoardPage,
+  AdminPage
   } from './pages';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route exact path="/board/:boardNo" component={SpecificBoardPage} />
       <Route exact path="/board/:boardNo/post/:postNo" component={PostDetailPage} />
 
+      <Route exact path="/admin" component={AdminPage} />
     </div>
   );
 }

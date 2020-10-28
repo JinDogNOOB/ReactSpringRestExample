@@ -8,11 +8,13 @@
 
     display: flex;
     justify-content: center;
+
+    position: relative; 
 }
 .menu_container > li{
-    display: inline-block;
-    padding: 10px 80px;
-    position: relative; 
+    display: inline-block; 
+    padding: 10px 80px; 
+    
 }
 
 .menu_container > li:hover{
@@ -23,15 +25,21 @@
 
 
 .menu_container > li:hover > .dropdown_container{
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10%, auto));
+    justify-content: left;
 }
-
 
 .menu_container .dropdown_container {
     position: absolute;
-    top: 50px;
+    top: 100%;
     left: 0;
     width: 100%;
-    background-color: blue;
+    background-color: white;
     display: none;
+}
+
+.dropdown_container > .dropdown_header{
+    grid-column: 1/4;
+    grid-row: 1/6;
 }
