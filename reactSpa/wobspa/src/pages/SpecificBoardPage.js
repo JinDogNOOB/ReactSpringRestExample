@@ -4,7 +4,6 @@ function SpecificBoardPage({match}){
     return(
         <div>
             SpecificBoardPage {match.params.boardNo}
-
         </div>
     );
 }

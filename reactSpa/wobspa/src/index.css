@@ -182,22 +182,3 @@ label{
 
 
 
-
-
-/* ####### 플렉스 ################################### */
-.container-flex{display:flex;}
-
-.container-flex.direction-col{flex-direction: column;}
-
-.container-flex.justifyContent-end{justify-content: flex-end;}
-.container-flex.justifyContent-center{justify-content: center;}
-.container-flex.justifyContent-spaceBetween{justify-content: space-between;}
-.container-flex.justifyContent-spaceAround{justify-content: space-around;}
-.container-flex.justifyContent-spaceEvenly{justify-content: space-evenly;}
-
-.container-flex.alignItem-flex-start{align-items : flex-start;}
-.container-flex.alignItem-flex-end{align-items : flex-end;}
-.container-flex.alignItem-flex-center{align-items : center;}
-.container-flex.alignItem-flex-baseline{align-items : baseline;}
-
-.item-flex{}
