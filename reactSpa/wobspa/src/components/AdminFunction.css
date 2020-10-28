@@ -11,14 +11,31 @@
 }
 
 
-
 .admin_function_container > .admin_menu{
-    flex-grow: 1;
+    width: 200px;
     min-height: 1000px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.admin_menu > a{
+    width: 100%;
+    background-color: gray;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+
+    padding: 10px 0px;
+    margin: 3px 0;
+}
+.admin_menu > a:hover{
+    background-color: darkgray;
 }
 
 .admin_function_container > .admin_info{
-    flex-grow: 9;
+    width: 100%;
+    /* flex-grow: 9; */
     min-height: 1000px;
 }
 
