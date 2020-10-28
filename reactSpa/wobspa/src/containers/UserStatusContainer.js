@@ -13,7 +13,7 @@ import UserStatus from '../components/UserStatus';
 
 function UserStatusContainer(){
 
-    
+    console.log("container rerender");
     // redux store
     const {isLoggedIn} = useSelector(state=> ({
         isLoggedIn: state.user.isLoggedIn

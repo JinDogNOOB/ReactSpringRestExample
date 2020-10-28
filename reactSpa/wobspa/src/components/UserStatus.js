@@ -33,7 +33,7 @@ function UserStatus({onSetIsLoggedInStatus, isLoggedIn, onRequestSignup, onReque
         setUserNickname(event.target.value);
     }
 
-
+    console.log("rerender");
 
 
     // 사용함수 

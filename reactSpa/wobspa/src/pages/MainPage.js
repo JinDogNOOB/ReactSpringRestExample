@@ -12,7 +12,7 @@ import './MainPage.css';
 */
 
 function MainPage(){
-
+    console.log("main rerender");
     if(true){
         return(
             <div className="grid_container">

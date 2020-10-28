@@ -44,7 +44,7 @@ public class AdminController {
     // 유저목록 *get
     @RequestMapping(value="/user/", method = RequestMethod.GET)
     private List<UserDTO> getUserList(HttpServletRequest request, HttpServletResponse response){
-        return null;
+        return userService.getUserList();
     }
 
 

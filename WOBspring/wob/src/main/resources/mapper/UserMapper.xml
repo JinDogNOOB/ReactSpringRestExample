@@ -16,7 +16,7 @@
  -->
 
  <select id="selectUsers" resultType="com.yck.wob.dto.UserDTO">
-SELECT * FROM user_tb
+SELECT userNo, userEmail, userNickname, userStatus FROM user_tb
  </select>
 
 <select id="countUsers" resultType="int">

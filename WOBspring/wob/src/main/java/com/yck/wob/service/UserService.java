@@ -1,5 +1,7 @@
 package com.yck.wob.service;
 
+import java.util.List;
+
 import com.yck.wob.dao.UserDao;
 import com.yck.wob.dto.UserDTO;
 import com.yck.wob.util.PasswordHash;
@@ -53,6 +55,14 @@ public class UserService{
         }
         // 실패
         return null;
+    }
+
+    /**
+     * 회원정보 리스트
+     * @return userList
+     */
+    public List<UserDTO> getUserList(){
+        return userDao.selectUsers();
     }
 
     // ### 회원정보 보기 
