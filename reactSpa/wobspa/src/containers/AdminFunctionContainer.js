@@ -56,7 +56,7 @@ function AdminFunctionContainer(){
     }
 
     // ###################################################
-    // Axios [유저리스트, 유저정보, 유저수정, 유저차단, 삭제는보류]
+    // Axios [유저리스트, 유저정보, 유저수정, 유저차단삭제는보류]
     const requestUserInfoList = async() =>{
         try{
             const response = await axios(axiosOptions.get('/admin/user/',{}));
@@ -85,6 +85,13 @@ function AdminFunctionContainer(){
             setUserStatus(response.data.userStatus);
 
             onSetModalStatus(1);
+        }catch(e){
+            console.log(e);
+        }
+    }
+    const requestModifyUserInfo = async() => {
+        try{
+            // 앗 백엔드 유저정보수정을 일반유저정보수정그걸로 해놨다.. 
         }catch(e){
             console.log(e);
         }
@@ -131,6 +138,8 @@ function AdminFunctionContainer(){
         requestUserInfo = {requestUserInfo}
         onSetMode = {onSetMode}
         onSetModalStatus = {onSetModalStatus}
+        onSetUserNickname = {onSetUserNickname}
+        onSetUserStatus = {onSetUserStatus}
 
         userMgmtModalStatus = {userMgmtModalStatus}
         boardMgmtModalStatus = {boardMgmtModalStatus}

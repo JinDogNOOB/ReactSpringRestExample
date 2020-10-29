@@ -59,7 +59,7 @@ public class AdminController {
     // 유저정보수정 *put
     @RequestMapping(value="/user/{userNo}", method = RequestMethod.PUT)
     private void modifyUserInfo(@PathVariable int userNo, HttpServletRequest request, HttpServletResponse response){
-        // userService.modifyUserInfo(userPassword, userNickname);
+        // userService.modifyUserInfo(userPassword, userNickname); 이거 이거 어드민용으로 변경해야함
         return;
     }
     // 유저차단 *post

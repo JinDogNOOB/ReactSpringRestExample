@@ -19,6 +19,8 @@ function AdminFunction({mode,
     requestUserInfo,
 
     onSetModalStatus,
+    onSetUserNickname,
+    onSetUserStatus,
 
     userMgmtModalStatus,
     boardMgmtModalStatus,
@@ -83,6 +85,8 @@ function AdminFunction({mode,
             m_userNickname = {m_userNickname}
             m_userStatus = {m_userStatus}
             onSetModalStatus = {onSetModalStatus}
+            onSetUserNickname = {onSetUserNickname}
+            onSetUserStatus = {onSetUserStatus}
             />}
 
             <div className="admin_menu">
@@ -107,14 +111,19 @@ function UserMgmtModal({
     m_userEmail,
     m_userNickname,
     m_userStatus,
-    onSetModalStatus
+    onSetModalStatus,
+    onSetUserNickname,
+    onSetUserStatus
 }){
+    const [mode, setMode] = useState(1)
+    //1:정보 2:수정
 
     return(
             <div >
                 <div className="new_modal" >
                     <div className="modal-content">
-
+                        {
+                            mode==1 && (
                         <div className="container-flex direction-col">
 
                             <h1>회원정보</h1>
@@ -141,11 +150,47 @@ function UserMgmtModal({
                             <div className="container-flex justifyContent-center">
                                 <input type="button" className="modal-button" onClick={() => {onSetModalStatus(0)}} value="밴" />
                                 <input type="button" className="modal-button" onClick={() => {onSetModalStatus(0)}} value="확인" />
-                                <input type="button" className="modal-button" onClick={() => {onSetModalStatus(0)}} value="수정" />
+                                <input type="button" className="modal-button" onClick={() => {setMode(2)}} value="수정" />
                             </div>
 
+                        </div>
+                        )}
+
+                        {
+                            mode==2 && (
+                        <div className="container-flex direction-col">
+
+                            <h1>회원정보 수정</h1>
+                            <div className="container-flex justifyContent-center">
+                                <h2>번호</h2>
+                                <span>{m_userNo}</span>
+                            </div>
+
+                            <div className="container-flex justifyContent-center">
+                                <h2>아이디</h2>
+                                <span>{m_userEmail}</span>
+                            </div>
+
+                            <div className="container-flex justifyContent-center">
+                                <h2>닉네임</h2>
+                                <span><input type="text" value={m_userNickname} onChange={onSetUserNickname}></input></span>
+                            </div>
+
+                            <div className="container-flex justifyContent-center">
+                                <h2>상태</h2>
+                                <span><input type="text" value={m_userStatus} onChange={onSetUserStatus}></input></span>
+                            </div>
+
+                            <div className="container-flex justifyContent-center">
+                                <input type="button" className="modal-button" onClick={() => {setMode(1)}} value="뒤로가기" />
+                                <input type="button" className="modal-button" onClick={() => {onSetModalStatus(0)}} value="요청전송" />
+                            </div>
 
                         </div>
+                        )}
+
+
+                        
 
                     </div>
                 </div>
