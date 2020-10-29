@@ -58,7 +58,6 @@ function AdminFunction({mode,
                     ))}
                     </tbody>
                     
-
                 </table>
             );
             break;

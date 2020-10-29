@@ -18,6 +18,9 @@ function AdminFunctionContainer(){
 
     // 유저정보리스트 
     const [userInfoList, setUserInfoList] = useState([]);
+    // 게시판리스트
+    const [boardInfoList, setBoardInfoList] = useState([]);
+
 
     // 모달 on off 상태
     const [userMgmtModalStatus, setUserMgmtModalStatus] = useState(false);
@@ -91,12 +94,37 @@ function AdminFunctionContainer(){
     }
     const requestModifyUserInfo = async() => {
         try{
-            // 앗 백엔드 유저정보수정을 일반유저정보수정그걸로 해놨다.. 
+            // 앗 백엔드 유저정보수정을 일반유저정보수정그걸로 해놨다.. 보류
         }catch(e){
             console.log(e);
         }
     }
-    
+    // Axios 게시판
+    /**
+     * 게시판 목록 요청 get
+     */
+    const requestBoardList = async() => {
+        try{
+            const response = await axios(axiosOptions.get("/admin/board/", {}));
+        }catch(e){
+            console.log(e);
+        }
+    }
+
+     /**
+      * 게시판 추가 post
+      */
+    const requestAddingBoard = async(userNo, boardName, boardDesc) => {
+        try{
+            const response = await axios(axiosOptions.post("/admin/board", {
+                userNo : userNo,
+                boardName : boardName,
+                boardDesc : boardDesc
+            }));
+        }catch(e){
+            console.log(e);
+        }
+    }
 
 
 
