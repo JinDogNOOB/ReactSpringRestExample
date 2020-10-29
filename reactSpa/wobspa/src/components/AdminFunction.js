@@ -9,7 +9,22 @@ export const REQUESTEDBOARD = 3;
 
 
 
-function AdminFunction({mode, onSetMode}){
+function AdminFunction({mode,
+    onSetMode,
+    m_userNo,
+    m_userEmail,
+    m_userNickname, 
+    m_userStatus,
+    userInfoList,
+    requestUserInfo,
+
+    onSetModalStatus,
+
+    userMgmtModalStatus,
+    boardMgmtModalStatus,
+    boardReqMgmtModalStatus
+
+}){
     // admin menu 가 무엇이 눌렀느냐에 따라서 
     // amdin info 가 그려져야한다... 흠 생각생각하즈아아
 
@@ -29,7 +44,21 @@ function AdminFunction({mode, onSetMode}){
 
     switch(mode){
         case USER:{
-            adminInfoJSX = (<div>userMode</div>);
+            adminInfoJSX = (
+                <table className="user_list">
+                    <thead>
+                        <tr>UserList</tr>
+                        <tr><th>No</th><th>Email</th><th>nickName</th><th>status</th></tr>
+                    </thead>
+                    <tbody>
+                    {userInfoList.map((data, index) => (
+                        <tr key={index} onClick={() => requestUserInfo(data.userNo)}><td>{data.userNo}</td><td>{data.userEmail}</td><td>{data.userNickname}</td><td>{data.userStatus}</td></tr>
+                    ))}
+                    </tbody>
+                    
+
+                </table>
+            );
             break;
         }
         case BOARD:{
@@ -48,6 +77,14 @@ function AdminFunction({mode, onSetMode}){
     
     return (
         <div className="admin_function_container">
+            { userMgmtModalStatus && <UserMgmtModal 
+            m_userNo = {m_userNo}
+            m_userEmail = {m_userEmail}
+            m_userNickname = {m_userNickname}
+            m_userStatus = {m_userStatus}
+            onSetModalStatus = {onSetModalStatus}
+            />}
+
             <div className="admin_menu">
                 <a href="#" onClick={() => onSetMode(USER)}>유저관리</a>
                 <a href="#" onClick={() => onSetMode(BOARD)}>게시판관리</a>
@@ -61,6 +98,66 @@ function AdminFunction({mode, onSetMode}){
         </div>
     );
 }
+
+
+
+function UserMgmtModal({
+
+    m_userNo,
+    m_userEmail,
+    m_userNickname,
+    m_userStatus,
+    onSetModalStatus
+}){
+
+    return(
+            <div >
+                <div className="new_modal" >
+                    <div className="modal-content">
+
+                        <div className="container-flex direction-col">
+
+                            <h1>회원정보</h1>
+                            <div className="container-flex justifyContent-center">
+                                <h2>번호</h2>
+                                <span>{m_userNo}</span>
+                            </div>
+
+                            <div className="container-flex justifyContent-center">
+                                <h2>아이디</h2>
+                                <span>{m_userEmail}</span>
+                            </div>
+
+                            <div className="container-flex justifyContent-center">
+                                <h2>닉네임</h2>
+                                <span>{m_userNickname}</span>
+                            </div>
+
+                            <div className="container-flex justifyContent-center">
+                                <h2>상태</h2>
+                                <span>{m_userStatus}</span>
+                            </div>
+
+                            <div className="container-flex justifyContent-center">
+                                <input type="button" className="modal-button" onClick={() => {onSetModalStatus(0)}} value="밴" />
+                                <input type="button" className="modal-button" onClick={() => {onSetModalStatus(0)}} value="확인" />
+                                <input type="button" className="modal-button" onClick={() => {onSetModalStatus(0)}} value="수정" />
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    );
+}
+
+
+
+
+
+
 
 
 export default AdminFunction;

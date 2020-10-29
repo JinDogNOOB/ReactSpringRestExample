@@ -8,6 +8,7 @@
     height: auto;
     
     display: flex;
+    overflow: hidden;
 }
 
 
@@ -46,4 +47,36 @@
     border-style: solid;
     border-color: black;
     border-width: 1px;
+}
+
+
+table.user_list {
+    width: 50%;
+
+}
+
+table.user_list thead{
+    padding : 2px, 2px;
+    border-style: solid;
+    border-style: black;
+    border-width: 1px;
+}
+
+table.user_list th{
+    padding : 2px, 2px;
+    border-style: solid;
+    border-style: black;
+    border-width: 1px;
+}
+
+table.user_list td{
+    padding : 3px 3px;
+    margin: 3px 3px;
+    border-style: solid;
+    border-style: black;
+    border-width: 1px;
+}
+
+tr:hover{
+    background-color: gray;
 }

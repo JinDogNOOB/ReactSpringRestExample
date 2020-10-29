@@ -17,6 +17,8 @@
 
     /* 정렬 */
     align-items: stretch;
+    
+    overflow: hidden;
 
 }
 

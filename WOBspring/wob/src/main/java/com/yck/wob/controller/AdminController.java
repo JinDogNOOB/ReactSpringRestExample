@@ -52,7 +52,9 @@ public class AdminController {
     // 유저정보보기 *get
     @RequestMapping(value="/user/{userNo}", method = RequestMethod.GET)
     private UserDTO getUserInfo(@PathVariable int userNo, HttpServletRequest request, HttpServletResponse response){
-        return userService.getUserInfo(userNo);
+        UserDTO user = userService.getUserInfo(userNo);
+        user.setUserPassword(null);
+        return user;
     }
     // 유저정보수정 *put
     @RequestMapping(value="/user/{userNo}", method = RequestMethod.PUT)

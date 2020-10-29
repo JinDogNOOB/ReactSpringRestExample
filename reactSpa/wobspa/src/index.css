@@ -172,6 +172,45 @@ label{
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
+/* bool 이용 모달*/
+.new_modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 1;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+
+}
+.new_modal > .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 500px;
+    height: auto;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+.new_modal > .modal-content > .modal-button {
+    float: right;
+    font-size: 20px;
+    padding: 20px 80px;
+    width: 50px;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+.new_modal > .modal-content > .modal-button:hover {
+    background-color: darkgray;
+}
 
 
 
@@ -181,4 +220,22 @@ label{
 
 
 
+
+
+
+/* ####### 플렉스 ################################### */
+.container-flex{display:flex;}
+
+.container-flex.direction-col{flex-direction: column;}
+
+.container-flex.justifyContent-end{justify-content: flex-end;}
+.container-flex.justifyContent-center{justify-content: center;}
+.container-flex.justifyContent-spaceBetween{justify-content: space-between;}
+.container-flex.justifyContent-spaceAround{justify-content: space-around;}
+.container-flex.justifyContent-spaceEvenly{justify-content: space-evenly;}
+
+.container-flex.alignItem-flex-start{align-items : flex-start;}
+.container-flex.alignItem-flex-end{align-items : flex-end;}
+.container-flex.alignItem-flex-center{align-items : center;}
+.container-flex.alignItem-flex-baseline{align-items : baseline;}
 
