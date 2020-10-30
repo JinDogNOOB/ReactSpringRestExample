@@ -19,10 +19,16 @@ public class BoardDaoMybatisImpl implements BoardDao {
         private static final String namespace = "BoardMapper";
 
        // 게시판인덱스 관리
+       /**
+        *  모든 보드 가져온다
+        */
         @Override
         public List<BoardDTO> selectBoards(){
         return sqlSession.selectList(namespace + ".selectBoards");
        }
+       /**
+        * boardStatus 20~30 (허가된 게시판) 만 가져온다
+        */
        @Override
        public List<BoardDTO> selectPermitedBoards(){
         return sqlSession.selectList(namespace + ".selectPermitedBoards");
@@ -53,12 +59,16 @@ public class BoardDaoMybatisImpl implements BoardDao {
        }
 
    
-       // 게시판 테이블 생성
+       /**
+        * 실제 글이 올라갈 테이블 생성
+        */
        @Override
        public void createMainBoard(BoardDTO boardDTO){
         sqlSession.update(namespace + ".createMainBoard", boardDTO);
        }
-       // 게시판댓글테이블 생성
+       /**
+        * 실제 댓글이 올라갈 테이블 생성
+        */
        @Override
        public void createSubBoard(BoardDTO boardDTO){
         sqlSession.update(namespace + ".createSubBoard", boardDTO);

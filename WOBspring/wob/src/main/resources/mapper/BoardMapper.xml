@@ -32,7 +32,7 @@ SELECT * FROM board_list_tb where boardNo = #{boardNo}
  </select>
 
   <select id="selectBoardByName" parameterType="com.yck.wob.dto.BoardDTO" resultType="com.yck.wob.dto.BoardDTO">
-SELECT * FROM board_list_tb where boardNo = #{boardNo}
+SELECT * FROM board_list_tb where boardName = #{boardName}
  </select>
 
  <insert id="insertBoard" parameterType="com.yck.wob.dto.BoardDTO">
