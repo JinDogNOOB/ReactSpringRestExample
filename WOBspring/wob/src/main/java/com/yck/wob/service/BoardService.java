@@ -61,15 +61,8 @@ public class BoardService {
         boardDao.createSubBoard(dbBoard);
         return true;
     }
-    /**
-     * Admin용
-     * 그냥 게시판정보랑 실제 post sub 테이블 생성
-     * 야야야야야야 이거 create 테이블할때 boardNo 필수니까 
-     * 일단 select를 하든 생긴거에서 바로 boardNo를 받아오든해서 다음으로 넘어가라 아아아아
-     * 이거 수정필요 아아아아아 
-     * @return
-     */
-    public boolean createBoard(String boardName, String boardDesc, int userNo){
+
+ /*    public boolean createBoard(String boardName, String boardDesc, int userNo){
         BoardDTO board = new BoardDTO();
         board.setBoardName(boardName);
         board.setBoardDesc(boardDesc);
@@ -84,7 +77,7 @@ public class BoardService {
             return false;
         }
         return true;
-    }
+    } 폐기 이 기능은 위에거 두개로 충당 가능*/
 
     public BoardDTO getBoardInfo(int boardNo){
         BoardDTO board = new BoardDTO();
@@ -94,6 +87,7 @@ public class BoardService {
 
     public BoardDTO getBoardInfoByName(String boardName){
         BoardDTO board = new BoardDTO();
+        board.setBoardName(boardName);
         return boardDao.selectBoardByName(board);
     }
 

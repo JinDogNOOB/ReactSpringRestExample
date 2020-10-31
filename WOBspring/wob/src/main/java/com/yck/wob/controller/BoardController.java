@@ -63,7 +63,7 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
             return;
         }
         // 작업
-        if(!boardService.askToAddingBoardList(boardName, boardDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()))){
+        if(!boardService.askToAddingBoard(boardName, boardDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()))){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
