@@ -1,0 +1,39 @@
+div{    border-style: solid;
+    border-color: black;
+    border-width: 1px;}
+
+.specific_board{
+
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.specific_board > .title{
+    padding: 20px;
+}
+
+.specific_board > .post_list{
+    margin-top: 10px;
+    min-height: 100px;
+}
+
+.specific_board > .post_list > ul{
+
+}
+
+.specific_board > .post_list > li{
+
+}
+
+.specific_board > .index{
+    margin: 20px 0px;
+}
+
+.specific_board > .search_bar{
+
+}

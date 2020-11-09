@@ -90,8 +90,11 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     // 게시글 리스트 get
     @RequestMapping(value="/{boardNo}/post", method = RequestMethod.GET)
     private List<PostDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+        int index = (int)map.get("index");
+        int listAmount = (int)map.get("listAmount");
+
         response.setStatus(HttpServletResponse.SC_OK);
-        return postService.getPostlists(boardNo);
+        return postService.getPostlists(boardNo, index, listAmount);
     }
 
     // 게시글 쓰기 post

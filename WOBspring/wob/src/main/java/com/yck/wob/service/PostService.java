@@ -54,10 +54,18 @@ public class PostService {
         return true;
     }
 
-    // ### 게시글 목록 보기
-    public List<PostDTO> getPostlists(int boardNo){
+    /**
+     * @param boardNo 게시판번호
+     * @param index 인덱스번호
+     * @param listAmount 가져올 개수
+     * @return
+     */
+    public List<PostDTO> getPostlists(int boardNo, int index, int listAmount){
         PostDTO post = new PostDTO();
         post.setBoardNo(boardNo);
+        post.setIndex(index);
+        post.setListAmount(listAmount);
+
         return boardDao.selectPosts(post);
     }
     // ### 게시글 하나 보기
