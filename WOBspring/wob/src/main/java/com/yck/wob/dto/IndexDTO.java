@@ -4,7 +4,17 @@ public class IndexDTO {
     protected int index;
     protected int listAmount;
 
-    protected
+    protected int start;
+
+    /**
+     * you must input index and listAmount before calculating(this function)
+     * calculate starting point
+     * start 0 1 2 3 4 5 6 7 8 9 10 11 12 ~ *  
+     * 
+     */
+    public void calcStartingIndex(){
+        start = this.index * this.listAmount;
+    }
     public int getIndex() {
         return index;
     }
@@ -29,6 +39,13 @@ public class IndexDTO {
         }
     }
 
+    public int getStart() {
+        return start;
+    }
+
+
+
+    
     
     
     

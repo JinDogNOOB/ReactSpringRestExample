@@ -65,6 +65,7 @@ public class PostService {
         post.setBoardNo(boardNo);
         post.setIndex(index);
         post.setListAmount(listAmount);
+        post.calcStartingIndex();
 
         return boardDao.selectPosts(post);
     }
