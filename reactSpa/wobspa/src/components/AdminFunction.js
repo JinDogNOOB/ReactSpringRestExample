@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import './AdminFunction.css';
+import './Component.css';
 
 export const USER = 1;
 export const BOARD = 2;

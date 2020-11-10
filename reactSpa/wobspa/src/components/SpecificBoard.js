@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import './SpecificBoard.css';
+import './Component.css';
 
 function SpecificBoard({
     boardName,
@@ -51,7 +51,7 @@ function SpecificBoard({
 // desc 는 미리보기로 띄워놓자
 function PostList({postList}){
     return (
-        <table>
+        <table className="post_list">
             <thead>
                 <tr>
                     <th>글번호</th>
@@ -91,7 +91,7 @@ function Index({
     }
 
     return(
-        <ul>
+        <ul className="post_list_index">
             <li>처음</li>
             <li>이전</li>
             {
