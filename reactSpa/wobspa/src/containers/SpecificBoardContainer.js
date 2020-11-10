@@ -111,6 +111,7 @@ function SpecificBoardContainer({boardNo}){
 
     return(
         <SpecificBoard 
+        boardNo = {boardNo}
         boardName = {boardName}
         boardDesc = {boardDesc}
         postList = {postList}

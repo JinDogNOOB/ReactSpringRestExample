@@ -43,10 +43,6 @@ function MainPage(){
                     컨텐트
                 </div>
 
-                <div className="right_content">
-                    오른쪽 컨텐트
-                </div>
-
                 <div className="footer">
                     푸터
                 </div>

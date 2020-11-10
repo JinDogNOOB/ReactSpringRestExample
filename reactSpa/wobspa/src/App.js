@@ -7,7 +7,8 @@ import {
   BoardPage,
   UserMyInfoPage,
   SpecificBoardPage,
-  AdminPage
+  AdminPage,
+  PostWritingFormPage
   } from './pages';
 
 function App() {
@@ -20,8 +21,11 @@ function App() {
 
       <Route exact path="/board" component={BoardPage} />
       <Route exact path="/board/:boardNo" component={SpecificBoardPage} />
-      <Route exact path="/board/:boardNo/post/:postNo" component={PostDetailPage} />
-
+      <Switch>
+        <Route exact path="/board/:boardNo/post/form/:postNo" component={PostWritingFormPage} />
+        <Route exact path="/board/:boardNo/post/form" component={PostWritingFormPage} />
+        <Route exact path="/board/:boardNo/post/:postNo" component={PostDetailPage} />
+      </Switch>
       <Route exact path="/admin" component={AdminPage} />
     </div>
   );

@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
 import './Component.css';
 
 function SpecificBoard({
+    boardNo,
     boardName,
     boardDesc,
     postList,
@@ -35,7 +37,7 @@ function SpecificBoard({
                     postList = {postList}
                 />
                 <div>
-                    글쓰기 버튼
+                    <Link to={'/board/'+boardNo+"/post/form"}>글쓰기</Link>
                 </div>
 
             </div>
