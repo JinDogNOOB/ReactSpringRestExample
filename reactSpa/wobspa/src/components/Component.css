@@ -1,0 +1,205 @@
+/*
+AdminFunction
+*/
+.admin_function_container {
+    background-color: red;
+
+    /* 중앙 정렬 */
+    margin: 0 auto;
+    width: 1200px;
+    height: auto;
+    
+    display: flex;
+    overflow: hidden;
+}
+
+
+.admin_function_container > .admin_menu{
+    width: 200px;
+    min-height: 1000px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.admin_menu > a{
+    width: 100%;
+    background-color: gray;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+
+    padding: 10px 0px;
+    margin: 3px 0;
+}
+.admin_menu > a:hover{
+    background-color: darkgray;
+}
+
+.admin_function_container > .admin_info{
+    width: 100%;
+    /* flex-grow: 9; */
+    min-height: 1000px;
+}
+
+
+.admin_function_container > div{
+    background-color: pink;
+
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+
+.admin_function_container table.user_list {
+    width: 50%;
+
+}
+
+.admin_function_container table.user_list thead{
+    padding : 2px, 2px;
+    border-style: solid;
+    border-style: black;
+    border-width: 1px;
+}
+
+.admin_function_container table.user_list th{
+    padding : 2px, 2px;
+    border-style: solid;
+    border-style: black;
+    border-width: 1px;
+}
+
+.admin_function_container table.user_list td{
+    padding : 3px 3px;
+    margin: 3px 3px;
+    border-style: solid;
+    border-style: black;
+    border-width: 1px;
+}
+
+.admin_function_container tr:hover{
+    background-color: gray;
+}
+
+
+
+/*
+Component
+*/
+
+/* absolute 의 영향을 나게 할려면 부모가 relative realative 를 어디다 설정을 하느냐가 관건이다  */
+
+/* 드롭박스 참고 https://rgy0409.tistory.com/2963 */
+
+.menu_container{
+    text-align: center;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    position: relative; 
+}
+.menu_container > li{
+    display: inline-block; 
+    padding: 10px 80px; 
+    
+}
+
+.menu_container > li:hover{
+    background-color: aqua;
+}
+
+
+
+
+.menu_container > li:hover > .dropdown_container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10%, auto));
+    justify-content: left;
+}
+
+.menu_container .dropdown_container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    display: none;
+}
+
+.dropdown_container > .dropdown_header{
+    grid-column: 1/4;
+    grid-row: 1/6;
+}
+
+
+
+/*
+UserStatus
+*/
+.UserStatus{
+    /* background-color: purple; */
+    background-color: white;
+    margin-right: 10px;
+}
+
+
+/*
+SpecificBoard
+*/
+
+div{    border-style: solid;
+    border-color: black;
+    border-width: 1px;}
+
+.specific_board{
+
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.specific_board > .title{
+    padding: 20px;
+}
+
+.post_list{
+    margin-top: 10px;
+    min-height: 100px;
+}
+
+.post_list tr{
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+.post_list td{
+    width: 10%;
+}
+
+.post_list > tbody tr td{
+    padding : 5px;
+}
+
+.post_list_index{
+    margin: 0px 150px;
+    display:flex;
+    justify-content: space-between;
+}
+
+.post_list_index li{
+    padding: 10px;
+    background-color: aqua;
+}
+
+.post_search_bar{
+
+}

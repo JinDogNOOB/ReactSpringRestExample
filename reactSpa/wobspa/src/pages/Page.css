@@ -64,13 +64,13 @@
     grid-row: 4/5;
 }
 .grid_container > .center_content{
-    grid-column: 2/3;
+    grid-column: 2/4;
     grid-row: 4/5;
 }
-.grid_container > .right_content{
+/* .grid_container > .right_content{
     grid-column: 3/4;
     grid-row: 4/5;
-}
+} */
 
 .grid_container > .footer{
     grid-column: 1/4;
@@ -84,5 +84,14 @@
 }
 .head > .user_area{
     align-self: flex-start;
+}
+
+
+
+/* ### 어드민 페이지 */
+.admin_function{
+
+    grid-column: 1/4;
+    grid-row: 3/6;
 }
 

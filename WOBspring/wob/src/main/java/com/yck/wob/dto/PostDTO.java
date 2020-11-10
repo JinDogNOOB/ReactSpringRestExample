@@ -1,6 +1,6 @@
 package com.yck.wob.dto;
 
-public class PostDTO {
+public class PostDTO extends IndexDTO{
     private int postNo;
     private int boardNo;
     private String postName;

@@ -16,6 +16,10 @@ function AdminFunctionContainer(){
     const [userNickname, setUserNickname] = useState("");
     const [userStatus, setUserStatus] = useState(0);
 
+    // 게시판추가 modal 에 올라갈 boardinfo
+    const [boardName, setBoardName] = useState("");
+    const [boardDesc, setBoardDesc] = useState("");
+
     // 유저정보리스트 
     const [userInfoList, setUserInfoList] = useState([]);
     // 게시판리스트
@@ -40,6 +44,12 @@ function AdminFunctionContainer(){
     }
     const onSetUserStatus = (event) => {
         setUserStatus(event.target.value);
+    }
+    const onSetBoardName = (event) => {
+        setBoardName(event.target.value);
+    }
+    const onSetBoardDesc = (event) => {
+        setBoardDesc(event.target.value);
     }
     /**
      * @param {*} modalNum 0:없음 1:유저 2:보드 3:보드요청
@@ -106,6 +116,18 @@ function AdminFunctionContainer(){
     const requestBoardList = async() => {
         try{
             const response = await axios(axiosOptions.get("/admin/board/", {}));
+            let tempArray = [];
+            response.data.map((val, index)=>{
+                const temp = {
+                    boardNo : val.boardNo,
+                    boardName : val.boardName,
+                    boardDesc : val.boardDesc,
+                    boardProposer : val.boardProposer,
+                    boardStatus : val.boardStatus
+                }
+                tempArray.push(temp);
+            });
+            setBoardInfoList(tempArray);
         }catch(e){
             console.log(e);
         }
@@ -114,15 +136,19 @@ function AdminFunctionContainer(){
      /**
       * 게시판 추가 post
       */
-    const requestAddingBoard = async(userNo, boardName, boardDesc) => {
+    const requestForAddingBoard = async(userNo, boardName, boardDesc) => {
         try{
             const response = await axios(axiosOptions.post("/admin/board", {
                 userNo : userNo,
                 boardName : boardName,
                 boardDesc : boardDesc
             }));
+            alert("게시판 추가 성공했습니다.");
+            onSetModalStatus(0);
+            requestBoardList();
         }catch(e){
             console.log(e);
+            alert("게시판 추가 에러.");
         }
     }
 
@@ -139,7 +165,7 @@ function AdminFunctionContainer(){
                 break;
             }
             case BOARD:{
-                console.log("B");
+                requestBoardList();
                 break;
             }
             case REQUESTEDBOARD:{
@@ -162,12 +188,18 @@ function AdminFunctionContainer(){
         m_userNickname = {userNickname}
         m_userStatus = {userStatus}
         userInfoList = {userInfoList}
+        boardInfoList = {boardInfoList}
+        m_boardName = {boardName}
+        m_boardDesc = {boardDesc}
 
         requestUserInfo = {requestUserInfo}
+        requestForAddingBoard = {requestForAddingBoard}
         onSetMode = {onSetMode}
         onSetModalStatus = {onSetModalStatus}
         onSetUserNickname = {onSetUserNickname}
         onSetUserStatus = {onSetUserStatus}
+        onSetBoardName = {onSetBoardName}
+        onSetBoardDesc = {onSetBoardDesc}
 
         userMgmtModalStatus = {userMgmtModalStatus}
         boardMgmtModalStatus = {boardMgmtModalStatus}

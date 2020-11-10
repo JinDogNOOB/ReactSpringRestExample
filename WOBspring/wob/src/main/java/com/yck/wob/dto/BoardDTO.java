@@ -1,6 +1,6 @@
 package com.yck.wob.dto;
 
-public class BoardDTO {
+public class BoardDTO extends IndexDTO{
     private int boardNo;
     private String boardName;
     private String boardDesc;

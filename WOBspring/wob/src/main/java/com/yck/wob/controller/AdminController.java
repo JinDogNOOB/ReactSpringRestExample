@@ -87,15 +87,15 @@ public class AdminController {
 
         String boardName = (String)map.get("boardName");
         String boardDesc = (String)map.get("boardDesc");
-        int userNo = Integer.parseInt((String)map.get("userNo"));
+        int userNo = (int)map.get("userNo");
 
         
-        if (!boardService.askToAddingBoardList(boardName, boardDesc, userNo)){
+        if (!boardService.askToAddingBoard(boardName, boardDesc, userNo)){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
         int boardNo = boardService.getBoardInfoByName(boardName).getBoardNo();
-        if (!boardService.addBoardList(boardNo)){
+        if (!boardService.createAskedBoard(boardNo)){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }

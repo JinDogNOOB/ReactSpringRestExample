@@ -63,7 +63,7 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
             return;
         }
         // 작업
-        if(!boardService.askToAddingBoardList(boardName, boardDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()))){
+        if(!boardService.askToAddingBoard(boardName, boardDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()))){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
@@ -90,8 +90,11 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     // 게시글 리스트 get
     @RequestMapping(value="/{boardNo}/post", method = RequestMethod.GET)
     private List<PostDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+        int index = Integer.parseInt((String)map.get("index"));
+        int listAmount = Integer.parseInt((String)map.get("listAmount"));
+
         response.setStatus(HttpServletResponse.SC_OK);
-        return postService.getPostlists(boardNo);
+        return postService.getPostlists(boardNo, index, listAmount);
     }
 
     // 게시글 쓰기 post
@@ -99,15 +102,22 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     private void addPost(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
         String postName = (String)map.get("postName");
         String postDesc = (String)map.get("postDesc");
+        String jws = (String)map.get("jwt");
 
-        // 로그인 체크 
-        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+        // 로그인 체크 쿠키 미사용 하겠다
+        // if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+        //     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        //     return;
+        // } 
+        
+        // 스프링 시큐리티 도입하거나, 인터셉터 그거 찾아서 해보자
+        if(jws == null || !UserAuthUtil.validateJwtNStatus(jws, UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         // 작업
-        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()), boardNo)){
+        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(jws), boardNo)){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
