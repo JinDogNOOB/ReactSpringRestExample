@@ -9,7 +9,7 @@ function SpecificBoard({
     index,
     listAmount,
     onSetIndex,
-    onSetListAmount
+    onChangeListAmount
 
 }){
 
@@ -19,7 +19,15 @@ function SpecificBoard({
     return(
         <div className="specific_board">
             <div className="title">
-                {boardName} 게시판 설명 {boardDesc} , {listAmount}개씩 출력
+                {boardName} 게시판 설명 {boardDesc} , 
+                {listAmount}개씩 출력
+                <select onChange={onChangeListAmount}>
+                    <option value={listAmount} >선택</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
             </div>
 
             <div className="post_list">

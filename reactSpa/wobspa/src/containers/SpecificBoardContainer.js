@@ -43,8 +43,8 @@ function SpecificBoardContainer({boardNo}){
     const onSetIndex = (index) => {
         setIndex(index);
     }
-    const onSetListAmount = (amount) => {
-        setListAmount(amount);
+    const onChangeListAmount = (e) => {
+        setListAmount(e.target.value);
     }
 
 
@@ -105,7 +105,7 @@ function SpecificBoardContainer({boardNo}){
     },[boardNo]);
     useEffect(() => {
         onGetPostList(boardNo, index, listAmount);
-    },[boardNo, index]);
+    },[boardNo, index, listAmount]);
     
 
 
@@ -117,7 +117,7 @@ function SpecificBoardContainer({boardNo}){
         index = {index}
         listAmount = {listAmount}
         onSetIndex = {onSetIndex}
-        onSetListAmount = {onSetListAmount}
+        onChangeListAmount = {onChangeListAmount}
         />
 
     );
