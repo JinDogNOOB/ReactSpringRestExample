@@ -1,7 +1,6 @@
 import React from 'react';
 
-import './AdminPage.css';
-import './MainPage.css';
+import './Page.css';
 import NavItemContainer from '../containers/NavItemContainer';
 import UserStatusContainer from '../containers/UserStatusContainer';
 import AdminFunctionContainer from '../containers/AdminFunctionContainer';

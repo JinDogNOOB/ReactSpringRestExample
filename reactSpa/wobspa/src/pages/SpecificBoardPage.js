@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './MainPage.css';
+import './Page.css';
 import NavItemContainer from '../containers/NavItemContainer';
 import UserStatusContainer from '../containers/UserStatusContainer';
 import SpecificBoardContainer from '../containers/SpecificBoardContainer';

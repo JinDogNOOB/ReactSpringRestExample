@@ -2,7 +2,7 @@ import React from 'react';
 
 import UserStatusContainer from '../containers/UserStatusContainer';
 import NavItemContainer from '../containers/NavItemContainer';
-import './MainPage.css';
+import './Page.css';
 /*
 헤더 : 로고, 전광판
 컨텐트 : 왼쪽은실시간 중앙은 검색 오른쪽은 유저

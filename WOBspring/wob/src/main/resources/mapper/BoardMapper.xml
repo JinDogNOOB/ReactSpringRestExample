@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS ${boardNo}_board_sub_tb(
 
 
  <select id="selectPosts" resultType="com.yck.wob.dto.PostDTO">
-SELECT * FROM ${boardNo}_board_tb LIMIT #{start}, #{listAmount}
+SELECT * FROM ${boardNo}_board_tb order by postNo desc LIMIT #{start}, #{listAmount}
  </select>
 
 <select id="countPosts" resultType="int">

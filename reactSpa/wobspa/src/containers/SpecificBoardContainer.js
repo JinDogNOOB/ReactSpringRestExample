@@ -37,16 +37,22 @@ function SpecificBoardContainer({boardNo}){
     */
     const [postList, setPostList] = useState([]);
     const [index, setIndex] = useState(1);
+    const [indexList, setIndexList] = useState([]);
     const [listAmount, setListAmount] = useState(30);
     
-    
+    const onSetIndex = (index) => {
+        setIndex(index);
+    }
+    const onSetListAmount = (amount) => {
+        setListAmount(amount);
+    }
 
 
     // axios
-    // 게시판 정보 가져오기
+    // 특정 게시판 정보 가져오기
     const onGetBoardInfo = async(boardNo) =>{
         try{
-            const response = await axios(axiosOptions.get('/board/', {}));
+            const response = await axios(axiosOptions.get('/board/'+boardNo, {}));
             setBoardName(response.data.boardName);
             setBoardDesc(response.data.boardDesc);
         }catch(e){
@@ -60,6 +66,19 @@ function SpecificBoardContainer({boardNo}){
                 index : indexNumber,
                 listAmount : listAmount
             }));
+
+            let tempArray = [];
+            response.data.map((val, index) => {
+                let temp = {
+                    postNo : val.postNo,
+                    postName : val.postName,
+                    postDesc : val.postDesc,
+                    postOwner : val.postOwner
+                }
+                tempArray.push(temp);
+            });
+            setPostList(tempArray);
+            
         }catch(e){
             console.log(e);
         }
@@ -80,15 +99,26 @@ function SpecificBoardContainer({boardNo}){
     
 
 
-        // useEffect
+    // useEffect 
     useEffect(() => {
-        onGetBoardInfo();
-    },);
-
+        onGetBoardInfo(boardNo);
+    },[boardNo]);
+    useEffect(() => {
+        onGetPostList(boardNo, index, listAmount);
+    },[boardNo, index]);
+    
 
 
     return(
-        <SpecificBoard />
+        <SpecificBoard 
+        boardName = {boardName}
+        boardDesc = {boardDesc}
+        postList = {postList}
+        index = {index}
+        listAmount = {listAmount}
+        onSetIndex = {onSetIndex}
+        onSetListAmount = {onSetListAmount}
+        />
 
     );
 }

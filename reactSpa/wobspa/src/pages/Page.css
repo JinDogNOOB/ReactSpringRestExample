@@ -86,3 +86,12 @@
     align-self: flex-start;
 }
 
+
+
+/* ### 어드민 페이지 */
+.admin_function{
+
+    grid-column: 1/4;
+    grid-row: 3/6;
+}
+
