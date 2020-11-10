@@ -102,15 +102,22 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     private void addPost(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
         String postName = (String)map.get("postName");
         String postDesc = (String)map.get("postDesc");
+        String jws = (String)map.get("jwt");
 
-        // 로그인 체크 
-        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+        // 로그인 체크 쿠키 미사용 하겠다
+        // if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+        //     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        //     return;
+        // } 
+        
+        // 스프링 시큐리티 도입하거나, 인터셉터 그거 찾아서 해보자
+        if(jws == null || !UserAuthUtil.validateJwtNStatus(jws, UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         // 작업
-        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()), boardNo)){
+        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(jws), boardNo)){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
