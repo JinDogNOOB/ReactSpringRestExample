@@ -9,16 +9,26 @@ import {
   SpecificBoardPage,
   AdminPage,
   PostWritingFormPage,
-  PostModifingFormPage
+  PostModifingFormPage,
+
+  Banner,
+  Navigation,
+  Footer,
+  SignupPage
   } from './pages';
 
 function App() {
   //  <Route path="/" component={MainPage} /> 윗부분만 잘라내서 재활용 할수있는데 마지막에 하자
   return (
-    <div>
-     
+    <div className="grid_container">
+      <Route path="/" component={Banner} />
+      <Route path="/" component={Navigation} />
+
+
+
       <Route exact path="/" component={MainPage} />
       <Route exact path="/user" component={UserPage} />
+      <Route exact path="/user/signup" component={SignupPage} />
 
       <Route exact path="/user/myinfo" component={UserMyInfoPage} />
 
@@ -30,6 +40,10 @@ function App() {
         <Route exact path="/board/:boardNo/post/:postNo" component={PostDetailPage} />
       </Switch>
       <Route exact path="/admin" component={AdminPage} />
+
+
+
+      <Route path="/" component={Footer} />
     </div>
   );
 }

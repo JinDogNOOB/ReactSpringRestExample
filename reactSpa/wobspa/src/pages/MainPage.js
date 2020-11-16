@@ -14,77 +14,14 @@ import './Page.css';
 
 function MainPage(){
     console.log("main rerender");
-    if(true){
         return(
-            <div className="grid_container">
-                <div className="head">
-                    <div className="logo_area">
-                        로고
-                    </div>
-                    헤드
-                    <div className="user_area">
-                        <UserStatusContainer />
-                    </div>
-
-                </div>
-
-                <div className="nav">
-                    <NavItemContainer />
-                </div>
-
-                <div className="sub_nav">
-                    부가메뉴..검색판
-                </div>
-                
-                <div className="left_content">
-                    왼쪽 컨텐트
-                </div>
-
-                <div className="center_content">
-                    <TestContainer />
-                </div>
-
-                <div className="footer">
-                    푸터 
-                </div>
-
+            <div className="full_content">
+      
             </div>
         );
-    }
+    
 
-    return(
-        <div>
-            <div className="header">
-                
-                header
-            </div>
-            <div className="content">
-                <ul>
-                    <li>실시간</li>
-                    <li>검색창</li>
-                    <li><UserStatusContainer /></li>
-                </ul>
-            </div>
-            <div className="subContent">
-                <ul>
-                    <li><a>메뉴</a></li>
-                    <li><a>메뉴</a></li>
-                    <li><a>메뉴</a></li>
-                    <li><a>메뉴</a></li>
-                    <li><a>메뉴</a></li>
-                    <li><a>메뉴</a></li>
-                    <li><a>메뉴</a></li>
-                </ul>
-            </div>
-            <div className="main">
-
-            </div>
-            <footer className="footer">
-                footer
-            </footer>
-            
-        </div>
-    );
+    
 }
 
 export default MainPage;

@@ -7,3 +7,12 @@ export {default as SpecificBoardPage} from './SpecificBoardPage';
 export {default as AdminPage} from './AdminPage';
 export {default as PostWritingFormPage} from './PostWritingFormPage';
 export {default as PostModifingFormPage} from './PostModifingFormPage';
+
+export {default as Banner} from './Banner';
+export {default as Navigation} from './Navigation';
+export {default as Footer} from './Footer';
+
+export {default as SignupPage} from './SignupPage';
+
+
+
