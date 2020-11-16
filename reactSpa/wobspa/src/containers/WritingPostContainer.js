@@ -7,7 +7,7 @@ import {setLoginStatus, setJwt} from '../modules/user';
 
 import WritingForm from '../components/WritingForm';
 
-function WritingFormContainer({boardNo}){
+function WritingPostContainer({boardNo}){
     //리덕스
     const {isLoggedIn} = useSelector(state=> ({
         isLoggedIn: state.user.isLoggedIn
@@ -57,4 +57,4 @@ return (
 }
 
 
-export default WritingFormContainer;
+export default WritingPostContainer;

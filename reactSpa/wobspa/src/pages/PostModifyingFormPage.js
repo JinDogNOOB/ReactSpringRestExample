@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-function PostModifingFormPage({match}){
+function PostModifyingFormPage({match}){
     if(match.params.postNo == null){
         console.log("postNo 입력안댐");
     }else{
@@ -15,4 +15,4 @@ function PostModifingFormPage({match}){
     );
 }
 
-export default PostModifingFormPage;
+export default PostModifyingFormPage;

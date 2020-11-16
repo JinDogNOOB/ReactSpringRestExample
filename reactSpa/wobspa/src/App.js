@@ -9,7 +9,7 @@ import {
   SpecificBoardPage,
   AdminPage,
   PostWritingFormPage,
-  PostModifingFormPage,
+  PostModifyingFormPage,
 
   Banner,
   Navigation,
@@ -37,7 +37,7 @@ function App() {
       <Route exact path="/board" component={BoardPage} />
       <Route exact path="/board/:boardNo" component={SpecificBoardPage} />
       <Switch>
-        <Route exact path="/board/:boardNo/post/modform/:postNo" component={PostModifingFormPage} />
+        <Route exact path="/board/:boardNo/post/modform/:postNo" component={PostModifyingFormPage} />
         <Route exact path="/board/:boardNo/post/addform" component={PostWritingFormPage} />
         <Route exact path="/board/:boardNo/post/:postNo" component={PostDetailPage} />
       </Switch>
