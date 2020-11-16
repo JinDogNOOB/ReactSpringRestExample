@@ -66,15 +66,15 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     // ############### /board/
     // 게시판 목록 get
     @RequestMapping(value="/", method = RequestMethod.GET)
-    private List<BoardDTO> getPermitedBoardList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+    private List<BoardDTO> getPermitedBoardList(HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_OK);
         return boardService.getPermitedBoardList();
     }
     // 게시판생성요청 post
     @RequestMapping(value="/", method = RequestMethod.POST)
-    private void requestForAddingBoard(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
-        String boardName = (String)map.get("boardName");
-        String boardDesc = (String)map.get("boardDesc");
+    private void requestForAddingBoard(HttpServletRequest request, HttpServletResponse response){
+        String boardName = request.getParameter("boardName");
+        String boardDesc = request.getParameter("boardDesc");
     
         // 로그인 유무 권한 확인
         if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
@@ -98,7 +98,7 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     // ########### /board/{boardNo}
     // 게시판 정보 가져오기 get
     @RequestMapping(value="/{boardNo}", method = RequestMethod.GET)
-    private BoardDTO getBoardDetail(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+    private BoardDTO getBoardDetail(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_OK);
         return boardService.getBoardInfo(boardNo);
     }
@@ -108,9 +108,9 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     // ############# /board/{boardNo}/post
     // 게시글 리스트 get
     @RequestMapping(value="/{boardNo}/post", method = RequestMethod.GET)
-    private List<PostDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
-        int index = (int)map.get("index");
-        int listAmount = (int)map.get("listAmount");
+    private List<PostDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
+        int index = Integer.parseInt(request.getParameter("index"));
+        int listAmount = Integer.parseInt(request.getParameter("listAmount"));
         
         response.setStatus(HttpServletResponse.SC_OK);
         return postService.getPostlists(boardNo, index, listAmount);
@@ -118,9 +118,9 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
 
     // 게시글 쓰기 post
     @RequestMapping(value="/{boardNo}/post", method = RequestMethod.POST)
-    private void addPost(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
-        String postName = (String)map.get("postName");
-        String postDesc = (String)map.get("postDesc");
+    private void addPost(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
+        String postName = request.getParameter("postName");
+        String postDesc = request.getParameter("postDesc");
         
         // 로그인 체크 
         if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
@@ -143,14 +143,14 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     // ############ /board/{boardNo}/post/{postNo}
     // 게시글보기 get
     @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.GET)
-    private PostDTO getPostDetail(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+    private PostDTO getPostDetail(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_OK);
         return postService.getPost(boardNo, postNo);
     }
 
     // 게시글삭제 delete
     @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.DELETE)
-    private void deletePost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
+    private void deletePost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         
         // 로그인 유무 권한 확인
         if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
@@ -175,10 +175,10 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     }
     // 게시글수정 put
     @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.PUT)
-    private void modifyPost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
+    private void modifyPost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         
-        String postName = (String)map.get("postName");
-        String postDesc = (String)map.get("postDesc");
+        String postName = request.getParameter("postName");
+        String postDesc = request.getParameter("postDesc");
         // 로그인 유무 권한 확인
         if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -208,7 +208,7 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     // ############ /board/{boardNo}/post/{postNo}/sub
     // 댓글리스트 get
     @RequestMapping(value="/{boardNo}/post/{postNo}/sub", method = RequestMethod.PUT)
-    private PostSubDTO getSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
+    private PostSubDTO getSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         
         response.setStatus(HttpServletResponse.SC_OK);
         return postService.getPostSub(boardNo, postNo);

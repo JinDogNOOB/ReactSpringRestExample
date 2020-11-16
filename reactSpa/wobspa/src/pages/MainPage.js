@@ -45,7 +45,7 @@ function MainPage(){
                 </div>
 
                 <div className="footer">
-                    푸터
+                    푸터 
                 </div>
 
             </div>
