@@ -23,7 +23,7 @@ export default function user(state=initialState, action){
         case SET_LOGIN_STATUS:
             return{...state, isLoggedIn: action.isLoggedIn};
         case SET_JWT:
-            return{...state, jwt: action.jwt};
+            return{...state, jwt: action.jwt };
         default :
             return state;
     }

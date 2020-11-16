@@ -14,7 +14,8 @@ import {
   Banner,
   Navigation,
   Footer,
-  SignupPage
+  SignupPage,
+  SigninPage
   } from './pages';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Route exact path="/" component={MainPage} />
       <Route exact path="/user" component={UserPage} />
       <Route exact path="/user/signup" component={SignupPage} />
+      <Route exact path="/user/signin" component={SigninPage} /> 
 
       <Route exact path="/user/myinfo" component={UserMyInfoPage} />
 
