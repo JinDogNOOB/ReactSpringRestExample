@@ -67,6 +67,10 @@
     grid-column: 2/4;
     grid-row: 4/5;
 }
+.grid_container > .full_content{
+    grid-column: 1/4;
+    grid-row: 4/5;
+}
 /* .grid_container > .right_content{
     grid-column: 3/4;
     grid-row: 4/5;
@@ -94,4 +98,11 @@
     grid-column: 1/4;
     grid-row: 3/6;
 }
+
+/* ### 글쓰기 폼 ### */
+.writing_form {
+    display: flex;
+    flex-direction: column;
+}
+
 

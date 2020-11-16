@@ -121,15 +121,16 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     private void addPost(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
         String postName = request.getParameter("postName");
         String postDesc = request.getParameter("postDesc");
+        String jwt = request.getParameter("jwt");
         
         // 로그인 체크 
-        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         // 작업
-        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()), boardNo)){
+        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(jwt), boardNo)){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
@@ -151,14 +152,15 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     // 게시글삭제 delete
     @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.DELETE)
     private void deletePost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
-        
+        String jwt = request.getParameter("jwt");
+
         // 로그인 유무 권한 확인
-        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        // 쿠키에서 userNo 추출
-        int userNo = UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue());
+        // jwt에서 userNo 추출
+        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
         // 요청 게시글 db에서 추출 
         PostDTO dbPost = postService.getPost(boardNo, postNo);
         // userNo와 owner 비교
@@ -179,13 +181,15 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
         
         String postName = request.getParameter("postName");
         String postDesc = request.getParameter("postDesc");
+        String jwt = request.getParameter("jwt");
+
         // 로그인 유무 권한 확인
-        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
         // 쿠키에서 userNo 추출
-        int userNo = UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue());
+        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
         // 요청 게시글 db에서 추출 
         PostDTO dbPost = postService.getPost(boardNo, postNo);
         // userNo와 owner 비교
