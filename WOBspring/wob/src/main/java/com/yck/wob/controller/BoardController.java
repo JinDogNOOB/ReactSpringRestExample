@@ -1,5 +1,6 @@
 package com.yck.wob.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,12 +37,30 @@ public class BoardController {
     PostService postService;
     
 
-    /*
-@RequestMapping(value="/test", method = RequestMethod.GET)
-private String jspTest(HttpServletRequest request, HttpServletResponse response){
-    return "test";
+    
+@RequestMapping(value="/test/{n}/test", method = RequestMethod.GET)
+private Map<String, Object> getTest(@PathVariable int n, HttpServletRequest request, HttpServletResponse response){
+    String a = request.getParameter("a");
+    String b = request.getParameter("b");
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("a", a);
+    map.put("b", b);
+    map.put("n", n);
+    return map;
 }
-    */
+
+@RequestMapping(value="/test/{n}/test", method = RequestMethod.POST)
+private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest request, HttpServletResponse response){
+    String a = request.getParameter("a");
+    String b = request.getParameter("b");
+    
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("a", a);
+    map.put("b", b);
+    map.put("n", n);
+    return map;
+}
+    
 
 
     // ############### /board/
@@ -90,9 +109,9 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     // 게시글 리스트 get
     @RequestMapping(value="/{boardNo}/post", method = RequestMethod.GET)
     private List<PostDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
-        int index = Integer.parseInt((String)map.get("index"));
-        int listAmount = Integer.parseInt((String)map.get("listAmount"));
-
+        int index = (int)map.get("index");
+        int listAmount = (int)map.get("listAmount");
+        
         response.setStatus(HttpServletResponse.SC_OK);
         return postService.getPostlists(boardNo, index, listAmount);
     }
@@ -102,22 +121,15 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     private void addPost(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
         String postName = (String)map.get("postName");
         String postDesc = (String)map.get("postDesc");
-        String jws = (String)map.get("jwt");
-
-        // 로그인 체크 쿠키 미사용 하겠다
-        // if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
-        //     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        //     return;
-        // } 
         
-        // 스프링 시큐리티 도입하거나, 인터셉터 그거 찾아서 해보자
-        if(jws == null || !UserAuthUtil.validateJwtNStatus(jws, UserAuthUtil.STATUS_USER)){
+        // 로그인 체크 
+        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         // 작업
-        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(jws), boardNo)){
+        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue()), boardNo)){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
