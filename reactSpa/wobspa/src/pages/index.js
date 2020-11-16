@@ -6,3 +6,4 @@ export {default as UserMyInfoPage} from './UserMyInfoPage';
 export {default as SpecificBoardPage} from './SpecificBoardPage';
 export {default as AdminPage} from './AdminPage';
 export {default as PostWritingFormPage} from './PostWritingFormPage';
+export {default as PostModifingFormPage} from './PostModifingFormPage';

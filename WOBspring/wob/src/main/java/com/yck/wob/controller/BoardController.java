@@ -1,5 +1,6 @@
 package com.yck.wob.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,26 +37,44 @@ public class BoardController {
     PostService postService;
     
 
-    /*
-@RequestMapping(value="/test", method = RequestMethod.GET)
-private String jspTest(HttpServletRequest request, HttpServletResponse response){
-    return "test";
+    
+@RequestMapping(value="/test/{n}/test", method = RequestMethod.GET)
+private Map<String, Object> getTest(@PathVariable int n, HttpServletRequest request, HttpServletResponse response){
+    String a = request.getParameter("a");
+    String b = request.getParameter("b");
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("a", a);
+    map.put("b", b);
+    map.put("n", n);
+    return map;
 }
-    */
+
+@RequestMapping(value="/test/{n}/test", method = RequestMethod.POST)
+private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest request, HttpServletResponse response){
+    String a = request.getParameter("a");
+    String b = request.getParameter("b");
+    
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("a", a);
+    map.put("b", b);
+    map.put("n", n);
+    return map;
+}
+    
 
 
     // ############### /board/
     // 게시판 목록 get
     @RequestMapping(value="/", method = RequestMethod.GET)
-    private List<BoardDTO> getPermitedBoardList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+    private List<BoardDTO> getPermitedBoardList(HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_OK);
         return boardService.getPermitedBoardList();
     }
     // 게시판생성요청 post
     @RequestMapping(value="/", method = RequestMethod.POST)
-    private void requestForAddingBoard(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
-        String boardName = (String)map.get("boardName");
-        String boardDesc = (String)map.get("boardDesc");
+    private void requestForAddingBoard(HttpServletRequest request, HttpServletResponse response){
+        String boardName = request.getParameter("boardName");
+        String boardDesc = request.getParameter("boardDesc");
     
         // 로그인 유무 권한 확인
         if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
@@ -79,7 +98,7 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     // ########### /board/{boardNo}
     // 게시판 정보 가져오기 get
     @RequestMapping(value="/{boardNo}", method = RequestMethod.GET)
-    private BoardDTO getBoardDetail(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+    private BoardDTO getBoardDetail(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_OK);
         return boardService.getBoardInfo(boardNo);
     }
@@ -89,35 +108,29 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     // ############# /board/{boardNo}/post
     // 게시글 리스트 get
     @RequestMapping(value="/{boardNo}/post", method = RequestMethod.GET)
-    private List<PostDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
-        int index = Integer.parseInt((String)map.get("index"));
-        int listAmount = Integer.parseInt((String)map.get("listAmount"));
-
+    private List<PostDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
+        int index = Integer.parseInt(request.getParameter("index"));
+        int listAmount = Integer.parseInt(request.getParameter("listAmount"));
+        
         response.setStatus(HttpServletResponse.SC_OK);
         return postService.getPostlists(boardNo, index, listAmount);
     }
 
     // 게시글 쓰기 post
     @RequestMapping(value="/{boardNo}/post", method = RequestMethod.POST)
-    private void addPost(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
-        String postName = (String)map.get("postName");
-        String postDesc = (String)map.get("postDesc");
-        String jws = (String)map.get("jwt");
-
-        // 로그인 체크 쿠키 미사용 하겠다
-        // if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
-        //     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        //     return;
-        // } 
+    private void addPost(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
+        String postName = request.getParameter("postName");
+        String postDesc = request.getParameter("postDesc");
+        String jwt = request.getParameter("jwt");
         
-        // 스프링 시큐리티 도입하거나, 인터셉터 그거 찾아서 해보자
-        if(jws == null || !UserAuthUtil.validateJwtNStatus(jws, UserAuthUtil.STATUS_USER)){
+        // 로그인 체크 
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         // 작업
-        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(jws), boardNo)){
+        if (!postService.addPost(postName, postDesc, UserAuthUtil.getUserNoFromJws(jwt), boardNo)){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }
@@ -131,22 +144,23 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     // ############ /board/{boardNo}/post/{postNo}
     // 게시글보기 get
     @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.GET)
-    private PostDTO getPostDetail(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+    private PostDTO getPostDetail(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_OK);
         return postService.getPost(boardNo, postNo);
     }
 
     // 게시글삭제 delete
     @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.DELETE)
-    private void deletePost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
-        
+    private void deletePost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
+        String jwt = request.getParameter("jwt");
+
         // 로그인 유무 권한 확인
-        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        // 쿠키에서 userNo 추출
-        int userNo = UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue());
+        // jwt에서 userNo 추출
+        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
         // 요청 게시글 db에서 추출 
         PostDTO dbPost = postService.getPost(boardNo, postNo);
         // userNo와 owner 비교
@@ -163,17 +177,19 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     }
     // 게시글수정 put
     @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.PUT)
-    private void modifyPost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
+    private void modifyPost(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         
-        String postName = (String)map.get("postName");
-        String postDesc = (String)map.get("postDesc");
+        String postName = request.getParameter("postName");
+        String postDesc = request.getParameter("postDesc");
+        String jwt = request.getParameter("jwt");
+
         // 로그인 유무 권한 확인
-        if (!UserAuthUtil.validateJwtNStatus(WebUtils.getCookie(request, "jws").getValue(), UserAuthUtil.STATUS_USER)){
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
         // 쿠키에서 userNo 추출
-        int userNo = UserAuthUtil.getUserNoFromJws(WebUtils.getCookie(request, "jws").getValue());
+        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
         // 요청 게시글 db에서 추출 
         PostDTO dbPost = postService.getPost(boardNo, postNo);
         // userNo와 owner 비교
@@ -196,7 +212,7 @@ private String jspTest(HttpServletRequest request, HttpServletResponse response)
     // ############ /board/{boardNo}/post/{postNo}/sub
     // 댓글리스트 get
     @RequestMapping(value="/{boardNo}/post/{postNo}/sub", method = RequestMethod.PUT)
-    private PostSubDTO getSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
+    private PostSubDTO getSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         
         response.setStatus(HttpServletResponse.SC_OK);
         return postService.getPostSub(boardNo, postNo);

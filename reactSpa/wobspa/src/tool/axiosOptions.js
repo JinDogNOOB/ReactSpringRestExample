@@ -1,14 +1,18 @@
+import qs from 'querystring';
+
 const serverAddr = "127.0.0.1"
 const serverPort = "8080"
 const serverUrl = "http://" + serverAddr + ":" + serverPort;
 
+const CONTENT_TYPE_APP_URLENCODED = 'application/x-www-form-urlencoded;charset=UTF-8';
+const CONTENT_TYPE_APP_JSON = 'application/json;charset=UTF-8';
 const genGetOptions = (path, arg) => {
     const options = {
-        method: 'GET',
+        method: 'get',
         url: serverUrl+path,
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'x-www-form-urlencoded;charset=UTF-8'
+            'Content-Type': CONTENT_TYPE_APP_URLENCODED
         },
         params: arg 
     }
@@ -17,13 +21,13 @@ const genGetOptions = (path, arg) => {
 
 const genPostOptions = (path, arg) => {
     const options = {
-        method: 'POST',
+        method: 'post',
         url: serverUrl+path,
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json;charset=UTF-8'
+            'Content-Type': CONTENT_TYPE_APP_URLENCODED
         },
-        data: arg 
+        data : qs.stringify(arg)
     }
     return options;
 }
@@ -34,9 +38,9 @@ const genPutOptions = (path, arg) => {
         url: serverUrl+path,
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json;charset=UTF-8'
+            'Content-Type': CONTENT_TYPE_APP_URLENCODED
         },
-        data: arg 
+        data: qs.stringify(arg)
     }
     return options;
 }
@@ -47,9 +51,9 @@ const genDeleteOptions = (path, arg) => {
         url: serverUrl+path,
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json;charset=UTF-8'
+            'Content-Type': CONTENT_TYPE_APP_URLENCODED
         },
-        data: arg 
+        data: qs.stringify(arg)
     }
     return options;
 }

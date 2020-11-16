@@ -37,7 +37,7 @@ function SpecificBoard({
                     postList = {postList}
                 />
                 <div>
-                    <Link to={'/board/'+boardNo+"/post/form"}>글쓰기</Link>
+                    <Link to={'/board/'+boardNo+"/post/addform"}>글쓰기</Link>
                 </div>
 
             </div>

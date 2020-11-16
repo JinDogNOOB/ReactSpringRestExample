@@ -77,17 +77,17 @@ public class AdminController {
     // /admin/board
     // 게시판목록 *get
     @RequestMapping(value="/board", method = RequestMethod.GET)
-    private List<BoardDTO> getBoardList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map map){
+    private List<BoardDTO> getBoardList(HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_OK);
         return boardService.getBoardList();
     }
     // 게시판추가 *post
     @RequestMapping(value="/board", method = RequestMethod.POST)
-    private void makeBoard(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map){
+    private void makeBoard(HttpServletRequest request, HttpServletResponse response){
 
-        String boardName = (String)map.get("boardName");
-        String boardDesc = (String)map.get("boardDesc");
-        int userNo = (int)map.get("userNo");
+        String boardName = request.getParameter("boardName");
+        String boardDesc = request.getParameter("boardDesc");
+        int userNo = Integer.parseInt(request.getParameter("userNo"));
 
         
         if (!boardService.askToAddingBoard(boardName, boardDesc, userNo)){

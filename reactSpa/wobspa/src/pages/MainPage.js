@@ -2,6 +2,7 @@ import React from 'react';
 
 import UserStatusContainer from '../containers/UserStatusContainer';
 import NavItemContainer from '../containers/NavItemContainer';
+import TestContainer from '../containers/TestContainer';
 import './Page.css';
 /*
 헤더 : 로고, 전광판
@@ -40,11 +41,11 @@ function MainPage(){
                 </div>
 
                 <div className="center_content">
-                    컨텐트
+                    <TestContainer />
                 </div>
 
                 <div className="footer">
-                    푸터
+                    푸터 
                 </div>
 
             </div>
