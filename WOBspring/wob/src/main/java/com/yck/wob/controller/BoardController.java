@@ -122,6 +122,7 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
         String postName = request.getParameter("postName");
         String postDesc = request.getParameter("postDesc");
         String jwt = request.getParameter("jwt");
+        System.out.println("jwt" + jwt);
         
         // 로그인 체크 
         if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){

@@ -13,7 +13,8 @@ function UserStatus({
     isLoggedIn,
     onClickGotoSigninPage,
     onClickGotoSignupPage,
-    onClickLogOut
+    onClickLogOut,
+    tsetFunction
 }){
     //var button = document.querySelector("#loginButton");
     //button.addEventListener(modalSwitch)
@@ -33,6 +34,7 @@ function UserStatus({
                 <div className="UserStatusDiv">
                     님환영 님이 무엇입니까?!!
                     <input type="button" value="로그아웃" onClick={()=>{onClickLogOut()}}/>
+                    <input type="button" value="jwt체크" onClick={() => {tsetFunction()}} />
                 </div>
             </div>
         );

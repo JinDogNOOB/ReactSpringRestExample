@@ -1,10 +1,14 @@
 import React from 'react';
 
+import PostDetailContainer from '../containers/PostDetailContainer';
 
-function PostDetailPage(){
+function PostDetailPage({match}){
     return(
-        <div>
-            PostDetailPage;
+        <div className="center_content">
+            <PostDetailContainer 
+                boardNo = {match.params.boardNo}
+                postNo = {match.params.postNo}
+            />
         </div>
     );
 }

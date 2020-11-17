@@ -31,6 +31,9 @@ function UserStatusContainer(){
         dispatch(setJwt(""));
         dispatch(setLoginStatus(false));
     }
+    const tsetFunction = () => {
+        alert(jwt);
+    }
 
     // 로그인 유효 체크 반복이있어야할듯 여기에
     return(
@@ -39,6 +42,7 @@ function UserStatusContainer(){
             onClickGotoSigninPage = {onClickGotoSigninPage}
             onClickGotoSignupPage = {onClickGotoSignupPage}
             onClickLogOut = {onClickLogOut}
+            tsetFunction = {tsetFunction}
             />
     );
 

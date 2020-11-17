@@ -11,12 +11,10 @@ function SpecificBoard({
     index,
     listAmount,
     onSetIndex,
-    onChangeListAmount
+    onChangeListAmount,
+    gotoPostDetailPage
 
 }){
-
-    // 인덱스 번호 계산
-    
 
     return(
         <div className="specific_board">
@@ -35,6 +33,7 @@ function SpecificBoard({
             <div className="post_list">
                 <PostList
                     postList = {postList}
+                    gotoPostDetailPage = {gotoPostDetailPage}
                 />
                 <div>
                     <Link to={'/board/'+boardNo+"/post/addform"}>글쓰기</Link>
@@ -59,7 +58,7 @@ function SpecificBoard({
 
 
 // desc 는 미리보기로 띄워놓자
-function PostList({postList}){
+function PostList({postList, gotoPostDetailPage}){
     return (
         <table className="post_list">
             <thead>
@@ -74,7 +73,7 @@ function PostList({postList}){
             </thead>
             <tbody>
             {postList.map((val, i) => (
-                <tr key={i}>
+                <tr key={i} onClick={() => {gotoPostDetailPage(val.postNo)}}>
                     <td>{val.postNo}</td>
                     <td>{val.postName}</td>
                     <td>{val.postOwner}</td>

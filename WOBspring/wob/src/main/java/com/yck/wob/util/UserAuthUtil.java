@@ -85,13 +85,14 @@ public class UserAuthUtil {
         int userStatus = 0;
         try{
             
-            userStatus = Jwts.parserBuilder()
+            userStatus = getClaimsFromJws(jwsString).get("userStatus", Integer.class).intValue();
+            /* userStatus = Jwts.parserBuilder()
             .setSigningKey(key)
             .build()
             .parseClaimsJws(jwsString)
             .getBody()
-            .get("claimName", Integer.class)
-            .intValue();
+            .get("userStatus", Integer.class)
+            .intValue(); */
 
             switch (STATUS) {
                 case STATUS_ADMIN :{

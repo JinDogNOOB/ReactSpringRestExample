@@ -6,12 +6,15 @@ import SpecificBoard from '../components/SpecificBoard';
 import {setLoginStatus, setJwt} from '../modules/user';
 import {useSelector, useDispatch} from 'react-redux';
 
+import {useHistory} from 'react-router-dom';
+
 /**
  * 
  * int boardNo = boardNumber
  */
 function SpecificBoardContainer({boardNo}){
     
+    const history = useHistory();
 
     // 리덕스 (유저정보)
     const {isLoggedIn} = useSelector(state=> ({
@@ -45,6 +48,11 @@ function SpecificBoardContainer({boardNo}){
     }
     const onChangeListAmount = (e) => {
         setListAmount(e.target.value);
+    }
+
+    // common 
+    const gotoPostDetailPage = (postNo) => {
+        history.push('/board/'+boardNo+'/post/'+postNo);
     }
 
 
@@ -119,6 +127,7 @@ function SpecificBoardContainer({boardNo}){
         listAmount = {listAmount}
         onSetIndex = {onSetIndex}
         onChangeListAmount = {onChangeListAmount}
+        gotoPostDetailPage = {gotoPostDetailPage}
         />
 
     );
