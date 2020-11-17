@@ -5,9 +5,14 @@ import axiosOptions from '../tool/axiosOptions';
 
 import {setLoginStatus, setJwt} from '../modules/user';
 
-import WritingForm from '../components/WritingForm';
+import {useHistory} from 'react-router-dom';
+
+// import WritingForm from '../components/WritingForm';
+import PostForm from '../components/PostForm';
+
 
 function WritingPostContainer({boardNo}){
+    const history = useHistory();
     //리덕스
     const {isLoggedIn} = useSelector(state=> ({
         isLoggedIn: state.user.isLoggedIn
@@ -16,15 +21,15 @@ function WritingPostContainer({boardNo}){
         jwt : state.user.jwt
     }));
 
-
+    // state
     const [postName, setPostName] = useState("");
     const [postDesc, setPostDesc] = useState("");
+    const onSetPostName = (e) => {setPostName(e.target.value);}
+    const onSetPostDesc = (e) => {setPostDesc(e.target.value);}
 
-    const onSetPostName = (e) => {
-        setPostName(e.target.value);
-    }
-    const onSetPostDesc = (e) => {
-        setPostDesc(e.target.value);
+    // common 
+    const onCancel = () => {
+        history.push('/board/'+boardNo);
     }
 
     // axios 
@@ -36,21 +41,21 @@ function WritingPostContainer({boardNo}){
                 postDesc : postDesc,
                 jwt : jwt
             }));
-
         }catch(e){
             console.log(e);
         }
-
     }
     
 
 return (
-    <WritingForm
+    <PostForm
+        title = "temp Title"
         postName = {postName}
         postDesc = {postDesc}
         onSetPostName = {onSetPostName}
         onSetPostDesc = {onSetPostDesc}
-        onAddPost = {onAddPost}
+        onClickCancel = {onCancel}
+        onClickSubmit = {onAddPost}
     />
 );
 
