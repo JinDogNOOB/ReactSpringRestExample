@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import axiosOptions from '../tool/axiosOptions';
+import jwtTool from '../tool/jwtTool';
 
-import {setLoginStatus, setJwt} from '../modules/user';
+import {setLoginStatus, setJwt, setUserNo, setUserNickname, setUserStatus} from '../modules/user';
 import {useSelector, useDispatch} from 'react-redux';
 import SignIn from '../components/SignIn';
 
@@ -25,6 +26,9 @@ function SignInContainer(){
     const dispatch = useDispatch();
     const onSetLogInStatus = (bool) => dispatch(setLoginStatus(bool));
     const onSetJwt = (jwt) => dispatch(setJwt(jwt));
+    const onSetUserNo = (userNo) => dispatch(setUserNo(userNo));
+    const onSetUserNickname = (userNickname) => dispatch(setUserNickname(userNickname));
+    const onSetUserStatus = (userStatus) => dispatch(setUserStatus(userStatus));
 
     // state
     const [userEmail, setUserEmail] = useState("");
@@ -44,8 +48,13 @@ function SignInContainer(){
                 userPassword : userPassword
             }));
             const tempjwt = response.data.jwt;
+            const parsedJwt = jwtTool.parseJwt(tempjwt);
             onSetJwt(tempjwt);
             onSetLogInStatus(true);
+            onSetUserNo(parsedJwt.userNo);
+            onSetUserNickname(parsedJwt.userNickname);
+            onSetUserStatus(parsedJwt.userStatus);
+            
             alert("로그인에 성공했습니다");
             history.push('/');
             

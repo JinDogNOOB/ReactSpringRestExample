@@ -5,7 +5,6 @@ public class PostSubDTO {
     private int postSubParentNo;
     private int postNo;
     private int boardNo;
-    private String postSubName;
     private String postSubDesc;
     private int postSubOwner;
 
@@ -25,14 +24,6 @@ public class PostSubDTO {
 
     public void setPostSubParentNo(int postSubParentNo) {
         this.postSubParentNo = postSubParentNo;
-    }
-
-    public String getPostSubName() {
-        return postSubName;
-    }
-
-    public void setPostSubName(String postSubName) {
-        this.postSubName = postSubName;
     }
 
     public String getPostSubDesc() {

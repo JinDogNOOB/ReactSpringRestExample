@@ -66,7 +66,6 @@ CREATE TABLE IF NOT EXISTS ${boardNo}_board_sub_tb(
 	`postSubNo` int not null auto_increment,
 	`postSubParentNo` int DEFAULT NULL,
 	`postNo` int DEFAULT NULL,
-	`postSubName` varchar(60) DEFAULT NULL,
   `postSubDesc` varchar(500) DEFAULT NULL,
   `postSubOwner` int DEFAULT NULL,
 	PRIMARY KEY(postSubNo)
@@ -107,11 +106,11 @@ delete from ${boardNo}_board_tb where postNo=#{postNo}
 
 
  <select id="selectPostSubs" resultType="com.yck.wob.dto.PostSubDTO">
-SELECT * FROM ${boardNo}_board_sub_tb
+SELECT * FROM ${boardNo}_board_sub_tb where postNo=#{postNo}
  </select>
 
 <select id="countPostSubs" resultType="int">
-select count(*) from ${boardNo}_board_sub_tb
+select count(*) from ${boardNo}_board_sub_tb where postNo=#{postNo}
 </select>
 
 <select id="selectPostSubByNo" parameterType="com.yck.wob.dto.PostSubDTO" resultType="com.yck.wob.dto.PostSubDTO">
@@ -119,12 +118,12 @@ select * from ${boardNo}_board_sub_tb where postSubNo=#{postSubNo}
 </select>
 
 <insert id="insertPostSub" parameterType="com.yck.wob.dto.PostSubDTO">
-insert into ${boardNo}_board_sub_tb(postSubNo,postSubParentNo,postNo,postSubName,postSubDesc,postSubOwner)
-value(#{postSubNo}, #{postSubParentNo}, #{postNo}, #{postSubName}, #{postSubDesc}, #{postSubOwner})
+insert into ${boardNo}_board_sub_tb(postSubNo,postSubParentNo,postNo,postSubDesc,postSubOwner)
+value(#{postSubNo}, #{postSubParentNo}, #{postNo}, #{postSubDesc}, #{postSubOwner})
 </insert>
 
 <update id="updatePostSub" parameterType="com.yck.wob.dto.PostSubDTO">
-update ${boardNo}_board_sub_tb set postSubName=#{postSubName},postSubDesc=#{postSubDesc}
+update ${boardNo}_board_sub_tb set postSubDesc=#{postSubDesc}
 where postSubNo=#{postSubNo}
 </update>
 

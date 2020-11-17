@@ -21,6 +21,9 @@ function UserStatusContainer(){
     const {jwt} = useSelector(state=> ({
         jwt : state.user.jwt
     }));
+    const {userNickname} = useSelector(state=> ({
+        userNickname : state.user.userNickname
+    }));
 
     const dispatch = useDispatch();
 
@@ -43,6 +46,7 @@ function UserStatusContainer(){
             onClickGotoSignupPage = {onClickGotoSignupPage}
             onClickLogOut = {onClickLogOut}
             tsetFunction = {tsetFunction}
+            userNickname = {userNickname}
             />
     );
 

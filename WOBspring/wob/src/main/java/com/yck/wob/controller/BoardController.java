@@ -122,7 +122,6 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
         String postName = request.getParameter("postName");
         String postDesc = request.getParameter("postDesc");
         String jwt = request.getParameter("jwt");
-        System.out.println("jwt" + jwt);
         
         // 로그인 체크 
         if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
@@ -212,19 +211,73 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
 
     // ############ /board/{boardNo}/post/{postNo}/sub
     // 댓글리스트 get
-    @RequestMapping(value="/{boardNo}/post/{postNo}/sub", method = RequestMethod.PUT)
-    private PostSubDTO getSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value="/{boardNo}/post/{postNo}/sub", method = RequestMethod.GET)
+    private List<PostSubDTO> getSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         
         response.setStatus(HttpServletResponse.SC_OK);
-        return postService.getPostSub(boardNo, postNo);
-        
+        return postService.getPostSubs(boardNo, postNo);
     }
 
     // 댓글쓰기 post
+    @RequestMapping(value="/{boardNo}/post/{postNo}/sub", method = RequestMethod.POST)
+    private void postSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
+        String postSubDesc = request.getParameter("postSubDesc");
+        String jwt = request.getParameter("jwt");
+
+        // 로그인 유무 권한 확인
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        // 쿠키에서 userNo 추출
+        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
+
+        //작업
+        postService.addPostSub(boardNo, -1, postNo, postSubDesc, userNo);
+        response.setStatus(HttpServletResponse.SC_OK);
+        return;
+    }
 
     // 댓글수정 put
+    @RequestMapping(value="/{boardNo}/post/{postNo}/sub/{postSubNo}", method = RequestMethod.PUT)
+    private void putSubList(@PathVariable int boardNo, @PathVariable int postNo, @PathVariable int postSubNo, HttpServletRequest request, HttpServletResponse response){
+        String postSubDesc = request.getParameter("postSubDesc");
+        String jwt = request.getParameter("jwt");
+
+        // 로그인 유무 권한 확인
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        // 쿠키에서 userNo 추출
+        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
+
+
+        //작업
+        if(postService.modifyPostSub(boardNo, postSubNo, postSubDesc, userNo)) 
+            response.setStatus(HttpServletResponse.SC_OK);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        return;
+    }
 
     // 댓글삭제 delete 
+    @RequestMapping(value="/{boardNo}/post/{postNo}/sub/{postSubNo}", method = RequestMethod.DELETE)
+    private void deleteSubList(@PathVariable int boardNo, @PathVariable int postNo, @PathVariable int postSubNo, HttpServletRequest request, HttpServletResponse response){
+        String jwt = request.getParameter("jwt");
+
+        // 로그인 유무 권한 확인
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        // 쿠키에서 userNo 추출
+        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
+       
+        if(postService.deletePostSub(boardNo, postSubNo, userNo))
+            response.setStatus(HttpServletResponse.SC_OK);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        return;
+    }
 
 
 

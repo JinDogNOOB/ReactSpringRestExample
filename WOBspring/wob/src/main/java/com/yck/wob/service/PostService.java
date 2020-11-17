@@ -82,12 +82,11 @@ public class PostService {
     // ################################ 댓글 #############
 
     // ### 댓글 입력 
-    public boolean addPostSub(int boardNo, int postSubParentNo, int postNo, String postSubName, String postSubDesc, int postSubOwner){
+    public boolean addPostSub(int boardNo, int postSubParentNo, int postNo, String postSubDesc, int postSubOwner){
         PostSubDTO postSub = new PostSubDTO();
         postSub.setBoardNo(boardNo);
         postSub.setPostSubParentNo(postSubParentNo);
         postSub.setPostNo(postNo);
-        postSub.setPostSubName(postSubName);
         postSub.setPostSubDesc(postSubDesc);
         postSub.setPostSubOwner(postSubOwner);
 
@@ -96,23 +95,57 @@ public class PostService {
         return true;
     }
 
-    // ### 댓글 수정
-    public boolean modifyPostSub(int boardNo, int postSubNo, String postSubName, String postSubDesc){
+
+/**
+ * 댓글 수정
+ * @param boardNo 게시판 번호
+ * @param postSubNo 댓글 번호
+ * @param postSubDesc // 댓글 내용
+ * @param postSubOwner // 댓글 주인 id
+ * @return
+ */
+    public boolean modifyPostSub(int boardNo, int postSubNo, String postSubDesc, int postSubOwner){
         PostSubDTO postSub = new PostSubDTO();
         postSub.setBoardNo(boardNo);
         postSub.setPostSubNo(postSubNo);
-        postSub.setPostSubName(postSubName);
         postSub.setPostSubDesc(postSubDesc);
-
-        boardDao.updatePostSub(postSub);
+        postSub.setPostSubOwner(postSubOwner);
+        
+        // 소유자 체크
+        PostSubDTO dbPostSub = boardDao.selectPostSubByNo(postSub);
+        if(dbPostSub.getPostSubOwner() == postSubOwner) boardDao.updatePostSub(postSub);
+        else return false;
         return true;
     }
 
-    // ### 댓글 가져오기 spa 프론트 후에 작업하자
-    public PostSubDTO getPostSub(int boardNo, int postNo){
-        return null;
+    // ### 댓글 여러개 가져오기
+    public List<PostSubDTO> getPostSubs(int boardNo, int postNo){
+        PostSubDTO postSubDTO = new PostSubDTO();
+        postSubDTO.setBoardNo(boardNo);
+        postSubDTO.setPostNo(postNo);
+        return boardDao.selectPostSubs(postSubDTO);
     }
+    
+    /**
+     * 댓글 삭제
+     * @param boardNo 게시판 번호
+     * @param postSubNo 댓글 번호
+     * @param postSubOwner 댓글 주인 id
+     * @return
+     */
+    public boolean deletePostSub(int boardNo, int postSubNo, int postSubOwner){
+        PostSubDTO postSubDTO = new PostSubDTO();
+        postSubDTO.setBoardNo(boardNo);
+        postSubDTO.setPostSubNo(postSubNo);
+        postSubDTO.setPostSubOwner(postSubOwner);
 
+        
+        // 소유자 체크 후 작업
+        PostSubDTO dbPostSub = boardDao.selectPostSubByNo(postSubDTO);
+        if(dbPostSub.getPostSubOwner() == postSubOwner) boardDao.deletePostSub(postSubDTO);
+        else return false;
+        return true;
+    }
 
 
 }
