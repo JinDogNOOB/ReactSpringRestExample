@@ -5,6 +5,7 @@ import java.util.List;
 import com.yck.wob.dto.BoardDTO;
 import com.yck.wob.dto.PostDTO;
 import com.yck.wob.dto.PostSubDTO;
+import com.yck.wob.dto.PostwUserDTO;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,7 @@ public class BoardDaoMybatisImpl implements BoardDao {
    
        // 게시글
        @Override
-       public List<PostDTO> selectPosts(PostDTO postDTO){
+       public List<PostwUserDTO> selectPosts(PostDTO postDTO){
         return sqlSession.selectList(namespace + ".selectPosts", postDTO);
        }
        @Override

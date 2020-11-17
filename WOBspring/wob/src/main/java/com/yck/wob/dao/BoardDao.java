@@ -5,6 +5,7 @@ import java.util.List;
 import com.yck.wob.dto.BoardDTO;
 import com.yck.wob.dto.PostDTO;
 import com.yck.wob.dto.PostSubDTO;
+import com.yck.wob.dto.PostwUserDTO;
 
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +28,7 @@ public interface BoardDao {
     void createSubBoard(BoardDTO boardDTO);
 
     // 게시글
-    List<PostDTO> selectPosts(PostDTO postDTO);
+    List<PostwUserDTO> selectPosts(PostDTO postDTO);
     int countPosts(PostDTO postDTO);
     PostDTO selectPostByNo(PostDTO postDTO);
     int insertPost(PostDTO postDTO);

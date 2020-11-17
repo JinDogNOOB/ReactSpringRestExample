@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.yck.wob.dto.BoardDTO;
 import com.yck.wob.dto.PostDTO;
 import com.yck.wob.dto.PostSubDTO;
+import com.yck.wob.dto.PostwUserDTO;
 import com.yck.wob.service.BoardService;
 import com.yck.wob.service.PostService;
 import com.yck.wob.util.UserAuthUtil;
@@ -108,7 +109,7 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     // ############# /board/{boardNo}/post
     // 게시글 리스트 get
     @RequestMapping(value="/{boardNo}/post", method = RequestMethod.GET)
-    private List<PostDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
+    private List<PostwUserDTO> getPostList(@PathVariable int boardNo, HttpServletRequest request, HttpServletResponse response){
         int index = Integer.parseInt(request.getParameter("index"));
         int listAmount = Integer.parseInt(request.getParameter("listAmount"));
         

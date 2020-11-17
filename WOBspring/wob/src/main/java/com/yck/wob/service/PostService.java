@@ -5,6 +5,7 @@ import java.util.List;
 import com.yck.wob.dao.BoardDao;
 import com.yck.wob.dto.PostDTO;
 import com.yck.wob.dto.PostSubDTO;
+import com.yck.wob.dto.PostwUserDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +61,7 @@ public class PostService {
      * @param listAmount 가져올 개수
      * @return
      */
-    public List<PostDTO> getPostlists(int boardNo, int index, int listAmount){
+    public List<PostwUserDTO> getPostlists(int boardNo, int index, int listAmount){
         PostDTO post = new PostDTO();
         post.setBoardNo(boardNo);
         post.setIndex(index);

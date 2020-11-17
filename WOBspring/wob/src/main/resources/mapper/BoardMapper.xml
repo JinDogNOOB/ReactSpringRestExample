@@ -76,8 +76,12 @@ CREATE TABLE IF NOT EXISTS ${boardNo}_board_sub_tb(
 
 
 
- <select id="selectPosts" resultType="com.yck.wob.dto.PostDTO">
-SELECT * FROM ${boardNo}_board_tb order by postNo desc LIMIT #{start}, #{listAmount}
+ <select id="selectPosts" resultType="com.yck.wob.dto.PostwUserDTO">
+SELECT * 
+FROM ${boardNo}_board_tb AS p
+LEFT JOIN user_tb AS u
+ON u.userNo = p.postOwner
+order by postNo desc LIMIT #{start}, #{listAmount}
  </select>
 
 <select id="countPosts" resultType="int">
