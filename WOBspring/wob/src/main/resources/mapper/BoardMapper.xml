@@ -88,8 +88,13 @@ order by postNo desc LIMIT #{start}, #{listAmount}
 select count(*) from ${boardNo}_board_tb
 </select>
 
-<select id="selectPostByNo" parameterType="com.yck.wob.dto.PostDTO" resultType="com.yck.wob.dto.PostDTO">
-select * from ${boardNo}_board_tb where postNo=#{postNo}
+<select id="selectPostByNo" parameterType="com.yck.wob.dto.PostDTO" resultType="com.yck.wob.dto.PostwUserDTO">
+select * 
+from ${boardNo}_board_tb AS p
+LEFT JOIN user_tb AS u
+ON u.userNo = p.postOwner
+where postNo=#{postNo}
+
 </select>
 
 <insert id="insertPost" parameterType="com.yck.wob.dto.PostDTO">
@@ -109,16 +114,24 @@ delete from ${boardNo}_board_tb where postNo=#{postNo}
 
 
 
- <select id="selectPostSubs" resultType="com.yck.wob.dto.PostSubDTO">
-SELECT * FROM ${boardNo}_board_sub_tb where postNo=#{postNo}
+ <select id="selectPostSubs" resultType="com.yck.wob.dto.PostSubwUserDTO">
+SELECT * 
+FROM ${boardNo}_board_sub_tb AS p
+LEFT JOIN user_tb AS u
+ON u.userNo = p.postSubOwner
+where postNo=#{postNo}
  </select>
 
 <select id="countPostSubs" resultType="int">
 select count(*) from ${boardNo}_board_sub_tb where postNo=#{postNo}
 </select>
 
-<select id="selectPostSubByNo" parameterType="com.yck.wob.dto.PostSubDTO" resultType="com.yck.wob.dto.PostSubDTO">
-select * from ${boardNo}_board_sub_tb where postSubNo=#{postSubNo}
+<select id="selectPostSubByNo" parameterType="com.yck.wob.dto.PostSubDTO" resultType="com.yck.wob.dto.PostSubwUserDTO">
+select * 
+from ${boardNo}_board_sub_tb AS p
+LEFT JOIN user_tb AS u
+ON u.userNo = p.postSubOwner
+where postSubNo=#{postSubNo}
 </select>
 
 <insert id="insertPostSub" parameterType="com.yck.wob.dto.PostSubDTO">

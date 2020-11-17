@@ -5,6 +5,7 @@ import java.util.List;
 import com.yck.wob.dto.BoardDTO;
 import com.yck.wob.dto.PostDTO;
 import com.yck.wob.dto.PostSubDTO;
+import com.yck.wob.dto.PostSubwUserDTO;
 import com.yck.wob.dto.PostwUserDTO;
 
 import org.apache.ibatis.session.SqlSession;
@@ -85,7 +86,7 @@ public class BoardDaoMybatisImpl implements BoardDao {
         return sqlSession.selectOne(namespace + ".countPosts",postDTO);
        }
        @Override
-       public PostDTO selectPostByNo(PostDTO postDTO){
+       public PostwUserDTO selectPostByNo(PostDTO postDTO){
         return sqlSession.selectOne(namespace + ".selectPostByNo",postDTO);
        }
        @Override
@@ -103,7 +104,7 @@ public class BoardDaoMybatisImpl implements BoardDao {
    
        // 게시글 댓글
        @Override
-       public List<PostSubDTO> selectPostSubs(PostSubDTO postSubDTO){
+       public List<PostSubwUserDTO> selectPostSubs(PostSubDTO postSubDTO){
         return sqlSession.selectList(namespace + ".selectPostSubs", postSubDTO);
        }
        @Override
@@ -111,7 +112,7 @@ public class BoardDaoMybatisImpl implements BoardDao {
         return sqlSession.selectOne(namespace + ".countPostSubs", postSubDTO);
        }
        @Override
-       public PostSubDTO selectPostSubByNo(PostSubDTO postSubDTO){
+       public PostSubwUserDTO selectPostSubByNo(PostSubDTO postSubDTO){
         return sqlSession.selectOne(namespace + ".selectPostSubByNo", postSubDTO);
        }
        @Override

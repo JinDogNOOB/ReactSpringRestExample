@@ -5,6 +5,7 @@ import java.util.List;
 import com.yck.wob.dto.BoardDTO;
 import com.yck.wob.dto.PostDTO;
 import com.yck.wob.dto.PostSubDTO;
+import com.yck.wob.dto.PostSubwUserDTO;
 import com.yck.wob.dto.PostwUserDTO;
 
 import org.springframework.stereotype.Repository;
@@ -30,15 +31,15 @@ public interface BoardDao {
     // 게시글
     List<PostwUserDTO> selectPosts(PostDTO postDTO);
     int countPosts(PostDTO postDTO);
-    PostDTO selectPostByNo(PostDTO postDTO);
+    PostwUserDTO selectPostByNo(PostDTO postDTO);
     int insertPost(PostDTO postDTO);
     int updatePost(PostDTO postDTO);
     void deletePost(PostDTO postDTO);
 
     // 게시글 댓글
-    List<PostSubDTO> selectPostSubs(PostSubDTO postSubDTO);
+    List<PostSubwUserDTO> selectPostSubs(PostSubDTO postSubDTO);
     int countPostSubs(PostSubDTO postSubDTO);
-    PostSubDTO selectPostSubByNo(PostSubDTO postSubDTO);
+    PostSubwUserDTO selectPostSubByNo(PostSubDTO postSubDTO);
     int insertPostSub(PostSubDTO postSubDTO);
     int updatePostSub(PostSubDTO postSubDTO);
     void deletePostSub(PostSubDTO postSubDTO);

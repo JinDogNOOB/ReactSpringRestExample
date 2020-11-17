@@ -5,6 +5,7 @@ import java.util.List;
 import com.yck.wob.dao.BoardDao;
 import com.yck.wob.dto.PostDTO;
 import com.yck.wob.dto.PostSubDTO;
+import com.yck.wob.dto.PostSubwUserDTO;
 import com.yck.wob.dto.PostwUserDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,7 @@ public class PostService {
         return boardDao.selectPosts(post);
     }
     // ### 게시글 하나 보기
-    public PostDTO getPost(int boardNo, int postNo){
+    public PostwUserDTO getPost(int boardNo, int postNo){
         PostDTO post = new PostDTO();
         post.setBoardNo(boardNo);
         post.setPostNo(postNo);
@@ -120,7 +121,7 @@ public class PostService {
     }
 
     // ### 댓글 여러개 가져오기
-    public List<PostSubDTO> getPostSubs(int boardNo, int postNo){
+    public List<PostSubwUserDTO> getPostSubs(int boardNo, int postNo){
         PostSubDTO postSubDTO = new PostSubDTO();
         postSubDTO.setBoardNo(boardNo);
         postSubDTO.setPostNo(postNo);

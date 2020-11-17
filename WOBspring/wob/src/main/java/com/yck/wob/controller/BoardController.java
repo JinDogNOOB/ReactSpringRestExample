@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.yck.wob.dto.BoardDTO;
 import com.yck.wob.dto.PostDTO;
 import com.yck.wob.dto.PostSubDTO;
+import com.yck.wob.dto.PostSubwUserDTO;
 import com.yck.wob.dto.PostwUserDTO;
 import com.yck.wob.service.BoardService;
 import com.yck.wob.service.PostService;
@@ -145,7 +146,7 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     // ############ /board/{boardNo}/post/{postNo}
     // 게시글보기 get
     @RequestMapping(value="/{boardNo}/post/{postNo}", method = RequestMethod.GET)
-    private PostDTO getPostDetail(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
+    private PostwUserDTO getPostDetail(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_OK);
         return postService.getPost(boardNo, postNo);
     }
@@ -213,7 +214,7 @@ private Map<String, Object> postTest(@PathVariable int n, HttpServletRequest req
     // ############ /board/{boardNo}/post/{postNo}/sub
     // 댓글리스트 get
     @RequestMapping(value="/{boardNo}/post/{postNo}/sub", method = RequestMethod.GET)
-    private List<PostSubDTO> getSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
+    private List<PostSubwUserDTO> getSubList(@PathVariable int boardNo, @PathVariable int postNo, HttpServletRequest request, HttpServletResponse response){
         
         response.setStatus(HttpServletResponse.SC_OK);
         return postService.getPostSubs(boardNo, postNo);
