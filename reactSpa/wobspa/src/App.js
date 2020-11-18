@@ -5,7 +5,7 @@ import {
   PostDetailPage,
   UserPage,
   BoardPage,
-  UserMyInfoPage,
+  MyInfoPage,
   SpecificBoardPage,
   AdminPage,
   PostWritingFormPage,
@@ -32,7 +32,7 @@ function App() {
       <Route exact path="/user/signup" component={SignupPage} />
       <Route exact path="/user/signin" component={SigninPage} /> 
 
-      <Route exact path="/user/myinfo" component={UserMyInfoPage} />
+      <Route exact path="/user/myinfo" component={MyInfoPage} />
 
       <Route exact path="/board" component={BoardPage} />
       <Route exact path="/board/:boardNo" component={SpecificBoardPage} />

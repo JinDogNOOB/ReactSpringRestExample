@@ -13,6 +13,7 @@ function SignIn({
 
     return (
         <div>
+            <div>
             <div>아이디</div>
             <input type="text" value={userEmail} onChange={onSetUserEmail} />
             
@@ -22,6 +23,7 @@ function SignIn({
             <div>
                 <input type="button" onClick={() => {requestLogin();}} value="확인" />
                 <input type="button" onClick={() => {onClickGotoMainPage();}} value="취소" />
+            </div>
             </div>
         </div>
     );

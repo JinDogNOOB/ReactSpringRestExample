@@ -16,7 +16,7 @@ function MainPage(){
     console.log("main rerender");
         return(
             <div className="full_content">
-      
+                
             </div>
         );
     

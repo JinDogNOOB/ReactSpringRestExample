@@ -117,7 +117,16 @@ public class UserController {
     // 내 정보보기
     @RequestMapping(value="/myinfo", method = RequestMethod.GET)
     private UserDTO getMyUserInfo(HttpServletRequest request, HttpServletResponse response){
-        int userNo = Integer.parseInt(request.getParameter("userNo"));
+        
+        String jwt = request.getParameter("jwt");
+        // 로그인 유무 권한 확인
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return null;
+        }
+        // 쿠키에서 userNo 추출
+        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
+
 
         response.setStatus(HttpServletResponse.SC_OK);
         UserDTO user = userService.getUserInfo(userNo);
@@ -128,13 +137,21 @@ public class UserController {
     // 내 정보수정
     @RequestMapping(value="/myinfo", method = RequestMethod.PUT)
     private void modifyMyUserInfo(HttpServletRequest request, HttpServletResponse response){
-        int userNo = Integer.parseInt(request.getParameter("userNo"));
+        
         String newNickname = request.getParameter("newNickname");
         String currentPassword = request.getParameter("currentPassword");
         String newPassword = currentPassword;
 
+        String jwt = request.getParameter("jwt");
+        // 로그인 유무 권한 확인
+        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        // 쿠키에서 userNo 추출
+        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
 
-        if(request.getParameter("newPassword") == null || (request.getParameter("newPassword")).contentEquals("") == false){
+        if(request.getParameter("newPassword") != null || (request.getParameter("newPassword")).contentEquals("") == false){
             newPassword = request.getParameter("newPassword");
         }
         // 현재 패스워드 맞는지 검증

@@ -25,8 +25,8 @@ function UserStatus({
         return(
             <div className="UserStatus">
                 {/*  로그인이 안되있을 시  */}
-                <button onClick={() => {onClickGotoSigninPage()}}>로그인</button>
-                <button onClick={() => {onClickGotoSignupPage()}}>회원가입</button>
+                <input type="button" className="ck_button" value="로그인" onClick={() => {onClickGotoSigninPage()}} />
+                <input type="button" className="ck_button" value="회원가입" onClick={() => {onClickGotoSignupPage()}} />
             </div>
         )
     }else{
@@ -34,8 +34,8 @@ function UserStatus({
             <div className="UserStatus">
                 <div className="UserStatusDiv">
                 안녕하세요! {userNickname}님
-                    <input type="button" value="로그아웃" onClick={()=>{onClickLogOut()}}/>
-                    <input type="button" value="jwt체크" onClick={() => {tsetFunction()}} />
+                    <input type="button" className="ck_button" value="로그아웃" onClick={()=>{onClickLogOut()}}/>
+                    <input type="button" className="ck_button" value="jwt체크" onClick={() => {tsetFunction()}} />
                 </div>
             </div>
         );

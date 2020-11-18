@@ -23,11 +23,11 @@ function BoardItem({datas}){
     return (
       <div className="dropdown_container">
           <div className="dropdown_header">
-              드롭다운헤더
+            <img src={process.env.PUBLIC_URL + '/logo512.png'} />
           </div>
           {datas.map((data, index) => (
                 <div key={index}>
-                    <Link to={'/board/' + data.boardNo}>{data.boardName}</Link>
+                    <Link to={'/board/' + data.boardNo}>{data.boardName}게시판</Link>
                 </div>
               ))}
 

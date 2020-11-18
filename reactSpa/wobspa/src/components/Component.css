@@ -136,13 +136,17 @@ Component
 }
 
 
+.dropdown_header img{
+    width: 200px;
+}
+
+
 
 /*
 UserStatus
 */
 .UserStatus{
     /* background-color: purple; */
-    background-color: white;
     margin-right: 10px;
 }
 
@@ -200,6 +204,9 @@ div{    border-style: solid;
     background-color: aqua;
 }
 
-.post_search_bar{
 
+/* 로그인폼 */
+
+.signin {
+    
 }

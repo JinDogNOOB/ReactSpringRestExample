@@ -247,8 +247,6 @@ label{
 /*######################################################### */
 
 .grid_container{
-    background-color: bisque;
-
     /* 중앙 정렬 */
     margin: 0 auto;
     width: 1200px;
@@ -277,7 +275,6 @@ label{
 
 
 .grid_container > div {
-    background-color: pink;
 
     border-style: solid;
     border-color: black;
@@ -290,13 +287,13 @@ label{
 
     display: flex;
     justify-content: space-between;
+    background-color: coral;
 
 }
 
 .grid_container > .nav{
     grid-column: 1/4;
     grid-row: 2/3;
-    
 
 }
 
@@ -333,6 +330,31 @@ label{
     align-self: center;
     margin: 0px 80px;
 }
+.logo_area img{
+    height: 150px;
+}
+
+.head > .title_area{
+    align-self: center;
+    margin: 0px 80px;
+    font-size: xx-large;
+}
+
+
 .head > .user_area{
     align-self: flex-start;
+}
+
+
+
+
+
+
+
+
+
+/* 공통 */
+.ck_button{
+    padding: 2px 20px;
+    background-color: blanchedalmond;
 }
