@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import axiosOptions from '../tool/axiosOptions';
+import useHistoryState from '../tool/useHistoryState';
 import SpecificBoard from '../components/SpecificBoard';
 
 import {setLoginStatus, setJwt} from '../modules/user';
@@ -39,6 +40,7 @@ function SpecificBoardContainer({boardNo}){
 (((index-1) / 10)+1) * 10 - 1= 오른쪽끝
     */
     const [postList, setPostList] = useState([]);
+    // const [index, setIndex] = useHistoryState(1, "index");
     const [index, setIndex] = useState(1);
     const [indexList, setIndexList] = useState([]);
     const [listAmount, setListAmount] = useState(30);

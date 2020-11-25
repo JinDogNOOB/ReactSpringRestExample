@@ -12,18 +12,18 @@ function SignIn({
 }){
 
     return (
-        <div>
-            <div>
-            <div>아이디</div>
-            <input type="text" value={userEmail} onChange={onSetUserEmail} />
+        <div className="signin_out">
+            <div className="signin_in">
+                <div>아이디</div>
+                <input type="text" value={userEmail} onChange={onSetUserEmail} />
             
-            <div>패스워드</div>
-            <input type="text" value={userPassword} onChange={onSetUserPassword} />
+                <div>패스워드</div>
+                <input type="text" value={userPassword} onChange={onSetUserPassword} />
 
-            <div>
-                <input type="button" onClick={() => {requestLogin();}} value="확인" />
-                <input type="button" onClick={() => {onClickGotoMainPage();}} value="취소" />
-            </div>
+                <div>
+                    <input type="button" className="ck_button" onClick={() => {requestLogin();}} value="확인" />
+                    <input type="button" className="ck_button" onClick={() => {onClickGotoMainPage();}} value="취소" />
+                </div>
             </div>
         </div>
     );
