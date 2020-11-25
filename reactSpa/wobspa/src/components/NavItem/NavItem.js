@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import '../Component.css';
+import './NavItemStyle.css';
 
 function NavItem({boardList}){
 
@@ -25,11 +25,14 @@ function BoardItem({datas}){
           <div className="dropdown_header">
             <img src={process.env.PUBLIC_URL + '/logo512.png'} />
           </div>
+          <div className="board_parent">
           {datas.map((data, index) => (
                 <div key={index}>
-                    <Link to={'/board/' + data.boardNo}>{data.boardName}게시판</Link>
+                    <Link to={'/board/' + data.boardNo}>{data.boardName} 게시판</Link>
                 </div>
               ))}
+          </div>
+          
 
       </div>
     );
