@@ -1,12 +1,12 @@
 import React from 'react';
-import MyInfo from '../components/MyInfo';
+import MyInfo from './MyInfo';
 
 import {useSelector, useDispatch} from 'react-redux';
 
 import axios from 'axios';
-import axiosOptions from '../tool/axiosOptions';
+import axiosOptions from '../../tool/axiosOptions';
 
-import {setLoginStatus, setJwt} from '../modules/user';
+import {setLoginStatus, setJwt} from '../../modules/user';
 import {useHistory} from 'react-router-dom';
 
 

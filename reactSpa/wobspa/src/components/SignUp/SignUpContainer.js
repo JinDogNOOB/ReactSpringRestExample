@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import axiosOptions from '../tool/axiosOptions';
-import SpecificBoard from '../components/SpecificBoard';
+import axiosOptions from '../../tool/axiosOptions';
 
-import {setLoginStatus, setJwt} from '../modules/user';
+import {setLoginStatus, setJwt} from '../../modules/user';
 import {useSelector, useDispatch} from 'react-redux';
-import SignUp from '../components/SignUp';
+import SignUp from './SignUp';
 
 
 function SignUpContainer(){

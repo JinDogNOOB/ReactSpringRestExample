@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import axiosOptions from '../tool/axiosOptions';
-import jwtTool from '../tool/jwtTool';
+import axiosOptions from '../../tool/axiosOptions';
+import jwtTool from '../../tool/jwtTool';
 
-import {setLoginStatus, setJwt, setUserNo, setUserNickname, setUserStatus} from '../modules/user';
+import {setLoginStatus, setJwt, setUserNo, setUserNickname, setUserStatus} from '../../modules/user';
 import {useSelector, useDispatch} from 'react-redux';
-import SignIn from '../components/SignIn';
+import SignIn from './SignIn';
 
 
 // 매뉴얼한 페이지이동을 위해애애

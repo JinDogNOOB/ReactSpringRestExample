@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PostDetailContainer from '../containers/PostDetailContainer';
+import PostDetailContainer from '../components/PostDetail/PostDetailContainer';
 
 function PostDetailPage({match}){
     return(

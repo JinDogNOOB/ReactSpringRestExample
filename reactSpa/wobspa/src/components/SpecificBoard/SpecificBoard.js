@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
-import './Component.css';
+import '../Component.css';
 
 function SpecificBoard({
     boardNo,

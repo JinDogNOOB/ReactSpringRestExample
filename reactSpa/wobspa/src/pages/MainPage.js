@@ -1,8 +1,5 @@
 import React from 'react';
 
-import UserStatusContainer from '../containers/UserStatusContainer';
-import NavItemContainer from '../containers/NavItemContainer';
-import TestContainer from '../containers/TestContainer';
 import './Page.css';
 /*
 헤더 : 로고, 전광판

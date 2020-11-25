@@ -1,5 +1,5 @@
 import React from 'react';
-import NavItemContainer from '../containers/NavItemContainer';
+import NavItemContainer from '../components/NavItem/NavItemContainer';
 
 function Navigation(){
     return(

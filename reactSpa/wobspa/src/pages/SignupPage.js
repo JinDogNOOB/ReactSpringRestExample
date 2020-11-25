@@ -1,5 +1,5 @@
 import React from 'react';
-import SignUpContainer from '../containers/SignUpContainer';
+import SignUpContainer from '../components/SignUp/SignUpContainer';
 
 function SignupPage(){
     return(

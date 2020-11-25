@@ -1,5 +1,5 @@
 import React from 'react';
-import SignInContainer from '../containers/SignInContainer';
+import SignInContainer from '../components/SignIn/SignInContainer';
 
 function SigninPage(){
     return(

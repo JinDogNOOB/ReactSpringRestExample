@@ -1,5 +1,5 @@
 import React from 'react';
-import MyInfoContainer from '../containers/MyInfoContainer';
+import MyInfoContainer from '../components/MyInfo/MyInfoContainer';
 
 function MyInfoPage(){
     return(

@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
-import axiosOptions from '../tool/axiosOptions';
+import axiosOptions from '../../tool/axiosOptions';
 
-import {setLoginStatus, setJwt} from '../modules/user';
+import {setLoginStatus, setJwt} from '../../modules/user';
 
 import {useHistory} from 'react-router-dom';
 
 // import WritingForm from '../components/WritingForm';
-import PostForm from '../components/PostForm';
+import PostForm from './PostForm';
 
 
 function WritingPostContainer({boardNo}){

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import axiosOptions from '../tool/axiosOptions';
+import axiosOptions from '../../tool/axiosOptions';
 
-import NavItem from '../components/NavItem';
+import NavItem from './NavItem';
 // https://maxrozen.com/learn-useeffect-dependency-array-react-hooks/ 
 // useEffect infinite loop when fetch the data 
 function NavItemContainer(){

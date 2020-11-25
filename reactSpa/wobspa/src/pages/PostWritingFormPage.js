@@ -1,9 +1,7 @@
 import React from 'react';
 
-import UserStatusContainer from '../containers/UserStatusContainer';
-import NavItemContainer from '../containers/NavItemContainer';
-import TestContainer from '../containers/TestContainer';
-import WritingPostContainer from '../containers/WritingPostContainer';
+
+import WritingPostContainer from '../components/PostForm/WritingPostContainer';
 import './Page.css';
 
 

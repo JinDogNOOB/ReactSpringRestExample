@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
-import axiosOptions from '../tool/axiosOptions';
+import axiosOptions from '../../tool/axiosOptions';
 
-import {setLoginStatus, setJwt} from '../modules/user';
+import {setLoginStatus, setJwt} from '../../modules/user';
 import {useHistory} from 'react-router-dom';
 // 요거 작성이랑 수정 둘다 PostForm.js 이용하게 바꿔라
-import PostForm from '../components/PostDetail';
+import PostForm from './PostDetail';
 
 function PostDetailContainer({boardNo, postNo}){
     const history = useHistory();

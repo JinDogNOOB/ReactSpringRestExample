@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import './Component.css';
+import '../Component.css';
 
 function NavItem({boardList}){
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ModifyingPostContainer from '../containers/ModifyingPostContainer';
+import ModifyingPostContainer from '../components/PostForm/ModifyingPostContainer';
 
 function PostModifyingFormPage({match}){
     return(

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
-import axiosOptions from '../tool/axiosOptions';
+import axiosOptions from '../../tool/axiosOptions';
 
-import {setLoginStatus, setJwt} from '../modules/user';
-import UserStatus from '../components/UserStatus';
+import {setLoginStatus, setJwt} from '../../modules/user';
+import UserStatus from './UserStatus';
 
 import {useHistory} from 'react-router-dom';
 

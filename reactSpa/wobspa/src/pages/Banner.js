@@ -1,5 +1,5 @@
 import React from 'react';
-import UserStatusContainer from '../containers/UserStatusContainer';
+import UserStatusContainer from '../components/UserStatus/UserStatusContainer';
 
 function Banner(){
     return(

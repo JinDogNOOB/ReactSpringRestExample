@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import axiosOptions from '../tool/axiosOptions';
+import axiosOptions from '../../tool/axiosOptions';
 
-import AdminFunction, {USER, BOARD, REQUESTEDBOARD} from '../components/AdminFunction';
+import AdminFunction, {USER, BOARD, REQUESTEDBOARD} from './AdminFunction';
 
 
 function AdminFunctionContainer(){
