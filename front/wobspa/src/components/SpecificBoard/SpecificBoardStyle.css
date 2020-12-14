@@ -1,0 +1,56 @@
+
+
+/*
+SpecificBoard
+*/
+
+div{    border-style: solid;
+    border-color: black;
+    border-width: 1px;}
+
+.specific_board{
+
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.specific_board > .title{
+    padding: 20px;
+}
+
+.post_list{
+    margin-top: 10px;
+    min-height: 100px;
+}
+
+.post_list tr{
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+.post_list td{
+    width: 10%;
+}
+
+.post_list > tbody tr td{
+    padding : 5px;
+}
+
+.post_list_index{
+    margin: 0px 150px;
+    display:flex;
+    justify-content: space-between;
+}
+
+.post_list_index li{
+    padding: 10px;
+    background-color: aqua;
+}
+
+

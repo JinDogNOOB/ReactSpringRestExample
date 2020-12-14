@@ -1,0 +1,87 @@
+
+
+/*
+Component
+*/
+
+/* absolute 의 영향을 나게 할려면 부모가 relative realative 를 어디다 설정을 하느냐가 관건이다  */
+
+/* 드롭박스 참고 https://rgy0409.tistory.com/2963 */
+
+.menu_container{
+
+    
+    
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    position: relative; 
+
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-style: italic;
+    
+}
+.menu_container > li{
+    width: 20%;
+    height: 100%;
+    display: flex;
+}
+.menu_container > li > p{
+    width : 100%;
+    padding-top: 20%;
+    text-align: center;
+    
+}
+
+.menu_container > li:hover{
+    background-color: aqua;
+}
+
+
+
+
+.menu_container > li:hover > .dropdown_container{
+
+    display: flex;
+    justify-content: left;
+}
+
+.menu_container .dropdown_container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    display: none;
+    color: black;
+}
+
+.dropdown_container > .dropdown_header{
+    grid-column: 1/4;
+    grid-row: 1/6;
+}
+
+
+.board_parent{
+    display: flex;
+    padding: 5px 20px;
+    width:100%;
+    height: 100%;
+}
+
+.board_parent > div{
+    padding: 5px 20px;
+    margin: 1px 5px;
+    
+}
+
+
+.dropdown_header img{
+    width: 200px;
+}
+
+
+
