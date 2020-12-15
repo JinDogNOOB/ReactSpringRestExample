@@ -9,7 +9,7 @@ div{    border-style: solid;
     border-width: 1px;}
 
 .specific_board{
-
+    background-color: rgb(243, 243, 243);
     width: 100%;
     height: auto;
 
@@ -19,38 +19,63 @@ div{    border-style: solid;
 }
 
 
-.specific_board > .title{
+.title{
+    background-color: white;
     padding: 20px;
+    margin: 10px 5px;
+}
+.title > .board_name{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.title > .board_desc{
+    margin: 2px 20px;
+    font-size: 1.1rem;
+}
+.title > .amount_changer{
+    margin-left: 90%;
+}
+
+
+
+.post{
+    background-color: white;
+    margin: 10px 5px;
+    min-height: 600px;
 }
 
 .post_list{
-    margin-top: 10px;
-    min-height: 100px;
+    padding : 5px;
+    min-height: 550px;
 }
 
-.post_list tr{
-    margin-bottom: 10px;
-    padding: 10px;
+.post_list thead{
     width: 100%;
 }
 
 .post_list td{
-    width: 10%;
 }
 
 .post_list > tbody tr td{
     padding : 5px;
 }
 
+
+/* 페이징 툴 스타일 */
+
 .post_list_index{
     margin: 0px 150px;
     display:flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .post_list_index li{
-    padding: 10px;
-    background-color: aqua;
+    border-style: solid;
+    border-color: rgb(117, 117, 117);
+    border-width: 1px;
+    padding: 10px 15px;
+    background-color:rgb(240, 240, 240);
+    cursor: pointer;
 }
 
 

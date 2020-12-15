@@ -1,0 +1,12 @@
+.post_detail{
+    margin: 5px 5px;
+}
+
+.post_title{
+    margin: 5px 5px;
+}
+
+.post_content{
+    margin: 5px 5px;
+    min-height: 400px;
+}

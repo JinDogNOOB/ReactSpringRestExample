@@ -5,8 +5,42 @@ UserStatus
 */
 .UserStatus{
     /* background-color: purple; */
-    right: 0px;
-    top: 0px;
+    display: flex;
+    align-items: center;
+    margin: 0px 10px
+}
+
+/*
+참고 https://nimolove.tistory.com/44 > Chaeni_vlog
+
+cursor는 마우스 올라갔을때 가리키는 커서로 변하게끔
+*/
+.UserStatus input.sButton{
+    background-color: #f8585b;
+    border: none;
+    color:#fff;
+    
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    padding: 10px 15px;
+    margin: 0px 3px;
+    cursor: pointer;
+
+    border-radius:10px;
+}
+
+.UserStatus input.signupButton{
+}
+
+.UserStatus input.signinButton{
+    background-color: #ffffff;
+    color:#000;
+
 }
 
 

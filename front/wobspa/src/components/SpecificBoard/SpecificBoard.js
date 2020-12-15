@@ -19,10 +19,11 @@ function SpecificBoard({
     return(
         <div className="specific_board">
             <div className="title">
-                {boardName} 게시판 설명 {boardDesc} , 
-                {listAmount}개씩 출력
-                <select onChange={onChangeListAmount}>
-                    <option value={listAmount} >선택</option>
+                <p className="board_name">Welcome to {boardName} board!</p>
+                <p className="board_desc">{boardDesc}</p>
+                
+                <select className="amount_changer"onChange={onChangeListAmount}>
+                    <option value={listAmount}> current {listAmount}</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
                     <option value="50">50</option>
@@ -30,16 +31,17 @@ function SpecificBoard({
                 </select>
             </div>
 
-            <div className="post_list">
+
+            <div className="post">
                 <PostList
                     postList = {postList}
                     gotoPostDetailPage = {gotoPostDetailPage}
                 />
                 <div>
-                    <Link to={'/board/'+boardNo+"/post/addform"}>글쓰기</Link>
+                    <Link to={'/board/'+boardNo+"/post/addform"}>Write</Link>
                 </div>
-
             </div>
+
 
             <div className="index">
                 <Index 
@@ -49,7 +51,7 @@ function SpecificBoard({
             </div>
 
             <div className="search_bar">
-                검색창
+                Search
 
             </div>
         </div>
@@ -61,14 +63,22 @@ function SpecificBoard({
 function PostList({postList, gotoPostDetailPage}){
     return (
         <table className="post_list">
+            <colgroup>
+                <col width="1%" />
+                <col width="20%" />
+                <col width="5%" />
+                <col width="5%" />
+                <col width="2%" />
+                <col width="1%" />
+            </colgroup>
             <thead>
                 <tr>
-                    <th>글번호</th>
-                    <th>제목</th>
-                    <th>글쓴이</th>
-                    <th>작성일</th>
-                    <th>조회수</th>
-                    <th>추천</th>
+                    <th>No</th>
+                    <th></th>
+                    <th>Writer</th>
+                    <th>Date</th>
+                    <th>View</th>
+                    <th>Star</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,9 +87,9 @@ function PostList({postList, gotoPostDetailPage}){
                     <td>{val.postNo}</td>
                     <td>{val.postName}</td>
                     <td>{val.postOwner}</td>
-                    <td>미정</td>
-                    <td>미정</td>
-                    <td>미정</td>
+                    <td>not</td>
+                    <td>not</td>
+                    <td>not</td>
                 </tr>
             ))}
             </tbody>
@@ -101,15 +111,15 @@ function Index({
 
     return(
         <ul className="post_list_index">
-            <li>처음</li>
-            <li>이전</li>
+            <li>Begin</li>
+            <li>Prev</li>
             {
                 indexArray.map((val, i) => (
                     <li key={i} onClick={()=>{onSetIndex(val)}}>{val}</li>
                 ))
             }
-            <li>다음</li>
-            <li>끝</li>
+            <li>Next</li>
+            <li>End</li>
         </ul>
     );
 }

@@ -25,8 +25,8 @@ function UserStatus({
         return(
             <div className="UserStatus">
                 {/*  로그인이 안되있을 시  */}
-                <input type="button" className="ck_button" value="로그인" onClick={() => {onClickGotoSigninPage()}} />
-                <input type="button" className="ck_button" value="회원가입" onClick={() => {onClickGotoSignupPage()}} />
+                <input type="button" className="sButton signinButton" value="SignIn" onClick={() => {onClickGotoSigninPage()}} />
+                <input type="button" className="sButton" value="SignUp" onClick={() => {onClickGotoSignupPage()}} />
             </div>
         )
     }else{

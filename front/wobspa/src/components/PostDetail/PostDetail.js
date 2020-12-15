@@ -17,11 +17,10 @@ function PostDetail({
 
 
     return (
-        <div>
-            <div>글제목</div>
-            <div>{postName}</div>
-            <div>글내용</div>
-            <div>{postDesc}</div>
+        <div className="post_detail">
+            <div className="post_title">{postName}</div>
+            <div className="post_content">{postDesc}</div>
+
             <div>
                 <input type="button" value="수정" onClick={() => {onClickModify()}}/>
                 <input type="button" value="취소" onClick={() => {onClickCancel()}} />

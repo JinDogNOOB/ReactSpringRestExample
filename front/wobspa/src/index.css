@@ -255,7 +255,6 @@ label{
 
 
 div {
-
     border-style: solid;
     border-color: black;
     border-width: 1px;
@@ -266,19 +265,23 @@ div {
 .top_user{
     
     margin: 0 auto;
-    width: 1200px;
+    width: 100%;
 
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
     
-    height: 26px;
+    height: 56px;
+}
+.top_user > img.small_logo{
+    margin: 0px 20px;
 }
 
-/* 로고랑 네비 */
+
+/*  네비 */
 .logo_nav{
     margin: 0 auto;
     display: flex;
-    width: 1200px;
+    width: 100%;
 }
 .logo_nav > .logo_area{
 }
@@ -291,6 +294,10 @@ div {
 
 .blank_line{
     height: 52px;
+}
+
+img.small_logo{
+    height: 100%;
 }
 
 

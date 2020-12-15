@@ -5,9 +5,9 @@ function BLogoNNav(){
     return(
         <div className="logo_nav">
 
-            <div className="logo_area">
+{/*             <div className="logo_area">
                 <img src={process.env.PUBLIC_URL + '/logo512.png'} />
-            </div>
+            </div> */}
 
             <div className="nav_area">
                 <NavItemContainer />
