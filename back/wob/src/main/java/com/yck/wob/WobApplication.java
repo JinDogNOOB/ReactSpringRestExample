@@ -20,7 +20,7 @@ public class WobApplication{
 	}
 
 
-	// SqlSessionFactory 빈 
+	// SqlSessionFactory 빈 for mybatis
 	@Bean
 	public SqlSessionFactory SqlSessionFactory(DataSource dataSource)throws Exception{
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
