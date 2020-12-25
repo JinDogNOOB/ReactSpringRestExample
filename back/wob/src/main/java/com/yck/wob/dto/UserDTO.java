@@ -10,5 +10,5 @@ public class UserDTO {
     private String userPassword;
     private String userEmail;
     private String userNickname;
-    private int userStatus;
+    private UserRoleType userStatus;
 }

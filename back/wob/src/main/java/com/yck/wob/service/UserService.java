@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yck.wob.dao.UserDao;
 import com.yck.wob.dto.UserDTO;
+import com.yck.wob.dto.UserRoleType;
 import com.yck.wob.util.PasswordHash;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ public class UserService{
             return false;
         }
 
-        // 회원가입 진행
-        user.setUserStatus(20);
+        // 회원가입 진행 테스트용으로 무조건 어드민으로 
+        user.setUserStatus(UserRoleType.ROLE_ADMIN);
         userDao.insertUser(user);
 
         return true;
