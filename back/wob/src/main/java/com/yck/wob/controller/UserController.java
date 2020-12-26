@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 import com.yck.wob.dao.UserDao;
 import com.yck.wob.dao.UserDaoMybatisImpl;
 import com.yck.wob.dto.UserDTO;
+import com.yck.wob.dto.UserRoleType;
 import com.yck.wob.service.PostService;
 import com.yck.wob.service.UserService;
 import com.yck.wob.util.UserAuthUtil;
@@ -24,9 +25,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
 // @CrossOrigin("*")
 @RestController
 @RequestMapping(value="/user")
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -74,6 +78,10 @@ public class UserController {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return null;
         }
+        log.info("로그인계정권한 .name()" + user.getUserStatus().name());
+        log.info("로그인계정권한 .getCode()" + user.getUserStatus().getCode());
+        log.info("로그인계정권한 .toString()" + user.getUserStatus().toString());
+        log.info("로그인계정권한 .compareto(ROLE_ADMIN)" + user.getUserStatus().compareTo(UserRoleType.ROLE_ADMIN)); // -작다 0이면 같다 + 크다 strcmp랑 동일
 
         String jws = UserAuthUtil.getJwtContainsUserInfo(user, UserAuthUtil.EXPIRETIME_ONEDAY);
         response.setStatus(HttpServletResponse.SC_OK);

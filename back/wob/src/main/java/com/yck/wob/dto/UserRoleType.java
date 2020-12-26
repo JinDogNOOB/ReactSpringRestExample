@@ -16,7 +16,9 @@ import lombok.Getter;
  * 세션팩토리에 핸들러 등록
  */
 public enum UserRoleType implements CodeEnum {
-    ROLE_USER(20), ROLE_ADMIN(99);
+    ROLE_ANONY(10),
+    ROLE_USER(20),
+    ROLE_ADMIN(99);
 
     @Getter
     private int roleType;
