@@ -39,8 +39,7 @@ function WritingPostContainer({boardNo}){
             const response = await axios(axiosOptions.post('/board/'+boardNo+'/post', {
                 postName : postName,
                 postDesc : postDesc,
-                jwt : jwt
-            }));
+            }, jwt));
         }catch(e){
             console.log(e);
         }

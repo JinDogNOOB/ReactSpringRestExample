@@ -29,7 +29,7 @@ function SignUpContainer(){
     // 회원가입
     const onRequestSignup = async() => {
         try{
-            const response = await axios(axiosOptions.put('/user/', {
+            const response = await axios(axiosOptions.put('/user', {
                 userEmail : userEmail,
                 userPassword : userPassword,
                 userNickname : userNickname

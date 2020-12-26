@@ -12,6 +12,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
+/**
+ * use config.security.util.JwtUtils instead
+ */
+@Deprecated
 public class UserAuthUtil {
     private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     // String jws = Jwts.builder().setSubject("Joe").signWith(key).compact();

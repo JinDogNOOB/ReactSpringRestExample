@@ -75,8 +75,7 @@ function PostDetailContainer({boardNo, postNo}){
         try{
             const response = await axios(axiosOptions.post('/board/'+boardNo+'/post/'+postNo+'/sub', {
                 postSubDesc : subPostDesc,
-                jwt : jwt
-            }));
+            }, jwt));
             setSubPostDesc("");
             onLoadSubPost();
         }catch(e){
@@ -89,8 +88,7 @@ function PostDetailContainer({boardNo, postNo}){
         try{
             const response = await axios(axiosOptions.put('/board/'+boardNo+'/post/'+postNo+'/sub/'+postSubNo, {
                 postSubDesc : subPostDesc,
-                jwt : jwt
-            }));
+            }, jwt));
             setSubPostDesc("");
         }catch(e){
             console.log(e);
@@ -100,8 +98,7 @@ function PostDetailContainer({boardNo, postNo}){
     const onDeleteSubPost = async(postSubNo) => {
         try{
             const response = await axios(axiosOptions.delete('/board/'+boardNo+'/post/'+postNo+'/sub/'+postSubNo, {
-                jwt : jwt
-            }));
+            }, jwt));
 
         }catch(e){
             console.log(e);

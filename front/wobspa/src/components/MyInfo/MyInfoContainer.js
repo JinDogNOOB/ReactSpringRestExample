@@ -25,8 +25,7 @@ function MyInfoContainer() {
     const onLoadMyinfo = async() => {
         try{
             const response = await axios(axiosOptions.get('/user/myinfo', {
-                jwt: jwt
-            }));
+            }, jwt));
 
         }catch(e){
             console.log(e);

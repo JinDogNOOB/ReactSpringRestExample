@@ -98,9 +98,8 @@ function SpecificBoardContainer({boardNo}){
         try{
             const response = await axios(axiosOptions.post('/board/'+boardNo+'/post', {
                 postName : postName,
-                postDesc : postDesc,
-                jws : jwt
-            }));
+                postDesc : postDesc
+            }, jwt));
 
         }catch(e){
             console.log(e);
