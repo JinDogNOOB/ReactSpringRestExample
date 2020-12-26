@@ -43,17 +43,23 @@ function SignInContainer(){
     // 로그인
     const requestLogin = async() => {
         try{
-            const response = await axios(axiosOptions.post('/user/', {
+            const response = await axios(axiosOptions.post('/user/login', {
                 userEmail : userEmail,
                 userPassword : userPassword
             }));
-            const tempjwt = response.data.jwt;
-            const parsedJwt = jwtTool.parseJwt(tempjwt);
-            onSetJwt(tempjwt);
+            // const tempjwt = response.data.jwt;
+            const jwtWithBearer = response.headers.authorization // ["Authorization"];
+            // console.log(response.headers);
+            // alert(testval.authorization);
+
+
+            const parsedJwt = jwtTool.parseJwt(jwtWithBearer.split(' ')[1]);
+            onSetJwt(jwtWithBearer);
+
             onSetLogInStatus(true);
-            onSetUserNo(parsedJwt.userNo);
-            onSetUserNickname(parsedJwt.userNickname);
-            onSetUserStatus(parsedJwt.userStatus);
+            onSetUserNo(parsedJwt.userno);
+            onSetUserNickname(parsedJwt.nickname);
+            onSetUserStatus(parsedJwt.role);
             
             alert("로그인에 성공했습니다");
             history.push('/');

@@ -17,6 +17,8 @@ import com.yck.wob.service.UserService;
 import com.yck.wob.util.UserAuthUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,18 +41,16 @@ public class UserController {
     /*
     @RequestBody Map map // application/json
     @RequestParam Map map // x-www-form-urlencoded // & =
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    @RequestMapping(value="", method = RequestMethod.GET)
     private int tetetete(HttpServletRequest request, HttpServletResponse response){
     }
     */
     // ################### /user/ ##########################################
     // 회원가입
-    @RequestMapping(value="/", method = RequestMethod.PUT)
+    
+    @RequestMapping(value="", method = RequestMethod.PUT)
     private void signup(HttpServletRequest request, HttpServletResponse response){
         
-/*         String userEmail = request.getParameter("userEmail");
-        String userPassword = request.getParameter("userPassword");
-        String userNickname = request.getParameter("userNickname"); */
         String userEmail = request.getParameter("userEmail");
         String userPassword = request.getParameter("userPassword");
         String userNickname = request.getParameter("userNickname");
@@ -68,7 +68,11 @@ public class UserController {
     }
 
     // 로그인
-    @RequestMapping(value="/", method = RequestMethod.POST)
+    /**
+     * spring security CustomAuthenticationFilter.java 가 역할 대신
+     */
+    @Deprecated
+    @RequestMapping(value="", method = RequestMethod.POST)
     private String signin(HttpServletRequest request, HttpServletResponse response){
         String userEmail = request.getParameter("userEmail");
         String userPassword = request.getParameter("userPassword");
@@ -95,14 +99,14 @@ public class UserController {
     }
 
     // 유저 신고
-    @RequestMapping(value="/", method = RequestMethod.DELETE)
+    @RequestMapping(value="", method = RequestMethod.DELETE)
     private List<UserDTO> reportUser(HttpServletRequest request, HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
         return null;
     }
 
     // 회원정보보기
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    @RequestMapping(value="", method = RequestMethod.GET)
     private UserDTO getUserInfo(HttpServletRequest request, HttpServletResponse response){
         if(request.getParameter("userNo") == null) return null;
 
@@ -124,20 +128,11 @@ public class UserController {
 
     // 내 정보보기
     @RequestMapping(value="/myinfo", method = RequestMethod.GET)
-    private UserDTO getMyUserInfo(HttpServletRequest request, HttpServletResponse response){
-        
-        String jwt = request.getParameter("jwt");
-        // 로그인 유무 권한 확인
-        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return null;
-        }
-        // 쿠키에서 userNo 추출
-        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
-
+    private UserDTO getMyUserInfo(HttpServletRequest request, HttpServletResponse response){ 
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
         response.setStatus(HttpServletResponse.SC_OK);
-        UserDTO user = userService.getUserInfo(userNo);
+        UserDTO user = userService.getUserInfo(email);
         user.setUserPassword(null);
         return user;
     }
@@ -145,30 +140,23 @@ public class UserController {
     // 내 정보수정
     @RequestMapping(value="/myinfo", method = RequestMethod.PUT)
     private void modifyMyUserInfo(HttpServletRequest request, HttpServletResponse response){
-        
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
         String newNickname = request.getParameter("newNickname");
         String currentPassword = request.getParameter("currentPassword");
         String newPassword = currentPassword;
 
-        String jwt = request.getParameter("jwt");
-        // 로그인 유무 권한 확인
-        if (!UserAuthUtil.validateJwtNStatus(jwt, UserAuthUtil.STATUS_USER)){
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return;
-        }
-        // 쿠키에서 userNo 추출
-        int userNo = UserAuthUtil.getUserNoFromJws(jwt);
 
         if(request.getParameter("newPassword") != null || (request.getParameter("newPassword")).contentEquals("") == false){
             newPassword = request.getParameter("newPassword");
         }
         // 현재 패스워드 맞는지 검증
-        if (userService.signIn("userEmail", currentPassword) == null){
+        if (userService.signIn(email, currentPassword) == null){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
         // 유저정보 수정 시작
-        if (userService.modifyUserInfo(newPassword, newNickname) == false){
+        if (userService.modifyUserInfo(email, newPassword, newNickname) == false){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return;
         }

@@ -37,7 +37,9 @@ value(#{userNo}, #{userPassword}, #{userEmail}, #{userNickname}, #{userStatus})
 </insert>
 
 <update id="updateUser" parameterType="com.yck.wob.dto.UserDTO">
-update user_tb set userPassword=#{userPassword}, userNickname=#{userNickname}, userStatus=#{userStatus}
+update user_tb 
+set userPassword=#{userPassword}, userNickname=#{userNickname}, userStatus=#{userStatus} 
+where userNo = #{userNo}
 </update> 
 
 <delete id="deleteUser" parameterType="com.yck.wob.dto.UserDTO">

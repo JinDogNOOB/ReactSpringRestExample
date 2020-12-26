@@ -37,8 +37,7 @@ function ModifyingPostContainer({boardNo, postNo}){
             const response = await axios(axiosOptions.put('/board/'+boardNo+'/post/'+postNo, {
                 postName : postName,
                 postDesc : postDesc,
-                jwt : jwt
-            }));
+            }, jwt));
 
         }catch(e){
             console.log(e);

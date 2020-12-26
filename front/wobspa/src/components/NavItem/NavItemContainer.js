@@ -15,7 +15,7 @@ function NavItemContainer(){
         try{
             console.log("ononReq");
 
-                const response = await axios(axiosOptions.get('/board/', {}));
+                const response = await axios(axiosOptions.get('/board', {}));
                 let tempBoardLists = [];
     
                 // console.log(response.data);

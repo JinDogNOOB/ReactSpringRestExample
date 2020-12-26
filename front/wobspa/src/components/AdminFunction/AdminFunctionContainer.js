@@ -72,7 +72,7 @@ function AdminFunctionContainer(){
     // Axios [유저리스트, 유저정보, 유저수정, 유저차단삭제는보류]
     const requestUserInfoList = async() =>{
         try{
-            const response = await axios(axiosOptions.get('/admin/user/',{}));
+            const response = await axios(axiosOptions.get('/admin/user',{}));
             let tempArray = [];
             // 이거 테스트 한번 해보자 잘 들어가면 이대로 가자 안댄다 ㅠㅠ 
             response.data.map((val, index) =>{
@@ -91,7 +91,7 @@ function AdminFunctionContainer(){
     }
     const requestUserInfo = async(userNo) => {
         try{
-            const response = await axios(axiosOptions.get('/admin/user/'+userNo, {}));
+            const response = await axios(axiosOptions.get('/admin/user'+userNo, {}));
             setUserNo(response.data.userNo);
             setUserEmail(response.data.userEmail);
             setUserNickname(response.data.userNickname);
@@ -115,7 +115,7 @@ function AdminFunctionContainer(){
      */
     const requestBoardList = async() => {
         try{
-            const response = await axios(axiosOptions.get("/admin/board/", {}));
+            const response = await axios(axiosOptions.get("/admin/board", {}));
             let tempArray = [];
             response.data.map((val, index)=>{
                 const temp = {

@@ -8,6 +8,7 @@ import com.yck.wob.dto.UserRoleType;
 import com.yck.wob.util.PasswordHash;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -15,15 +16,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService{
     
-    @Autowired
-    UserDao userDao;
-
+    @Autowired UserDao userDao;
+    @Autowired PasswordEncoder passwordEncoder;
     
     // ### 회원가입
     public boolean signUp(String userEmail, String userPassword, String userNickname){
         UserDTO user = new UserDTO();
         user.setUserEmail(userEmail);
-        user.setUserPassword(PasswordHash.hashPasswordWithSHA256(userPassword));
+        user.setUserPassword(passwordEncoder.encode(userPassword));
         user.setUserNickname(userNickname);
 
         // 아이디 중복 체크 
@@ -72,11 +72,16 @@ public class UserService{
         user.setUserNo(userNo);
         return userDao.selectUserByNo(user);
     }
+    public UserDTO getUserInfo(String userEmail){
+        UserDTO user = new UserDTO();
+        user.setUserEmail(userEmail);
+        return userDao.selectUserByEmail(user);
+    }
 
     // ### 회원정보 수정
-    public boolean modifyUserInfo(String userPassword, String userNickname){
-        UserDTO user = new UserDTO();
-        user.setUserPassword(PasswordHash.hashPasswordWithSHA256(userPassword));
+    public boolean modifyUserInfo(String userEmail, String userPassword, String userNickname){
+        UserDTO user = getUserInfo(userEmail);
+        user.setUserPassword(passwordEncoder.encode(userPassword));
         user.setUserNickname(userNickname);
         try{
             userDao.updateUser(user); 

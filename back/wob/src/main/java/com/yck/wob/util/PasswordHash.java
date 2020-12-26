@@ -5,6 +5,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
+/**
+ * use spring security passwordEncorder instead
+ */
+@Deprecated
 public class PasswordHash {
     
     public static String hashPasswordWithSHA256(String plainText){
