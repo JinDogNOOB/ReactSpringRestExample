@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import WalletProvider from '../WalletSelector';
+import RandomNumberGenerator from '../RandomNumberGenerator';
 
 import './NavItemStyle.css';
 
@@ -10,7 +12,7 @@ function NavItem({boardList}){
     return (
         <ul className="menu_container">
             <li><p href="#">Boards</p><BoardItem datas={boardList}/></li>
-            <li><p href="#">FunnyThings</p></li>
+            <li><p href="#">FunnyThings</p><FunnyThingsItem /></li>
             <li><p href="#">Notice</p></li>
             <li><p href="#">Etc</p></li>
         </ul>
@@ -33,10 +35,23 @@ function BoardItem({datas}){
                 </div>
               ))}
           </div>
-          
-
       </div>
     );
+}
+
+//FunnyThings 드롭다운
+function FunnyThingsItem(){
+    return (
+        <div className="dropdown_container">
+            <div className="dropdown_header">
+                <img src={process.env.PUBLIC_URL + '/logo512.png'} />
+            </div>
+            <div className="board_parent">
+                <WalletProvider />
+                <RandomNumberGenerator />
+            </div>
+        </div>
+    )
 }
 
 
