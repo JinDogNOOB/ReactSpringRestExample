@@ -1,6 +1,8 @@
 # 목표
 * react 학습
     - provider, context, hooks
+    - https://velog.io/@katanazero86/react-hooks : hook context 에 관한 개념을 잘 정리해놓은곳
+
 * spring boot 학습
     - spring security
 * .net core 학습
