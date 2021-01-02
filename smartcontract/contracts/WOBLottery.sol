@@ -16,6 +16,8 @@ contract wobLottery{
     // 
     // 복권당첨번호 기준 블록 으로부터 200블록 지났으면 이월
     uint256 public START_BLOCK_NUMBER;
+    // 5일 36864
+    uint256 public PURCHASE_PERIOD = 36864;
     mapping(uint256 => mapping(uint8 => address payable[])) public PARTICIPANTS;
     
     // constructor
@@ -45,7 +47,7 @@ contract wobLottery{
     function passNumberNPay(uint8 number) external payable returns(bool){
         require(0 < number && number < 101, "number should be within 1~100");
         require(msg.value >= 1500000000000000, "msg.value must be higher than 0.0015ETH");
-        require(START_BLOCK_NUMBER+36864 > block.number, "can't do this after startBlockNumber+36864");
+        require(START_BLOCK_NUMBER+PURCHASE_PERIOD > block.number, "can't do this after startBlockNumber+PURCHASE_PERIOD");
 
         PARTICIPANTS[GAME_NUMBER][number].push(msg.sender);
         GATHERED_WEI += msg.value;
@@ -56,10 +58,10 @@ contract wobLottery{
     // 만약 dirty read 같은거를 evm이 막으면 onlyOwner로 굳이 주인이 draw안호출해도된다
     // 전부한테 풀어버리고 맨 처음 한 사람이 draw() 하고 인센티브 조금 가져가고 아 이거는 생각해봐야한다.. 굳이?
     function draw() external payable returns(bool){
-        require(START_BLOCK_NUMBER+36864+50 <= block.number, "you can draw lottery only after startBlockNumber+36864+50");
+        require(START_BLOCK_NUMBER+PURCHASE_PERIOD+50 <= block.number, "you can draw lottery only after startBlockNumber+PURCHASE_PERIOD+50");
 
         bool result = false;
-        if(START_BLOCK_NUMBER+36864+50+175 < block.number){
+        if(START_BLOCK_NUMBER+PURCHASE_PERIOD+50+175 < block.number){
             // 기한 넘음 => 돈 이월하고(그대로 두고) 새 게임 시작
             startNewGame();
         }else if(PARTICIPANTS[GAME_NUMBER][getWinningNumber()].length == 0){
@@ -86,7 +88,7 @@ contract wobLottery{
 
     // get winningNumber
     function getWinningNumber() private view returns (uint8){
-        bytes32 hashval = blockhash(START_BLOCK_NUMBER+36864+25);
+        bytes32 hashval = blockhash(START_BLOCK_NUMBER+PURCHASE_PERIOD+25);
         bytes1 result = hashval[0];
         for(uint8 i = 1; i < hashval.length; i++){
             result ^= hashval[i];
