@@ -14,7 +14,7 @@ import Web3Provider from 'web3-react';
 import Web3 from 'web3';
 
 import Web3jsProvider from './contexts/Web3jsProvider';
-
+import ModalsProvider from './contexts/Modals';
 const store = createStore(rootReducer);
 
 
@@ -27,9 +27,9 @@ ReactDOM.render(
           web3Api={Web3}
           >
             <Web3jsProvider>
-
-      <Root />
-
+            <ModalsProvider>
+        <Root />
+        </ModalsProvider>
       </Web3jsProvider>
       </Web3Provider>
     </Provider>
