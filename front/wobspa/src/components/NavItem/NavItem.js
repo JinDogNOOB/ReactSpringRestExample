@@ -3,11 +3,15 @@ import {Link} from 'react-router-dom';
 import WalletProvider from '../WalletSelector';
 import RandomNumberGenerator from '../RandomNumberGenerator';
 
+import useModal from '../../hooks/useModal';
+import TestFunctionModal from '../TestFunctionModal';
+
 import './NavItemStyle.css';
 
 function NavItem({boardList}){
 
     // const testData = ['yo', 'ho~', 'zozo'];
+    
 
     return (
         <ul className="menu_container">
@@ -41,6 +45,7 @@ function BoardItem({datas}){
 
 //FunnyThings 드롭다운
 function FunnyThingsItem(){
+    const [onPresentTestModal] = useModal(<TestFunctionModal />);
     return (
         <div className="dropdown_container">
             <div className="dropdown_header">
@@ -49,6 +54,7 @@ function FunnyThingsItem(){
             <div className="board_parent">
                 <WalletProvider />
                 <RandomNumberGenerator />
+                <input type="button" onClick={onPresentTestModal} />
             </div>
         </div>
     )
