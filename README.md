@@ -28,9 +28,7 @@ mvn -N io.takari:maven:wrapper
     - 사다리타기 + main net
         - (랜덤번호생성과 똑같이 블록해쉬이용해서 사다리 만들고 전시 html canvas 이용)
         - 페이지 하나 만들어야함
-    - 복권 + main net
-        - 테스트넷트워크 중에 적절한곳에 복권 컨트랙트 배포
-        - 페이지 하나 만들어야함
+    - 복권 + main net -> easy_lottery repository -> https://github.com/JinDogNOOB/easy-lottery
 
 
 # 개발 환경
